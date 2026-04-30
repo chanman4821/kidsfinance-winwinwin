@@ -1,0 +1,353 @@
+"use client";
+import React from "react";
+
+/**
+ * Money-themed cartoon characters & SVG avatars.
+ * Replaces animal mascots with on-brand finance characters.
+ */
+
+/* ============================================================
+ * COACH COIN — primary mascot (replaces Mochi the dog)
+ * Friendly anthropomorphic gold coin with face + arms
+ * ============================================================ */
+export function CoachCoin({ className = "", mood = "happy" }: { className?: string; mood?: "happy" | "wave" | "celebrate" | "sleep" }) {
+  return (
+    <svg viewBox="0 0 240 260" className={className} aria-label="Coach Coin">
+      {/* shadow */}
+      <ellipse cx="120" cy="245" rx="80" ry="8" fill="rgba(0,0,0,0.18)" />
+
+      {/* coin body — concentric circles for depth */}
+      <circle cx="120" cy="120" r="100" fill="#fbbf24" />
+      <circle cx="120" cy="120" r="100" fill="url(#coinGloss)" />
+      <circle cx="120" cy="120" r="92" fill="none" stroke="#92400e" strokeWidth="4" />
+      <circle cx="120" cy="120" r="82" fill="none" stroke="#fde68a" strokeWidth="2" opacity="0.6" />
+
+      <defs>
+        <radialGradient id="coinGloss" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#fef9c3" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#fbbf24" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#d97706" stopOpacity="0.4" />
+        </radialGradient>
+      </defs>
+
+      {/* dollar sign center */}
+      <text x="120" y="155" textAnchor="middle" fontFamily="Lilita One, Fredoka, sans-serif" fontSize="120" fontWeight="900" fill="#92400e" opacity="0.25">$</text>
+
+      {/* eyes */}
+      {mood === "sleep" ? (
+        <>
+          <path d="M 90 105 Q 100 115 110 105" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+          <path d="M 130 105 Q 140 115 150 105" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+        </>
+      ) : (
+        <>
+          {/* eye whites */}
+          <ellipse cx="100" cy="105" rx="14" ry="16" fill="white" />
+          <ellipse cx="140" cy="105" rx="14" ry="16" fill="white" />
+          {/* pupils */}
+          <circle cx="103" cy="108" r="7" fill="#1f2937" />
+          <circle cx="143" cy="108" r="7" fill="#1f2937" />
+          {/* highlights */}
+          <circle cx="105" cy="105" r="3" fill="white" />
+          <circle cx="145" cy="105" r="3" fill="white" />
+        </>
+      )}
+
+      {/* eyebrows for celebrate */}
+      {mood === "celebrate" && (
+        <>
+          <path d="M 86 88 Q 100 80 114 88" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+          <path d="M 126 88 Q 140 80 154 88" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+        </>
+      )}
+
+      {/* cheek blush */}
+      <circle cx="78" cy="135" r="9" fill="#f87171" opacity="0.7" />
+      <circle cx="162" cy="135" r="9" fill="#f87171" opacity="0.7" />
+
+      {/* mouth */}
+      <path d="M 95 145 Q 120 175 145 145" stroke="#1f2937" strokeWidth="5" fill="white" strokeLinecap="round" strokeLinejoin="round" />
+      {/* tongue */}
+      <ellipse cx="120" cy="158" rx="8" ry="6" fill="#f87171" />
+
+      {/* arms — pure white gloves like Mickey Mouse */}
+      <g>
+        {/* left arm */}
+        <path d="M 30 170 Q 18 185 22 205" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+        {/* right arm — waving */}
+        {mood === "wave" || mood === "celebrate" ? (
+          <g className="paw-wave">
+            <path d="M 210 170 Q 225 145 230 120" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+            <circle cx="232" cy="115" r="14" fill="white" stroke="#1f2937" strokeWidth="3" />
+          </g>
+        ) : (
+          <path d="M 210 170 Q 222 185 218 205" stroke="#1f2937" strokeWidth="4" fill="none" strokeLinecap="round" />
+        )}
+      </g>
+      {/* gloves at hands */}
+      <circle cx="22" cy="205" r="14" fill="white" stroke="#1f2937" strokeWidth="3" />
+      {!(mood === "wave" || mood === "celebrate") && (
+        <circle cx="218" cy="205" r="14" fill="white" stroke="#1f2937" strokeWidth="3" />
+      )}
+
+      {/* feet — rounded boots */}
+      <ellipse cx="90" cy="235" rx="22" ry="12" fill="#1f2937" />
+      <ellipse cx="150" cy="235" rx="22" ry="12" fill="#1f2937" />
+      <ellipse cx="92" cy="232" rx="16" ry="6" fill="#374151" />
+      <ellipse cx="152" cy="232" rx="16" ry="6" fill="#374151" />
+
+      {/* sparkles around (celebrate mood) */}
+      {mood === "celebrate" && (
+        <>
+          <text x="20" y="40" fontSize="20" fill="#fde047">✨</text>
+          <text x="200" y="40" fontSize="20" fill="#fde047">✨</text>
+          <text x="50" y="80" fontSize="14" fill="#fde047">⭐</text>
+          <text x="180" y="80" fontSize="14" fill="#fde047">⭐</text>
+        </>
+      )}
+    </svg>
+  );
+}
+
+/* ============================================================
+ * KID AVATAR — customizable cartoon kid
+ * Skin tone + hair style + outfit
+ * ============================================================ */
+type AvatarProps = {
+  className?: string;
+  skin?: string;       // hex color
+  hair?: HairStyle;
+  hairColor?: string;
+  outfit?: OutfitStyle;
+};
+
+export type HairStyle = "short" | "long" | "curly" | "buzz" | "bun" | "afro";
+export type OutfitStyle = "tee" | "suit" | "hoodie" | "blazer" | "vest" | "tracksuit";
+
+const SKIN_DEFAULT = "#fcd34d";
+const HAIR_DEFAULT = "#451a03";
+
+export function KidAvatar({
+  className = "",
+  skin = SKIN_DEFAULT,
+  hair = "short",
+  hairColor = HAIR_DEFAULT,
+  outfit = "tee",
+}: AvatarProps) {
+  return (
+    <svg viewBox="0 0 200 240" className={className} aria-label="Your character">
+      {/* shadow */}
+      <ellipse cx="100" cy="232" rx="55" ry="6" fill="rgba(0,0,0,0.18)" />
+
+      {/* legs */}
+      <rect x="78" y="180" width="18" height="50" rx="6" fill={outfit === "suit" || outfit === "blazer" ? "#1f2937" : outfit === "tracksuit" ? "#dc2626" : "#1e40af"} />
+      <rect x="104" y="180" width="18" height="50" rx="6" fill={outfit === "suit" || outfit === "blazer" ? "#1f2937" : outfit === "tracksuit" ? "#dc2626" : "#1e40af"} />
+
+      {/* shoes */}
+      <ellipse cx="87" cy="232" rx="14" ry="6" fill="#1f2937" />
+      <ellipse cx="113" cy="232" rx="14" ry="6" fill="#1f2937" />
+
+      {/* body / outfit */}
+      <Outfit outfit={outfit} />
+
+      {/* arms */}
+      <ellipse cx="55" cy="155" rx="10" ry="22" fill={skin} stroke="#1f2937" strokeWidth="2" />
+      <ellipse cx="145" cy="155" rx="10" ry="22" fill={skin} stroke="#1f2937" strokeWidth="2" />
+      {/* hands */}
+      <circle cx="55" cy="180" r="9" fill={skin} stroke="#1f2937" strokeWidth="2" />
+      <circle cx="145" cy="180" r="9" fill={skin} stroke="#1f2937" strokeWidth="2" />
+
+      {/* neck */}
+      <rect x="92" y="100" width="16" height="14" fill={skin} stroke="#1f2937" strokeWidth="2" />
+
+      {/* head */}
+      <circle cx="100" cy="75" r="42" fill={skin} stroke="#1f2937" strokeWidth="3" />
+
+      {/* ears */}
+      <ellipse cx="60" cy="78" rx="6" ry="10" fill={skin} stroke="#1f2937" strokeWidth="2" />
+      <ellipse cx="140" cy="78" rx="6" ry="10" fill={skin} stroke="#1f2937" strokeWidth="2" />
+
+      {/* hair */}
+      <Hair hair={hair} hairColor={hairColor} />
+
+      {/* eyes */}
+      <circle cx="84" cy="72" r="4.5" fill="#1f2937" />
+      <circle cx="116" cy="72" r="4.5" fill="#1f2937" />
+      <circle cx="86" cy="70" r="1.5" fill="white" />
+      <circle cx="118" cy="70" r="1.5" fill="white" />
+
+      {/* smile */}
+      <path d="M 86 88 Q 100 98 114 88" stroke="#1f2937" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+
+      {/* cheek blush */}
+      <circle cx="72" cy="85" r="5" fill="#fda4af" opacity="0.6" />
+      <circle cx="128" cy="85" r="5" fill="#fda4af" opacity="0.6" />
+    </svg>
+  );
+}
+
+function Outfit({ outfit }: { outfit: OutfitStyle }) {
+  if (outfit === "suit") {
+    return (
+      <g>
+        <path d="M 60 120 L 60 180 L 140 180 L 140 120 Q 130 110 100 110 Q 70 110 60 120 Z" fill="#1f2937" stroke="#0f172a" strokeWidth="2" />
+        <path d="M 100 110 L 90 180 M 100 110 L 110 180" stroke="white" strokeWidth="2" />
+        <circle cx="95" cy="140" r="2" fill="white" />
+        <circle cx="95" cy="160" r="2" fill="white" />
+        {/* tie */}
+        <path d="M 96 110 L 100 130 L 104 110 Z" fill="#dc2626" />
+        <path d="M 100 130 L 95 170 L 100 175 L 105 170 Z" fill="#dc2626" />
+      </g>
+    );
+  }
+  if (outfit === "blazer") {
+    return (
+      <g>
+        <path d="M 60 120 L 60 180 L 140 180 L 140 120 Q 130 110 100 110 Q 70 110 60 120 Z" fill="#1e40af" stroke="#1e3a8a" strokeWidth="2" />
+        <rect x="92" y="115" width="16" height="65" fill="white" />
+        <path d="M 96 115 L 100 135 L 104 115" fill="#dc2626" />
+      </g>
+    );
+  }
+  if (outfit === "hoodie") {
+    return (
+      <g>
+        <path d="M 55 125 L 55 180 L 145 180 L 145 125 Q 130 105 100 105 Q 70 105 55 125 Z" fill="#7c3aed" stroke="#5b21b6" strokeWidth="2" />
+        {/* hood */}
+        <path d="M 65 110 Q 100 95 135 110 Q 130 100 100 95 Q 70 100 65 110 Z" fill="#6d28d9" stroke="#5b21b6" strokeWidth="2" />
+        {/* drawstrings */}
+        <line x1="92" y1="120" x2="92" y2="140" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        <line x1="108" y1="120" x2="108" y2="140" stroke="white" strokeWidth="2" strokeLinecap="round" />
+        {/* pocket */}
+        <path d="M 70 150 L 130 150 L 125 175 L 75 175 Z" fill="#6d28d9" stroke="#5b21b6" strokeWidth="2" />
+      </g>
+    );
+  }
+  if (outfit === "vest") {
+    return (
+      <g>
+        {/* shirt under */}
+        <rect x="60" y="115" width="80" height="65" fill="white" stroke="#e5e7eb" strokeWidth="2" />
+        {/* vest */}
+        <path d="M 60 125 L 60 180 L 90 180 L 95 130 L 60 125 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2" />
+        <path d="M 140 125 L 140 180 L 110 180 L 105 130 L 140 125 Z" fill="#16a34a" stroke="#14532d" strokeWidth="2" />
+        {/* dollar sign on chest */}
+        <text x="100" y="160" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="22" fontWeight="900" fill="#facc15">$</text>
+      </g>
+    );
+  }
+  if (outfit === "tracksuit") {
+    return (
+      <g>
+        <path d="M 60 120 L 60 180 L 140 180 L 140 120 Q 130 110 100 110 Q 70 110 60 120 Z" fill="#dc2626" stroke="#991b1b" strokeWidth="2" />
+        {/* white stripes */}
+        <rect x="65" y="115" width="6" height="65" fill="white" />
+        <rect x="129" y="115" width="6" height="65" fill="white" />
+        <rect x="92" y="115" width="16" height="65" fill="white" />
+      </g>
+    );
+  }
+  // default tee
+  return (
+    <g>
+      <path d="M 60 120 L 60 180 L 140 180 L 140 120 Q 130 110 100 110 Q 70 110 60 120 Z" fill="#3b82f6" stroke="#1e40af" strokeWidth="2" />
+      <text x="100" y="155" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="34" fontWeight="900" fill="#facc15">$</text>
+    </g>
+  );
+}
+
+function Hair({ hair, hairColor }: { hair: HairStyle; hairColor: string }) {
+  if (hair === "short") {
+    return (
+      <path d="M 60 65 Q 100 30 140 65 Q 145 50 130 40 Q 100 25 70 40 Q 55 50 60 65 Z" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+    );
+  }
+  if (hair === "long") {
+    return (
+      <g>
+        <path d="M 60 60 Q 100 20 140 60 L 145 110 Q 140 85 135 80 L 130 65 Q 100 35 70 65 L 65 80 Q 60 85 55 110 Z" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+      </g>
+    );
+  }
+  if (hair === "curly") {
+    return (
+      <g>
+        <circle cx="70" cy="50" r="13" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+        <circle cx="100" cy="40" r="15" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+        <circle cx="130" cy="50" r="13" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+        <circle cx="58" cy="65" r="10" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+        <circle cx="142" cy="65" r="10" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+      </g>
+    );
+  }
+  if (hair === "buzz") {
+    return (
+      <path d="M 65 60 Q 100 45 135 60 Q 130 50 100 45 Q 70 50 65 60 Z" fill={hairColor} opacity="0.85" />
+    );
+  }
+  if (hair === "bun") {
+    return (
+      <g>
+        <path d="M 60 65 Q 100 30 140 65 Q 145 50 130 40 Q 100 25 70 40 Q 55 50 60 65 Z" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+        <circle cx="100" cy="28" r="14" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+      </g>
+    );
+  }
+  if (hair === "afro") {
+    return (
+      <ellipse cx="100" cy="42" rx="55" ry="38" fill={hairColor} stroke="#1f2937" strokeWidth="2" />
+    );
+  }
+  return null;
+}
+
+/* ============================================================
+ * FINANCE COMPANIONS — replace pet animals
+ * ============================================================ */
+export type CompanionId = "piggy" | "vault" | "treasure" | "moneytree" | "bag" | "atm";
+
+export const COMPANIONS: { id: CompanionId; emoji: string; name: string; tagline: string }[] = [
+  { id: "piggy", emoji: "🐷", name: "Piggy Bank", tagline: "Saves coins" },
+  { id: "vault", emoji: "🔐", name: "Vault", tagline: "Locks money" },
+  { id: "treasure", emoji: "💎", name: "Treasure", tagline: "Gems & jewels" },
+  { id: "moneytree", emoji: "🌳", name: "Money Tree", tagline: "Grows wealth" },
+  { id: "bag", emoji: "💰", name: "Money Bag", tagline: "Big sack of coins" },
+  { id: "atm", emoji: "🏧", name: "ATM Buddy", tagline: "Always loaded" },
+];
+
+/* ============================================================
+ * MONEY-THEMED SCENE — coin city with falling coins
+ * ============================================================ */
+export function MoneyScene() {
+  return (
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      <svg viewBox="0 0 800 1400" preserveAspectRatio="xMidYMax slice" className="absolute inset-0 w-full h-full">
+        <defs>
+          <linearGradient id="moneysky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#7c3aed" />
+            <stop offset="40%" stopColor="#3b82f6" />
+            <stop offset="80%" stopColor="#10b981" />
+            <stop offset="100%" stopColor="#84cc16" />
+          </linearGradient>
+        </defs>
+        <rect width="800" height="1400" fill="url(#moneysky)" />
+        {/* big sun */}
+        <circle cx="640" cy="180" r="80" fill="#facc15" />
+        <circle cx="640" cy="180" r="65" fill="#fde047" />
+        {/* hill silhouettes */}
+        <path d="M 0 1100 Q 200 950 400 1050 T 800 1000 L 800 1400 L 0 1400 Z" fill="#15803d" />
+        <path d="M 0 1200 Q 200 1080 400 1180 T 800 1130 L 800 1400 L 0 1400 Z" fill="#14532d" />
+      </svg>
+
+      {/* falling coins */}
+      <div className="absolute top-0 left-[10%] text-3xl anim-cloud-1 opacity-70">🪙</div>
+      <div className="absolute top-0 left-[30%] text-2xl anim-cloud-3 opacity-60">💰</div>
+      <div className="absolute top-0 left-[55%] text-3xl anim-cloud-2 opacity-70">💵</div>
+      <div className="absolute top-0 left-[75%] text-2xl anim-cloud-1 opacity-60">💎</div>
+      <div className="absolute top-10 left-[85%] text-3xl anim-cloud-3 opacity-70">🪙</div>
+    </div>
+  );
+}
+
+/* Keep old characters as re-exports for backwards compat */
+export { Mochi, Bunny, Egg, FancyJar, CoinwoodScene } from "./characters-legacy";
