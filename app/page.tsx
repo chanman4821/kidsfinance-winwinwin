@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CoachCoin, MoneyUnicorn, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
+import { CoachCoin, MoneyPanda, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
 
 const SKINS = [
   { id: "fair", color: "#ffe0bd" },
@@ -93,7 +93,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (step === "hi") speak("Hey friend! I'm Sparkle the Money Unicorn! Let's make magic money!");
+    if (step === "hi") speak("Hey friend! I'm Sparkle the Money Panda! Let's make magic money!");
     if (step === "name") speak("What's your name?");
     if (step === "age") speak("How old are you?");
     if (step === "skin") speak("Pick your skin!");
@@ -140,7 +140,7 @@ export default function HomePage() {
         <div className="mt-3 flex justify-center">
           <div className="avatar-frame w-56 h-56 p-3 anim-float">
             {step === "hi" || step === "name" || step === "age" ? (
-              <MoneyUnicorn className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
+              <MoneyPanda className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
             ) : (
               <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
             )}

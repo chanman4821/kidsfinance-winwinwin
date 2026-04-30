@@ -7,12 +7,164 @@ import React from "react";
  */
 
 /* ============================================================
- * MONEY UNICORN — primary mascot (REPLACES Coach Coin)
- * Whimsical pastel-rainbow unicorn with dollar-sign horn,
- * gold-coin necklace, big sparkly eyes, money sparkles around
- * Aesthetic: Adopt-Me / Royale-High / cool kids game vibe
+ * MONEY PANDA — primary mascot "Sparkle"
+ * Cool black-and-white panda with $ sunglasses, gold chain,
+ * money sparkles. Roblox / Adopt-Me cool-kid vibe.
  * ============================================================ */
-export function MoneyUnicorn({ className = "", mood = "happy" }: { className?: string; mood?: "happy" | "wave" | "celebrate" | "sleep" }) {
+export function MoneyPanda({ className = "", mood = "happy" }: { className?: string; mood?: "happy" | "wave" | "celebrate" | "sleep" }) {
+  return (
+    <svg viewBox="0 0 260 280" className={className} aria-label="Money Panda">
+      <defs>
+        <radialGradient id="pandaWhite" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#f1f5f9" />
+        </radialGradient>
+        <radialGradient id="pandaBlack" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#334155" />
+          <stop offset="100%" stopColor="#0f172a" />
+        </radialGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#fde047" />
+          <stop offset="60%" stopColor="#fbbf24" />
+          <stop offset="100%" stopColor="#d97706" />
+        </linearGradient>
+        <radialGradient id="cheekP" cx="50%" cy="50%">
+          <stop offset="0%" stopColor="#fb7185" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* soft shadow under panda */}
+      <ellipse cx="130" cy="265" rx="80" ry="6" fill="rgba(15,23,42,0.18)" />
+
+      {/* BODY — round chibi panda body, white */}
+      <ellipse cx="130" cy="190" rx="68" ry="58" fill="url(#pandaWhite)" stroke="#e2e8f0" strokeWidth="1.5" />
+
+      {/* BLACK ARMS holding money */}
+      <ellipse cx="72" cy="185" rx="22" ry="32" fill="url(#pandaBlack)" />
+      <ellipse cx="188" cy="185" rx="22" ry="32" fill="url(#pandaBlack)" />
+
+      {/* BLACK LEGS */}
+      <ellipse cx="100" cy="252" rx="22" ry="14" fill="url(#pandaBlack)" />
+      <ellipse cx="160" cy="252" rx="22" ry="14" fill="url(#pandaBlack)" />
+      {/* white toe pads */}
+      <ellipse cx="98" cy="252" rx="8" ry="5" fill="#f1f5f9" />
+      <ellipse cx="162" cy="252" rx="8" ry="5" fill="#f1f5f9" />
+
+      {/* MONEY STACK in left paw */}
+      <g transform="translate(60, 195) rotate(-8)">
+        <rect x="0" y="0" width="34" height="22" rx="3" fill="#10b981" stroke="#047857" strokeWidth="1.5"/>
+        <rect x="-3" y="3" width="34" height="22" rx="3" fill="#34d399" stroke="#047857" strokeWidth="1.5"/>
+        <rect x="-6" y="6" width="34" height="22" rx="3" fill="#86efac" stroke="#047857" strokeWidth="1.5"/>
+        <text x="11" y="22" fontFamily="Lilita One, sans-serif" fontSize="14" fontWeight="900" fill="#047857">$</text>
+      </g>
+
+      {/* GOLD CHAIN — chunky on body */}
+      <g>
+        <ellipse cx="130" cy="155" rx="48" ry="8" fill="none" stroke="url(#goldGrad)" strokeWidth="4"/>
+        {/* Big $ medallion */}
+        <circle cx="130" cy="165" r="18" fill="url(#goldGrad)" stroke="#92400e" strokeWidth="2"/>
+        <text x="130" y="173" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="24" fontWeight="900" fill="#92400e">$</text>
+      </g>
+
+      {/* HEAD — round, white */}
+      <ellipse cx="130" cy="115" rx="62" ry="55" fill="url(#pandaWhite)" stroke="#e2e8f0" strokeWidth="1.5" />
+      {/* head highlight */}
+      <ellipse cx="113" cy="100" rx="22" ry="14" fill="white" opacity="0.6"/>
+
+      {/* BLACK EARS — classic panda tufts */}
+      <ellipse cx="82" cy="72" rx="16" ry="18" fill="url(#pandaBlack)" />
+      <ellipse cx="178" cy="72" rx="16" ry="18" fill="url(#pandaBlack)" />
+      {/* pink inner-ear */}
+      <ellipse cx="82" cy="76" rx="6" ry="8" fill="#fb7185" opacity="0.7"/>
+      <ellipse cx="178" cy="76" rx="6" ry="8" fill="#fb7185" opacity="0.7"/>
+
+      {/* BLACK EYE PATCHES (classic panda mask, slightly tilted = cool) */}
+      <ellipse cx="105" cy="115" rx="16" ry="20" fill="url(#pandaBlack)" transform="rotate(-15, 105, 115)"/>
+      <ellipse cx="155" cy="115" rx="16" ry="20" fill="url(#pandaBlack)" transform="rotate(15, 155, 115)"/>
+
+      {/* DOLLAR-SIGN SUNGLASSES (cool kid) - sit on top of eye patches when happy/wave/celebrate */}
+      {mood !== "sleep" && (
+        <g>
+          {/* lens frames */}
+          <circle cx="105" cy="115" r="14" fill="#0f172a" stroke="#fde047" strokeWidth="2.5"/>
+          <circle cx="155" cy="115" r="14" fill="#0f172a" stroke="#fde047" strokeWidth="2.5"/>
+          {/* lens tinted gradient */}
+          <circle cx="105" cy="115" r="11" fill="#1e3a8a" opacity="0.85"/>
+          <circle cx="155" cy="115" r="11" fill="#1e3a8a" opacity="0.85"/>
+          {/* $ inside each lens */}
+          <text x="105" y="121" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="16" fontWeight="900" fill="#fde047">$</text>
+          <text x="155" y="121" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="16" fontWeight="900" fill="#fde047">$</text>
+          {/* nose bridge */}
+          <line x1="119" y1="115" x2="141" y2="115" stroke="#fde047" strokeWidth="2.5" strokeLinecap="round"/>
+          {/* lens shine */}
+          <circle cx="100" cy="110" r="3" fill="white" opacity="0.7"/>
+          <circle cx="150" cy="110" r="3" fill="white" opacity="0.7"/>
+        </g>
+      )}
+
+      {/* sleep eyes (closed, no shades) */}
+      {mood === "sleep" && (
+        <g>
+          <path d="M 95 115 Q 105 122 115 115" stroke="#0f172a" strokeWidth="3" fill="none" strokeLinecap="round"/>
+          <path d="M 145 115 Q 155 122 165 115" stroke="#0f172a" strokeWidth="3" fill="none" strokeLinecap="round"/>
+        </g>
+      )}
+
+      {/* CHEEK BLUSH */}
+      <ellipse cx="88" cy="140" rx="10" ry="6" fill="url(#cheekP)"/>
+      <ellipse cx="172" cy="140" rx="10" ry="6" fill="url(#cheekP)"/>
+
+      {/* NOSE — small black */}
+      <ellipse cx="130" cy="138" rx="6" ry="5" fill="#0f172a"/>
+      {/* nose shine */}
+      <ellipse cx="128" cy="136" rx="2" ry="1.5" fill="white" opacity="0.6"/>
+
+      {/* MOUTH — happy smile */}
+      <path d="M 130 144 L 130 150" stroke="#0f172a" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M 117 152 Q 130 162 143 152" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+      {/* tongue when celebrate */}
+      {mood === "celebrate" && (
+        <ellipse cx="130" cy="158" rx="6" ry="4" fill="#fb7185"/>
+      )}
+
+      {/* WAVING PAW with cash fan */}
+      {mood === "wave" && (
+        <g transform="translate(195, 130) rotate(15)">
+          <ellipse cx="0" cy="0" rx="14" ry="16" fill="url(#pandaBlack)"/>
+          <text x="-4" y="-12" fontSize="22">💵</text>
+        </g>
+      )}
+
+      {/* FLOATING MONEY SPARKLES around */}
+      <g className="anim-float">
+        <text x="20" y="40" fontSize="22" opacity="0.9">✨</text>
+        <text x="220" y="55" fontSize="22" opacity="0.9">💸</text>
+        <text x="225" y="200" fontSize="18" opacity="0.85">⭐</text>
+        <text x="14" y="180" fontSize="18" opacity="0.85">💰</text>
+      </g>
+
+      {/* CELEBRATE EXTRAS */}
+      {mood === "celebrate" && (
+        <g>
+          <text x="40" y="20" fontSize="24">🎉</text>
+          <text x="200" y="20" fontSize="24">🎉</text>
+          <text x="120" y="10" fontSize="18">✨</text>
+          <text x="20" y="100" fontSize="16">💎</text>
+          <text x="220" y="100" fontSize="16">💎</text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/* Backwards-compat alias for any old `<MoneyUnicorn />` imports — points at the new panda */
+export const MoneyUnicorn = MoneyPanda;
+
+/* ============================================================
+ * MONEY UNICORN (legacy SVG kept for fallback) — DEPRECATED
+ * ============================================================ */
+function _LegacyMoneyUnicorn({ className = "", mood = "happy" }: { className?: string; mood?: "happy" | "wave" | "celebrate" | "sleep" }) {
   return (
     <svg viewBox="0 0 260 280" className={className} aria-label="Money Unicorn">
       <defs>
