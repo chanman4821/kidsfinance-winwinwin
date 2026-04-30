@@ -117,6 +117,51 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
+      {/* BACKGROUND SPARKLE LAYER — twinkling stars + drifting money */}
+      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
+        {[
+          { e: "✨", t: 8, l: 12, d: 0, s: 2 },
+          { e: "⭐", t: 22, l: 88, d: 0.8, s: 1.4 },
+          { e: "💫", t: 38, l: 6, d: 1.6, s: 1.6 },
+          { e: "✨", t: 55, l: 92, d: 0.4, s: 1.2 },
+          { e: "⭐", t: 70, l: 18, d: 1.2, s: 1.8 },
+          { e: "💫", t: 80, l: 80, d: 0, s: 1.4 },
+          { e: "✨", t: 90, l: 50, d: 2, s: 2.2 },
+        ].map((s, i) => (
+          <div
+            key={i}
+            className="absolute anim-twinkle"
+            style={{
+              top: `${s.t}%`,
+              left: `${s.l}%`,
+              fontSize: `${s.s}rem`,
+              animationDelay: `${s.d}s`,
+            }}
+          >
+            {s.e}
+          </div>
+        ))}
+        {/* drifting money emoji background */}
+        {[
+          { e: "💵", t: 15, l: 70, d: 0, dur: 18 },
+          { e: "💰", t: 60, l: 30, d: 4, dur: 22 },
+          { e: "💸", t: 35, l: 85, d: 8, dur: 20 },
+        ].map((m, i) => (
+          <div
+            key={`m-${i}`}
+            className="absolute anim-float opacity-50"
+            style={{
+              top: `${m.t}%`,
+              left: `${m.l}%`,
+              fontSize: "1.8rem",
+              animationDelay: `${m.d}s`,
+              animationDuration: `${m.dur}s`,
+            }}
+          >
+            {m.e}
+          </div>
+        ))}
+      </div>
 
       <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col px-4">
         {/* TOP BAR — Roblox style with cash counter */}
@@ -136,14 +181,16 @@ export default function HomePage() {
           <div className="bungee text-sm text-white -sm mt-1">MONEY GAMES</div>
         </div>
 
-        {/* CHARACTER */}
-        <div className="mt-3 flex justify-center">
-          <div className="avatar-frame w-56 h-56 p-3 anim-float">
-            {step === "hi" || step === "name" || step === "age" ? (
-              <MoneyPanda className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
-            ) : (
-              <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
-            )}
+        {/* CHARACTER — bigger + entry pop animation */}
+        <div className="mt-3 flex justify-center" key={`char-${step}`}>
+          <div className="avatar-frame w-72 h-72 p-3 anim-big-pop">
+            <div className="anim-jiggle w-full h-full">
+              {step === "hi" || step === "name" || step === "age" ? (
+                <MoneyPanda className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
+              ) : (
+                <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
+              )}
+            </div>
           </div>
         </div>
 
