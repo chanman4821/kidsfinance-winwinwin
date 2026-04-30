@@ -23,7 +23,7 @@ const JAR: Record<
   { label: string; emoji: string; bg: string; ring: string; text: string; bgSoft: string; goal: string }
 > = {
   save: { label: "SAVE", emoji: "🐷", bg: "bg-[#6ad48b]", ring: "ring-[#4fa86c]", text: "text-[#2b2640]", bgSoft: "bg-[#d4f4dd]", goal: "for goals" },
-  spend: { label: "SPEND", emoji: "🍭", bg: "bg-[#ff7eb5]", ring: "ring-[#cc5e8e]", text: "text-white", bgSoft: "bg-[#ffd6e7]", goal: "right now" },
+  spend: { label: "SPEND", emoji: "🛒", bg: "bg-[#fb923c]", ring: "ring-[#9a3412]", text: "text-white", bgSoft: "bg-[#fed7aa]", goal: "right now" },
   give: { label: "GIVE", emoji: "❤️", bg: "bg-[#ffd84d]", ring: "ring-[#ccaa3d]", text: "text-[#2b2640]", bgSoft: "bg-[#fff3b0]", goal: "to help others" },
 };
 
@@ -536,7 +536,7 @@ function ModalShell({ children, onClose }: { children: React.ReactNode; onClose:
       onClick={onClose}
     >
       <div
-        className="bg-[#fff9f0] rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[4px] border-white shadow-2xl relative"
+        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[4px] border-white shadow-2xl relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -678,7 +678,7 @@ function LessonModal({
                           ? correct
                             ? "bg-[#d4f4dd] border-[#6ad48b]"
                             : picked
-                            ? "bg-[#ffd6e7] border-[#ff7eb5]"
+                            ? "bg-[#fed7aa] border-[#fb923c]"
                             : "border-[#2b2640]/10 opacity-60"
                           : "border-[#2b2640]/10 hover:border-[#5aa9e6] bg-white"
                       }`}

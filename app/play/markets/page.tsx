@@ -62,7 +62,7 @@ export default function MarketsPage() {
   }
 
   return (
-    <div className="relative min-h-screen pb-28 bg-gradient-to-b from-[#cfe7ff] via-[#ffd6e7] to-[#fff3b0]">
+    <div className="relative min-h-screen pb-28 bg-transparent">
       <CoinwoodScene />
 
       <div className="max-w-md mx-auto px-3 pt-3 relative z-10">
@@ -287,7 +287,7 @@ function Labs() {
         <div className="display text-lg mb-1 flex items-center gap-2">💳 Credit Card Trap</div>
         <div className="text-xs text-[#2b2640]/70 mb-3">What happens if you spend $500 on a credit card and only pay the minimum each month?</div>
 
-        <div className="bg-[#ffd6e7]/60 rounded-xl p-3">
+        <div className="bg-[#fed7aa]/60 rounded-xl p-3">
           <div className="grid grid-cols-2 gap-2 text-center">
             <div>
               <div className="text-[10px] uppercase font-bold text-[#2b2640]/70">Time to pay off</div>
@@ -398,7 +398,7 @@ function TradeModal({
   return (
     <div className="fixed inset-0 bg-[#2b2640]/50 flex items-end sm:items-center justify-center z-50 p-4" onClick={onClose}>
       <div
-        className="bg-[#fff9f0] rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[4px] border-white shadow-2xl"
+        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[4px] border-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 mb-3">
@@ -438,7 +438,7 @@ function TradeModal({
             disabled={!position}
             onClick={() => setSide("sell")}
             className={`flex-1 py-3 rounded-xl display font-bold ${
-              side === "sell" ? "bg-[#ff7eb5] text-white shadow-[0_3px_0_0_#cc5e8e]" : "bg-white border-2 border-[#2b2640]/10 disabled:opacity-40"
+              side === "sell" ? "bg-[#fb923c] text-white shadow-[0_3px_0_0_#9a3412]" : "bg-white border-2 border-[#2b2640]/10 disabled:opacity-40"
             }`}
           >
             Sell
@@ -474,7 +474,7 @@ function TradeModal({
         <button
           onClick={() => (side === "buy" ? onBuy(ticker, amount) : onSell(ticker, sellShares))}
           className={`w-full py-3 rounded-full display font-bold text-white text-lg border-[3px] border-white shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)] ${
-            side === "buy" ? "bg-[#6ad48b]" : "bg-[#ff7eb5]"
+            side === "buy" ? "bg-[#6ad48b]" : "bg-[#fb923c]"
           }`}
         >
           {side === "buy" ? `Buy $${amount} of ${ticker}` : `Sell ${sellShares.toFixed(2)} shares`}

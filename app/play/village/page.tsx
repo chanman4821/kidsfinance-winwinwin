@@ -157,7 +157,7 @@ export default function VillagePage() {
   }
 
   return (
-    <div className="relative min-h-screen pb-28 bg-gradient-to-b from-[#cfe7ff] via-[#ffd6e7] to-[#fff3b0]">
+    <div className="relative min-h-screen pb-28 bg-transparent">
       <CoinwoodScene />
 
       {/* Header */}
@@ -193,7 +193,7 @@ export default function VillagePage() {
         <div className="grid grid-cols-4 gap-2 mb-3">
           <Stat icon="🪙" label="Coins" value={state.coins} bg="bg-[#fff3b0]" />
           <Stat icon="🐷" label="Save" value={state.jars.save} bg="bg-[#d4f4dd]" />
-          <Stat icon="🍭" label="Spend" value={state.jars.spend} bg="bg-[#ffd6e7]" />
+          <Stat icon="🍭" label="Spend" value={state.jars.spend} bg="bg-[#fed7aa]" />
           <Stat icon="❤️" label="Give" value={state.jars.give} bg="bg-[#ffe4a3]" />
         </div>
 
@@ -220,7 +220,7 @@ export default function VillagePage() {
       {toast && <Toast msg={toast} />}
 
       {/* Bottom dock */}
-      <nav className="fixed bottom-0 inset-x-0 bg-[#fff9f0]/95 backdrop-blur border-t-[3px] border-white shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-30">
+      <nav className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur border-t-[3px] border-white shadow-[0_-4px_12px_rgba(0,0,0,0.08)] z-30">
         <div className="max-w-md mx-auto flex">
           {([
             { id: "home", emoji: "🏠", label: "Home" },
@@ -263,7 +263,7 @@ export default function VillagePage() {
 function Onboarding({ onStart }: { onStart: (s: VillageState) => void }) {
   const [name, setName] = useState("");
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-[#cfe7ff] via-[#ffd6e7] to-[#fff3b0]">
+    <div className="relative min-h-screen bg-transparent">
       <CoinwoodScene />
       <div className="max-w-md mx-auto px-6 pt-12 pb-12 relative z-10">
         <div className="text-center mb-6">
@@ -360,7 +360,7 @@ function HomeTab({
             <button
               onClick={() => onMove("spend", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#ff7eb5] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#fb923c] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               🍭 +5 Spend
             </button>
@@ -437,7 +437,7 @@ function StandTab({
             max={15}
             value={state.stand.price}
             onChange={(e) => onSetPrice(parseInt(e.target.value))}
-            className="w-full accent-[#ff7eb5]"
+            className="w-full accent-[#fb923c]"
           />
           <div className="text-[10px] text-[#2b2640]/60 mt-1">
             Cost per cup: 🪙 {product.unitCost} · Profit per cup: 🪙 {state.stand.price - product.unitCost}
@@ -468,7 +468,7 @@ function StandTab({
         <button
           onClick={onOpen}
           disabled={state.stand.inventoryUnits === 0}
-          className="w-full py-4 rounded-full display font-bold text-white text-lg bg-[#ff7eb5] border-[3px] border-white shadow-[0_5px_0_0_#cc5e8e] active:translate-y-1 active:shadow-[0_1px_0_0_#cc5e8e] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-4 rounded-full display font-bold text-white text-lg bg-[#fb923c] border-[3px] border-white shadow-[0_5px_0_0_#9a3412] active:translate-y-1 active:shadow-[0_1px_0_0_#9a3412] disabled:opacity-40 disabled:cursor-not-allowed"
         >
           🚀 Open the stand!
         </button>
@@ -489,7 +489,7 @@ function StandTab({
               <div className="text-[9px] uppercase font-bold text-[#2b2640]/70">Revenue</div>
               <div className="display text-lg font-bold">🪙{lastDay.revenue}</div>
             </div>
-            <div className={`${lastDay.profit >= 0 ? "bg-[#d4f4dd]" : "bg-[#ffd6e7]"} rounded-lg p-2`}>
+            <div className={`${lastDay.profit >= 0 ? "bg-[#d4f4dd]" : "bg-[#fed7aa]"} rounded-lg p-2`}>
               <div className="text-[9px] uppercase font-bold text-[#2b2640]/70">Profit</div>
               <div className="display text-lg font-bold">{lastDay.profit >= 0 ? "+" : ""}🪙{lastDay.profit}</div>
             </div>
@@ -681,7 +681,7 @@ function PetTab({ state }: { state: VillageState }) {
         {stage < 3 && (
           <>
             <div className="mt-3 h-3 bg-[#2b2640]/10 rounded-full overflow-hidden">
-              <div className="h-full bg-[#ff7eb5] transition-all" style={{ width: `${pct}%` }} />
+              <div className="h-full bg-[#fb923c] transition-all" style={{ width: `${pct}%` }} />
             </div>
             <div className="text-[10px] text-[#2b2640]/60 mt-1">
               {state.xp % 100} / 100 XP to next stage
