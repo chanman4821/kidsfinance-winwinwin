@@ -21,7 +21,7 @@ import {
   VillageState,
   Weather,
 } from "@/lib/village";
-import { CoinwoodScene, Mochi } from "@/components/characters";
+import { CoinwoodScene, Mochi, MoneyUnicorn } from "@/components/money-characters";
 
 type Tab = "home" | "stand" | "shops" | "goals" | "pet";
 
@@ -163,7 +163,7 @@ export default function VillagePage() {
       {/* Header */}
       <div className="max-w-md mx-auto px-3 pt-3 relative z-10">
         <div className="flex items-center gap-2 mb-3">
-          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold bungee">
+          <Link href="/" className="text-xs underline text-[#312e81]/60 font-bold bungee">
             ← back
           </Link>
           <div className="display text-xl font-bold flex-1 text-center">🏘️ Coinwood Village</div>
@@ -175,12 +175,12 @@ export default function VillagePage() {
         {/* Mochi greeting */}
         <div className="flex items-end gap-2 mb-3">
           <div className="w-20 h-24 anim-float">
-            <Mochi className="w-full h-full" mood="happy" />
+            <MoneyUnicorn className="w-full h-full" mood="happy" />
           </div>
           <div className="bg-white rounded-2xl px-3 py-2 self-center mt-1 shadow shadow-blue-900/10 border-2 border-slate-900/15 flex-1 relative">
             <div className="absolute -left-3 top-3 w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-white" />
-            <div className="absolute -left-[14px] top-[10px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[12px] border-r-[#2b2640]" />
-            <div className="text-[10px] text-[#2b2640]/60 font-bold uppercase">Mayor Mochi</div>
+            <div className="absolute -left-[14px] top-[10px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[12px] border-r-[#312e81]" />
+            <div className="text-[10px] text-[#312e81]/60 font-bold uppercase">Sparkle</div>
             <div className="text-xs font-bold leading-tight">
               {state.stand.todayWeather === "sunny" && "Sunny day! Perfect for the lemonade stand 🍋"}
               {state.stand.todayWeather === "cloudy" && "Cloudy today — fewer customers but it's still a good day."}
@@ -191,7 +191,7 @@ export default function VillagePage() {
 
         {/* Stats bar */}
         <div className="grid grid-cols-4 gap-2 mb-3">
-          <Stat icon="🪙" label="Coins" value={state.coins} bg="bg-[#fff3b0]" />
+          <Stat icon="🪙" label="Coins" value={state.coins} bg="bg-[#fef3c7]" />
           <Stat icon="🐷" label="Save" value={state.jars.save} bg="bg-[#d4f4dd]" />
           <Stat icon="🍭" label="Spend" value={state.jars.spend} bg="bg-[#fed7aa]" />
           <Stat icon="❤️" label="Give" value={state.jars.give} bg="bg-[#ffe4a3]" />
@@ -233,7 +233,7 @@ export default function VillagePage() {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={`flex-1 py-3 flex flex-col items-center gap-0.5 ${
-                tab === t.id ? "text-[#2b2640] bg-[#fff3b0]" : "text-[#2b2640]/50"
+                tab === t.id ? "text-[#312e81] bg-[#fef3c7]" : "text-[#312e81]/50"
               } transition-colors`}
             >
               <div className={`text-2xl ${tab === t.id ? "scale-125" : ""} transition-transform`}>{t.emoji}</div>
@@ -244,7 +244,7 @@ export default function VillagePage() {
       </nav>
 
       <button
-        className="fixed top-2 right-2 text-[10px] text-[#2b2640]/40 underline z-30"
+        className="fixed top-2 right-2 text-[10px] text-[#312e81]/40 underline z-30"
         onClick={() => {
           if (confirm("Reset Village progress?")) {
             localStorage.removeItem(VILLAGE_STORAGE);
@@ -268,10 +268,10 @@ function Onboarding({ onStart }: { onStart: (s: VillageState) => void }) {
       <div className="max-w-md mx-auto px-6 pt-12 pb-12 relative z-10">
         <div className="text-center mb-6">
           <div className="w-40 h-44 mx-auto anim-float">
-            <Mochi className="w-full h-full" mood="wave" />
+            <MoneyUnicorn className="w-full h-full" mood="wave" />
           </div>
           <h1 className="display text-3xl font-bold mt-2">Welcome to Coinwood Village!</h1>
-          <p className="text-sm text-[#2b2640]/70 mt-2 px-4">
+          <p className="text-sm text-[#312e81]/70 mt-2 px-4">
             You&apos;re a new resident. Let&apos;s set up your home and meet the townsfolk.
           </p>
         </div>
@@ -282,13 +282,13 @@ function Onboarding({ onStart }: { onStart: (s: VillageState) => void }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Type your name"
-              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-900/15/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
+              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-900/15/20 bg-white focus:outline-none focus:border-purple-500 text-lg"
             />
           </label>
           <button
             disabled={!name.trim()}
             onClick={() => onStart(newVillageState(name.trim()))}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm disabled:opacity-50 bungee"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#a855f7] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm disabled:opacity-50 bungee"
           >
             Move to Coinwood 🏠
           </button>
@@ -318,7 +318,7 @@ function HomeTab({
           <span className="text-2xl">✅</span> Today&apos;s chores
         </div>
         {undone.length === 0 ? (
-          <div className="text-sm text-[#2b2640]/60 italic text-center py-3">
+          <div className="text-sm text-[#312e81]/60 italic text-center py-3">
             All chores done! 🎉 Try the Lemonade Stand or buy a shop.
           </div>
         ) : (
@@ -327,14 +327,14 @@ function HomeTab({
               <button
                 key={c.id}
                 onClick={() => onChore(c)}
-                className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border border-slate-900/15/30 active:scale-95 hover:border-blue-600 transition-all text-left"
+                className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border border-slate-900/15/30 active:scale-95 hover:border-purple-500 transition-all text-left"
               >
                 <div className="text-3xl">{c.emoji}</div>
                 <div className="flex-1">
                   <div className="font-bold text-sm">{c.title}</div>
-                  <div className="text-[10px] text-[#2b2640]/60 font-bold">🪙 +{c.coins}</div>
+                  <div className="text-[10px] text-[#312e81]/60 font-bold">🪙 +{c.coins}</div>
                 </div>
-                <div className="bg-[#6ad48b] text-white px-3 py-1.5 rounded-full bungee text-xs font-bold">Done!</div>
+                <div className="bg-[#34d399] text-white px-3 py-1.5 rounded-full bungee text-xs font-bold">Done!</div>
               </button>
             ))}
           </div>
@@ -346,14 +346,14 @@ function HomeTab({
           <div className="display text-base mb-1 flex items-center gap-2">
             <span className="text-2xl">🫙</span> Move coins to jars
           </div>
-          <div className="text-xs text-[#2b2640]/70 mb-3">
+          <div className="text-xs text-[#312e81]/70 mb-3">
             You have <strong>🪙 {state.coins}</strong> in your wallet. Move some to Save, Spend, or Give.
           </div>
           <div className="grid grid-cols-3 gap-2">
             <button
               onClick={() => onMove("save", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#6ad48b] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#34d399] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               🐷 +5 Save
             </button>
@@ -367,7 +367,7 @@ function HomeTab({
             <button
               onClick={() => onMove("give", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#ffd84d] text-[#2b2640] py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#ffd84d] text-[#312e81] py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               ❤️ +5 Give
             </button>
@@ -383,7 +383,7 @@ function HomeTab({
               setTimeout(() => onMove("spend", sp), 100);
             }}
             disabled={state.coins < 5}
-            className="mt-2 w-full bg-[#5aa9e6] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
+            className="mt-2 w-full bg-[#a855f7] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
           >
             ✨ Smart split: 50% Save · 30% Spend · 20% Give
           </button>
@@ -419,7 +419,7 @@ function StandTab({
           <div className="text-3xl">{product.emoji}</div>
           <div className="flex-1">
             <div className="display text-lg font-bold leading-tight capitalize">{state.stand.product} Stand</div>
-            <div className="text-[10px] text-[#2b2640]/60 font-bold">
+            <div className="text-[10px] text-[#312e81]/60 font-bold">
               Lvl {state.stand.level} · Day {state.stand.daysOpen} · {WEATHER_EMOJI[state.stand.todayWeather]} {state.stand.todayWeather}
             </div>
           </div>
@@ -428,7 +428,7 @@ function StandTab({
         {/* Pricing */}
         <div className="bg-yellow-100 rounded-xl p-3 mb-3">
           <div className="flex justify-between items-center mb-2">
-            <div className="text-xs font-bold text-[#2b2640]/70">Set price (per cup)</div>
+            <div className="text-xs font-bold text-[#312e81]/70">Set price (per cup)</div>
             <div className="display text-2xl font-bold">🪙 {state.stand.price}</div>
           </div>
           <input
@@ -439,7 +439,7 @@ function StandTab({
             onChange={(e) => onSetPrice(parseInt(e.target.value))}
             className="w-full accent-[#fb923c]"
           />
-          <div className="text-[10px] text-[#2b2640]/60 mt-1">
+          <div className="text-[10px] text-[#312e81]/60 mt-1">
             Cost per cup: 🪙 {product.unitCost} · Profit per cup: 🪙 {state.stand.price - product.unitCost}
           </div>
         </div>
@@ -447,7 +447,7 @@ function StandTab({
         {/* Inventory */}
         <div className="bg-[#d4f4dd]/60 rounded-xl p-3 mb-3">
           <div className="flex justify-between items-center mb-2">
-            <div className="text-xs font-bold text-[#2b2640]/70">Inventory ready</div>
+            <div className="text-xs font-bold text-[#312e81]/70">Inventory ready</div>
             <div className="display text-xl font-bold">{state.stand.inventoryUnits} cups</div>
           </div>
           <div className="grid grid-cols-3 gap-2">
@@ -456,7 +456,7 @@ function StandTab({
                 key={n}
                 onClick={() => onBuyInventory(n)}
                 disabled={state.coins < n * product.unitCost}
-                className="bg-[#6ad48b] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
+                className="bg-[#34d399] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
               >
                 Make {n}
                 <div className="text-[9px] opacity-80">🪙 {n * product.unitCost}</div>
@@ -481,20 +481,20 @@ function StandTab({
             <span className="text-xl">📊</span> Day {lastDay.day} report
           </div>
           <div className="grid grid-cols-3 gap-2 text-center">
-            <div className="bg-[#fff3b0] rounded-lg p-2">
-              <div className="text-[9px] uppercase font-bold text-[#2b2640]/70">Sold</div>
+            <div className="bg-[#fef3c7] rounded-lg p-2">
+              <div className="text-[9px] uppercase font-bold text-[#312e81]/70">Sold</div>
               <div className="display text-lg font-bold">{lastDay.sold}</div>
             </div>
             <div className="bg-[#cfe7ff] rounded-lg p-2">
-              <div className="text-[9px] uppercase font-bold text-[#2b2640]/70">Revenue</div>
+              <div className="text-[9px] uppercase font-bold text-[#312e81]/70">Revenue</div>
               <div className="display text-lg font-bold">🪙{lastDay.revenue}</div>
             </div>
             <div className={`${lastDay.profit >= 0 ? "bg-[#d4f4dd]" : "bg-[#fed7aa]"} rounded-lg p-2`}>
-              <div className="text-[9px] uppercase font-bold text-[#2b2640]/70">Profit</div>
+              <div className="text-[9px] uppercase font-bold text-[#312e81]/70">Profit</div>
               <div className="display text-lg font-bold">{lastDay.profit >= 0 ? "+" : ""}🪙{lastDay.profit}</div>
             </div>
           </div>
-          <div className="text-[10px] text-[#2b2640]/60 mt-2 italic">
+          <div className="text-[10px] text-[#312e81]/60 mt-2 italic">
             💡 {lastDay.profit > 0 ? "Profit means you made money!" : lastDay.profit === 0 ? "Break-even — try a different price." : "Loss — your costs were higher than what you sold for."}
           </div>
         </div>
@@ -515,15 +515,15 @@ function StandTab({
                 disabled={locked}
                 className={`p-2 rounded-xl border-2 ${
                   active
-                    ? "bg-[#fff3b0] border-[#ccaa3d]"
+                    ? "bg-[#fef3c7] border-[#ccaa3d]"
                     : locked
-                    ? "bg-[#2b2640]/5 border-[#2b2640]/10 opacity-50"
-                    : "bg-white border-[#2b2640]/10 hover:border-blue-600"
+                    ? "bg-[#312e81]/5 border-[#312e81]/10 opacity-50"
+                    : "bg-white border-[#312e81]/10 hover:border-purple-500"
                 } text-left transition-all`}
               >
                 <div className="text-2xl">{meta.emoji}</div>
                 <div className="display font-bold text-xs capitalize">{p}</div>
-                <div className="text-[10px] text-[#2b2640]/60">
+                <div className="text-[10px] text-[#312e81]/60">
                   {locked ? `🔒 lvl ${meta.unlockLevel}` : `cost 🪙${meta.unitCost}`}
                 </div>
               </button>
@@ -533,7 +533,7 @@ function StandTab({
         <button
           onClick={onUpgrade}
           disabled={state.coins < upgradeCost || state.stand.level >= 4}
-          className="w-full bg-[#5aa9e6] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
+          className="w-full bg-[#a855f7] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
         >
           ⬆️ Upgrade stand to lvl {state.stand.level + 1} · 🪙 {upgradeCost}
         </button>
@@ -556,7 +556,7 @@ function ShopsTab({
   const dailyTotal = dailyShopIncome(state);
   return (
     <div className="space-y-3">
-      <div className="bg-yellow-100 rounded-2xl p-3 border-2 border-slate-900/15 shadow text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-2 border-slate-900/15 shadow text-xs text-[#312e81]/80">
         💡 <strong>Buy a shop = passive income.</strong> Each shop pays you coins every day, even when you&apos;re not playing. Take more lessons → shops pay even more!
       </div>
 
@@ -566,7 +566,7 @@ function ShopsTab({
           <div className="display text-3xl font-bold">🪙 {dailyTotal}/day</div>
           <button
             onClick={onCollect}
-            className="mt-2 w-full bg-[#4fa86c] text-white py-3 rounded-full bungee font-bold text-base active:scale-95 shadow-lg shadow-blue-900/15"
+            className="mt-2 w-full bg-[#10b981] text-white py-3 rounded-full bungee font-bold text-base active:scale-95 shadow-lg shadow-blue-900/15"
           >
             💰 Collect today&apos;s coins
           </button>
@@ -580,14 +580,14 @@ function ShopsTab({
             <div
               key={s.id}
               className={`bg-white rounded-2xl p-3 border-2 border-slate-900/15 shadow-lg flex items-center gap-3 ${
-                isOwned ? "ring-2 ring-[#6ad48b]" : ""
+                isOwned ? "ring-2 ring-[#34d399]" : ""
               }`}
             >
               <div className="text-4xl shrink-0">{s.emoji}</div>
               <div className="flex-1 min-w-0">
                 <div className="display font-bold text-base leading-tight">{s.name}</div>
-                <div className="text-[11px] text-[#2b2640]/70 line-clamp-2">{s.description}</div>
-                <div className="text-[10px] text-[#2b2640]/60 font-bold mt-0.5">
+                <div className="text-[11px] text-[#312e81]/70 line-clamp-2">{s.description}</div>
+                <div className="text-[10px] text-[#312e81]/60 font-bold mt-0.5">
                   💸 {s.basePassive} coins/day
                 </div>
               </div>
@@ -597,7 +597,7 @@ function ShopsTab({
                 <button
                   onClick={() => onBuy(s.id)}
                   disabled={state.coins < s.cost}
-                  className="bg-[#5aa9e6] text-white px-3 py-2 rounded-full bungee font-bold text-xs disabled:opacity-40 shrink-0"
+                  className="bg-[#a855f7] text-white px-3 py-2 rounded-full bungee font-bold text-xs disabled:opacity-40 shrink-0"
                 >
                   🪙 {s.cost}
                 </button>
@@ -629,7 +629,7 @@ function GoalsTab({ state, setState }: { state: VillageState; setState: (s: Vill
 
       {state.goal && (
         <div className="bg-[#d4f4dd] rounded-2xl p-4 border-2 border-slate-900/15 shadow-lg">
-          <div className="display text-xs uppercase tracking-wider font-bold text-[#2b2640]/70">CURRENT GOAL</div>
+          <div className="display text-xs uppercase tracking-wider font-bold text-[#312e81]/70">CURRENT GOAL</div>
           <div className="flex items-center gap-3 mt-1">
             <div className="text-5xl">{state.goal.emoji}</div>
             <div className="flex-1">
@@ -639,7 +639,7 @@ function GoalsTab({ state, setState }: { state: VillageState; setState: (s: Vill
               </div>
               <div className="mt-2 h-3 bg-white/60 rounded-full overflow-hidden border border-slate-900/15">
                 <div
-                  className="h-full bg-[#4fa86c] transition-all duration-500"
+                  className="h-full bg-[#10b981] transition-all duration-500"
                   style={{ width: `${Math.min(100, (state.jars.save / state.goal.target) * 100)}%` }}
                 />
               </div>
@@ -657,7 +657,7 @@ function GoalsTab({ state, setState }: { state: VillageState; setState: (s: Vill
           >
             <div className="text-4xl mb-1">{g.emoji}</div>
             <div className="display font-bold text-sm">{g.name}</div>
-            <div className="text-[11px] text-[#2b2640]/60 font-bold">🪙 {g.target}</div>
+            <div className="text-[11px] text-[#312e81]/60 font-bold">🪙 {g.target}</div>
           </button>
         ))}
       </div>
@@ -677,23 +677,23 @@ function PetTab({ state }: { state: VillageState }) {
       <div className="bg-white rounded-2xl p-6 border-2 border-slate-900/15 shadow-lg text-center">
         <div className="text-8xl my-4 anim-float">{stageEmoji}</div>
         <div className="display text-2xl font-bold">{state.petName}</div>
-        <div className="text-xs text-[#2b2640]/60 font-bold uppercase tracking-wider">{stageName} stage</div>
+        <div className="text-xs text-[#312e81]/60 font-bold uppercase tracking-wider">{stageName} stage</div>
         {stage < 3 && (
           <>
-            <div className="mt-3 h-3 bg-[#2b2640]/10 rounded-full overflow-hidden">
+            <div className="mt-3 h-3 bg-[#312e81]/10 rounded-full overflow-hidden">
               <div className="h-full bg-[#fb923c] transition-all" style={{ width: `${pct}%` }} />
             </div>
-            <div className="text-[10px] text-[#2b2640]/60 mt-1">
+            <div className="text-[10px] text-[#312e81]/60 mt-1">
               {state.xp % 100} / 100 XP to next stage
             </div>
           </>
         )}
         {stage === 3 && (
-          <div className="text-sm text-[#2b2640]/70 mt-2 italic">{state.petName} is fully grown! 🌟</div>
+          <div className="text-sm text-[#312e81]/70 mt-2 italic">{state.petName} is fully grown! 🌟</div>
         )}
       </div>
 
-      <div className="bg-yellow-100 rounded-2xl p-3 border border-slate-900/15 text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border border-slate-900/15 text-xs text-[#312e81]/80">
         💡 Your pet evolves as you earn XP. Do chores, sell lemonade, take lessons — every action helps {state.petName} grow.
       </div>
     </div>
@@ -706,14 +706,14 @@ function Stat({ icon, label, value, bg }: { icon: string; label: string; value: 
     <div className={`${bg} rounded-xl p-2 text-center border border-slate-900/15`}>
       <div className="text-lg leading-none">{icon}</div>
       <div className="display text-base font-bold leading-none mt-0.5">{value}</div>
-      <div className="text-[8px] uppercase tracking-wider font-bold text-[#2b2640]/60">{label}</div>
+      <div className="text-[8px] uppercase tracking-wider font-bold text-[#312e81]/60">{label}</div>
     </div>
   );
 }
 
 function Toast({ msg }: { msg: string }) {
   return (
-    <div className="fixed top-16 left-1/2 -translate-x-1/2 bg-[#2b2640] text-white px-4 py-2 rounded-full bungee font-bold text-sm shadow-lg z-50 anim-bounce-in">
+    <div className="fixed top-16 left-1/2 -translate-x-1/2 bg-[#312e81] text-white px-4 py-2 rounded-full bungee font-bold text-sm shadow-lg z-50 anim-bounce-in">
       {msg}
     </div>
   );

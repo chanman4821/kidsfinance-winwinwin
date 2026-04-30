@@ -13,7 +13,7 @@ import {
   STOCKS,
 } from "@/lib/markets";
 import { loadMarkets, resetMarkets, saveMarkets } from "@/lib/marketsStorage";
-import { CoinwoodScene, Mochi } from "@/components/characters";
+import { CoinwoodScene, Mochi, MoneyUnicorn } from "@/components/money-characters";
 import Link from "next/link";
 
 type Tab = "portfolio" | "discover" | "labs" | "crew";
@@ -67,26 +67,26 @@ export default function MarketsPage() {
 
       <div className="max-w-md mx-auto px-3 pt-3 relative z-10">
         <div className="flex items-center gap-2 mb-3">
-          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold bungee">← back</Link>
+          <Link href="/" className="text-xs underline text-[#312e81]/60 font-bold bungee">← back</Link>
           <div className="display text-xl font-bold flex-1 text-center">📈 Coinwood Markets</div>
           <div className="w-16" />
         </div>
 
         <div className="bg-white rounded-2xl p-4 border-2 border-slate-900/15 shadow-lg mb-3">
-          <div className="text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold bungee">Total Portfolio</div>
+          <div className="text-xs uppercase tracking-wider text-[#312e81]/60 font-bold bungee">Total Portfolio</div>
           <div className="display text-3xl font-bold leading-none mt-1">
             ${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </div>
-          <div className={`text-sm font-bold mt-1 ${totalGain >= 0 ? "text-[#4fa86c]" : "text-[#cc4f6e]"}`}>
+          <div className={`text-sm font-bold mt-1 ${totalGain >= 0 ? "text-[#10b981]" : "text-[#cc4f6e]"}`}>
             {totalGain >= 0 ? "▲" : "▼"} ${Math.abs(totalGain).toFixed(2)} ({totalGainPct.toFixed(2)}%) all-time
           </div>
           <div className="grid grid-cols-2 gap-2 mt-3">
             <div className="bg-[#d4f4dd] rounded-xl p-2 text-center">
-              <div className="text-[10px] uppercase tracking-wider text-[#2b2640]/70 font-bold">Cash</div>
+              <div className="text-[10px] uppercase tracking-wider text-[#312e81]/70 font-bold">Cash</div>
               <div className="display font-bold text-base">${state.portfolio.cash.toFixed(2)}</div>
             </div>
-            <div className="bg-[#fff3b0] rounded-xl p-2 text-center">
-              <div className="text-[10px] uppercase tracking-wider text-[#2b2640]/70 font-bold">Invested</div>
+            <div className="bg-[#fef3c7] rounded-xl p-2 text-center">
+              <div className="text-[10px] uppercase tracking-wider text-[#312e81]/70 font-bold">Invested</div>
               <div className="display font-bold text-base">${investedValue.toFixed(2)}</div>
             </div>
           </div>
@@ -99,8 +99,8 @@ export default function MarketsPage() {
               onClick={() => setTab(t)}
               className={`flex-1 py-2 rounded-xl bungee font-bold text-xs uppercase tracking-wider ${
                 tab === t
-                  ? "bg-[#5aa9e6] text-white shadow-[0_3px_0_0_#3b80b0]"
-                  : "bg-white/70 text-[#2b2640]/60 border border-slate-900/15"
+                  ? "bg-[#a855f7] text-white shadow-[0_3px_0_0_#3b80b0]"
+                  : "bg-white/70 text-[#312e81]/60 border border-slate-900/15"
               }`}
             >
               {t === "portfolio" ? "📊 Holdings" : t === "discover" ? "🔍 Discover" : t === "labs" ? "🧪 Labs" : "👥 Crew"}
@@ -125,7 +125,7 @@ export default function MarketsPage() {
       )}
 
       <button
-        className="fixed top-2 right-2 text-[10px] text-[#2b2640]/40 underline z-20"
+        className="fixed top-2 right-2 text-[10px] text-[#312e81]/40 underline z-20"
         onClick={() => {
           if (confirm("Reset portfolio?")) {
             const fresh = resetMarkets();
@@ -144,13 +144,13 @@ function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
     return (
       <div className="bg-white rounded-2xl p-6 text-center border-2 border-slate-900/15 shadow-lg">
         <div className="w-32 h-36 mx-auto">
-          <Mochi className="w-full h-full" mood="happy" />
+          <MoneyUnicorn className="w-full h-full" mood="happy" />
         </div>
         <div className="display text-xl mt-2">Your portfolio is empty</div>
-        <div className="text-sm text-[#2b2640]/70 mt-1">
+        <div className="text-sm text-[#312e81]/70 mt-1">
           Tap <strong>🔍 Discover</strong> to find stocks. Start with companies you know!
         </div>
-        <div className="text-xs text-[#2b2640]/50 mt-3 italic">
+        <div className="text-xs text-[#312e81]/50 mt-3 italic">
           You have <strong>${state.portfolio.cash.toFixed(2)}</strong> of play money to invest. Real-world prices, no real risk.
         </div>
       </div>
@@ -173,14 +173,14 @@ function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
             <div className="text-4xl shrink-0">{stock.emoji}</div>
             <div className="flex-1 min-w-0">
               <div className="display font-bold text-base leading-tight truncate">{stock.name}</div>
-              <div className="text-[10px] text-[#2b2640]/60 font-bold uppercase">{p.ticker} · {p.shares.toFixed(2)} sh</div>
-              <div className={`text-xs font-bold mt-0.5 ${gain.abs >= 0 ? "text-[#4fa86c]" : "text-[#cc4f6e]"}`}>
+              <div className="text-[10px] text-[#312e81]/60 font-bold uppercase">{p.ticker} · {p.shares.toFixed(2)} sh</div>
+              <div className={`text-xs font-bold mt-0.5 ${gain.abs >= 0 ? "text-[#10b981]" : "text-[#cc4f6e]"}`}>
                 {gain.abs >= 0 ? "▲" : "▼"} ${Math.abs(gain.abs).toFixed(2)} ({gain.pct.toFixed(2)}%)
               </div>
             </div>
             <div className="text-right shrink-0">
               <div className="display font-bold text-base">${value.toFixed(2)}</div>
-              <div className="text-[10px] text-[#2b2640]/60 font-bold">@ ${price.toFixed(2)}</div>
+              <div className="text-[10px] text-[#312e81]/60 font-bold">@ ${price.toFixed(2)}</div>
             </div>
           </button>
         );
@@ -192,7 +192,7 @@ function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
 function Discover({ state, onTrade }: { state: MarketsState; onTrade: (ticker: string) => void }) {
   return (
     <div className="space-y-2">
-      <div className="bg-yellow-100 rounded-2xl p-3 border-2 border-slate-900/15 shadow text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-2 border-slate-900/15 shadow text-xs text-[#312e81]/80">
         💡 <strong>Tip:</strong> Invest in companies you know and use. Coca-Cola, Disney, Apple, Roblox — these are real companies you interact with every day.
       </div>
       {STOCKS.map((s) => {
@@ -209,12 +209,12 @@ function Discover({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
             <div className="text-4xl shrink-0">{s.emoji}</div>
             <div className="flex-1 min-w-0">
               <div className="display font-bold text-base leading-tight">{s.name}</div>
-              <div className="text-[10px] text-[#2b2640]/60 font-bold uppercase">{s.ticker} · {s.sector}</div>
-              <div className="text-[11px] text-[#2b2640]/70 line-clamp-2 mt-0.5">{s.blurb}</div>
+              <div className="text-[10px] text-[#312e81]/60 font-bold uppercase">{s.ticker} · {s.sector}</div>
+              <div className="text-[11px] text-[#312e81]/70 line-clamp-2 mt-0.5">{s.blurb}</div>
             </div>
             <div className="text-right shrink-0">
               <div className="display font-bold text-base">${price.toFixed(2)}</div>
-              <div className={`text-[10px] font-bold ${change30d >= 0 ? "text-[#4fa86c]" : "text-[#cc4f6e]"}`}>
+              <div className={`text-[10px] font-bold ${change30d >= 0 ? "text-[#10b981]" : "text-[#cc4f6e]"}`}>
                 {change30d >= 0 ? "▲" : "▼"} {Math.abs(change30d).toFixed(2)}% 30d
               </div>
             </div>
@@ -255,7 +255,7 @@ function Labs() {
     <div className="space-y-3">
       <div className="bg-white rounded-2xl p-4 border-2 border-slate-900/15 shadow-lg">
         <div className="display text-lg mb-1 flex items-center gap-2">🧪 Compound Interest Lab</div>
-        <div className="text-xs text-[#2b2640]/70 mb-3">See how saving a little every month grows over time.</div>
+        <div className="text-xs text-[#312e81]/70 mb-3">See how saving a little every month grows over time.</div>
 
         <div className="space-y-3">
           <SliderRow label="Save per month" value={contrib} min={5} max={500} step={5} prefix="$" onChange={setContrib} />
@@ -264,45 +264,45 @@ function Labs() {
         </div>
 
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-          <div className="bg-[#fff3b0] rounded-xl p-2">
-            <div className="text-[10px] uppercase font-bold text-[#2b2640]/70">You put in</div>
+          <div className="bg-[#fef3c7] rounded-xl p-2">
+            <div className="text-[10px] uppercase font-bold text-[#312e81]/70">You put in</div>
             <div className="display text-sm font-bold mt-1">${totalContributed.toLocaleString()}</div>
           </div>
           <div className="bg-[#d4f4dd] rounded-xl p-2">
-            <div className="text-[10px] uppercase font-bold text-[#2b2640]/70">Interest</div>
-            <div className="display text-sm font-bold mt-1 text-[#4fa86c]">+${interestEarned.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
+            <div className="text-[10px] uppercase font-bold text-[#312e81]/70">Interest</div>
+            <div className="display text-sm font-bold mt-1 text-[#10b981]">+${interestEarned.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
           </div>
-          <div className="bg-[#5aa9e6] text-white rounded-xl p-2">
+          <div className="bg-[#a855f7] text-white rounded-xl p-2">
             <div className="text-[10px] uppercase font-bold opacity-80">Final value</div>
             <div className="display text-sm font-bold mt-1">${fv.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>
           </div>
         </div>
 
-        <div className="mt-3 p-3 bg-yellow-100 rounded-xl text-xs text-[#2b2640]/80 italic">
+        <div className="mt-3 p-3 bg-yellow-100 rounded-xl text-xs text-[#312e81]/80 italic">
           💡 If you start <strong>10 years earlier</strong>, you&apos;d have ${(compoundFutureValue(contrib, years + 10, rate, 0) - fv).toLocaleString(undefined, { maximumFractionDigits: 0 })} MORE money. <strong>Time</strong> is the magic.
         </div>
       </div>
 
       <div className="bg-white rounded-2xl p-4 border-2 border-slate-900/15 shadow-lg">
         <div className="display text-lg mb-1 flex items-center gap-2">💳 Credit Card Trap</div>
-        <div className="text-xs text-[#2b2640]/70 mb-3">What happens if you spend $500 on a credit card and only pay the minimum each month?</div>
+        <div className="text-xs text-[#312e81]/70 mb-3">What happens if you spend $500 on a credit card and only pay the minimum each month?</div>
 
         <div className="bg-[#fed7aa]/60 rounded-xl p-3">
           <div className="grid grid-cols-2 gap-2 text-center">
             <div>
-              <div className="text-[10px] uppercase font-bold text-[#2b2640]/70">Time to pay off</div>
+              <div className="text-[10px] uppercase font-bold text-[#312e81]/70">Time to pay off</div>
               <div className="display text-2xl font-bold text-[#cc4f6e]">{creditMonths.years} yrs</div>
-              <div className="text-[10px] text-[#2b2640]/60">({creditMonths.months} months)</div>
+              <div className="text-[10px] text-[#312e81]/60">({creditMonths.months} months)</div>
             </div>
             <div>
-              <div className="text-[10px] uppercase font-bold text-[#2b2640]/70">Total interest paid</div>
+              <div className="text-[10px] uppercase font-bold text-[#312e81]/70">Total interest paid</div>
               <div className="display text-2xl font-bold text-[#cc4f6e]">${creditMonths.interestPaid}</div>
-              <div className="text-[10px] text-[#2b2640]/60">on a $500 purchase</div>
+              <div className="text-[10px] text-[#312e81]/60">on a $500 purchase</div>
             </div>
           </div>
         </div>
 
-        <div className="mt-3 p-3 bg-[#d4f4dd]/60 rounded-xl text-xs text-[#2b2640]/80 italic">
+        <div className="mt-3 p-3 bg-[#d4f4dd]/60 rounded-xl text-xs text-[#312e81]/80 italic">
           💡 At 22% APR, paying only the minimum turns a $500 charge into ${creditMonths.totalPaid}. <strong>Always pay your balance in full.</strong>
         </div>
       </div>
@@ -332,7 +332,7 @@ function SliderRow({
   return (
     <div>
       <div className="flex justify-between items-center mb-1">
-        <div className="text-xs font-bold text-[#2b2640]/70">{label}</div>
+        <div className="text-xs font-bold text-[#312e81]/70">{label}</div>
         <div className="display text-base font-bold">
           {prefix}{value}{suffix}
         </div>
@@ -344,7 +344,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-[#5aa9e6]"
+        className="w-full accent-[#a855f7]"
       />
     </div>
   );
@@ -355,7 +355,7 @@ function CrewPlaceholder() {
     <div className="bg-white rounded-2xl p-6 text-center border-2 border-slate-900/15 shadow-lg">
       <div className="text-6xl mb-3">👥</div>
       <div className="display text-xl">Investment Crews — Coming Soon</div>
-      <div className="text-sm text-[#2b2640]/70 mt-2">
+      <div className="text-sm text-[#312e81]/70 mt-2">
         Start a Crew with 2-8 friends. Share your portfolio, see what they&apos;re buying, and discuss strategies. Parent-approved on both sides — totally safe.
       </div>
       <div className="mt-4 p-3 bg-yellow-100 rounded-xl text-xs text-left">
@@ -396,7 +396,7 @@ function TradeModal({
   const sellShares = position ? Math.min(position.shares, amount / price) : 0;
 
   return (
-    <div className="fixed inset-0 bg-[#2b2640]/50 flex items-end sm:items-center justify-center z-50 p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-[#312e81]/50 flex items-end sm:items-center justify-center z-50 p-4" onClick={onClose}>
       <div
         className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-2 border-slate-900/15 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
@@ -405,20 +405,20 @@ function TradeModal({
           <div className="text-5xl">{stock.emoji}</div>
           <div className="flex-1">
             <div className="display text-xl font-bold leading-tight">{stock.name}</div>
-            <div className="text-xs text-[#2b2640]/60 font-bold">{stock.ticker} · {stock.sector}</div>
+            <div className="text-xs text-[#312e81]/60 font-bold">{stock.ticker} · {stock.sector}</div>
           </div>
-          <button onClick={onClose} className="text-[#2b2640]/40 text-3xl w-10 h-10">×</button>
+          <button onClick={onClose} className="text-[#312e81]/40 text-3xl w-10 h-10">×</button>
         </div>
 
         <div className="bg-white rounded-2xl p-3 mb-3 border border-slate-900/15/30">
           <div className="flex items-baseline gap-2">
             <div className="display text-3xl font-bold">${price.toFixed(2)}</div>
-            <div className={`text-sm font-bold ${change30 >= 0 ? "text-[#4fa86c]" : "text-[#cc4f6e]"}`}>
+            <div className={`text-sm font-bold ${change30 >= 0 ? "text-[#10b981]" : "text-[#cc4f6e]"}`}>
               {change30 >= 0 ? "▲" : "▼"} {Math.abs(change30).toFixed(2)}% (30d)
             </div>
           </div>
           <Sparkline data={recent30.map((h) => h.close)} positive={change30 >= 0} />
-          <div className="text-xs text-[#2b2640]/70 mt-2">{stock.blurb}</div>
+          <div className="text-xs text-[#312e81]/70 mt-2">{stock.blurb}</div>
         </div>
 
         {position && (
@@ -430,7 +430,7 @@ function TradeModal({
         <div className="flex gap-2 mb-3">
           <button
             onClick={() => setSide("buy")}
-            className={`flex-1 py-3 rounded-xl bungee font-bold ${side === "buy" ? "bg-[#6ad48b] text-white shadow shadow-blue-900/10" : "bg-white border border-slate-900/15/30"}`}
+            className={`flex-1 py-3 rounded-xl bungee font-bold ${side === "buy" ? "bg-[#34d399] text-white shadow shadow-blue-900/10" : "bg-white border border-slate-900/15/30"}`}
           >
             Buy
           </button>
@@ -447,7 +447,7 @@ function TradeModal({
 
         <div className="mb-3">
           <div className="flex justify-between mb-2">
-            <div className="text-xs font-bold text-[#2b2640]/70">{side === "buy" ? "Amount to buy" : "Amount to sell"}</div>
+            <div className="text-xs font-bold text-[#312e81]/70">{side === "buy" ? "Amount to buy" : "Amount to sell"}</div>
             <div className="display text-lg font-bold">${amount}</div>
           </div>
           <div className="grid grid-cols-4 gap-2">
@@ -457,14 +457,14 @@ function TradeModal({
                 onClick={() => setAmount(n)}
                 disabled={side === "buy" ? n > state.portfolio.cash : n > (position ? position.shares * price : 0)}
                 className={`py-2 rounded-xl bungee font-bold text-sm ${
-                  amount === n ? "bg-[#5aa9e6] text-white" : "bg-white border border-slate-900/15/30"
+                  amount === n ? "bg-[#a855f7] text-white" : "bg-white border border-slate-900/15/30"
                 } disabled:opacity-30`}
               >
                 ${n}
               </button>
             ))}
           </div>
-          <div className="text-xs text-[#2b2640]/60 mt-2 font-bold">
+          <div className="text-xs text-[#312e81]/60 mt-2 font-bold">
             {side === "buy"
               ? `≈ ${(amount / price).toFixed(4)} shares · You have $${state.portfolio.cash.toFixed(2)}`
               : `≈ ${sellShares.toFixed(4)} shares`}
@@ -474,7 +474,7 @@ function TradeModal({
         <button
           onClick={() => (side === "buy" ? onBuy(ticker, amount) : onSell(ticker, sellShares))}
           className={`w-full py-3 rounded-full bungee font-bold text-white text-lg border-2 border-slate-900/15 shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)] ${
-            side === "buy" ? "bg-[#6ad48b]" : "bg-[#fb923c]"
+            side === "buy" ? "bg-[#34d399]" : "bg-[#fb923c]"
           }`}
         >
           {side === "buy" ? `Buy $${amount} of ${ticker}` : `Sell ${sellShares.toFixed(2)} shares`}
@@ -498,7 +498,7 @@ function Sparkline({ data, positive }: { data: number[]; positive: boolean }) {
   }).join(" ");
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-12 mt-2">
-      <polyline points={points} fill="none" stroke={positive ? "#4fa86c" : "#cc4f6e"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points={points} fill="none" stroke={positive ? "#10b981" : "#cc4f6e"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
