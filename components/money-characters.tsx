@@ -59,12 +59,37 @@ export function MoneyPanda({ className = "", mood = "happy" }: { className?: str
         <text x="11" y="22" fontFamily="Lilita One, sans-serif" fontSize="14" fontWeight="900" fill="#047857">$</text>
       </g>
 
-      {/* GOLD CHAIN — chunky on body */}
+      {/* GOLD CHAINS — stacked rapper style 🎵 */}
       <g>
-        <ellipse cx="130" cy="155" rx="48" ry="8" fill="none" stroke="url(#goldGrad)" strokeWidth="4"/>
-        {/* Big $ medallion */}
-        <circle cx="130" cy="165" r="18" fill="url(#goldGrad)" stroke="#92400e" strokeWidth="2"/>
-        <text x="130" y="173" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="24" fontWeight="900" fill="#92400e">$</text>
+        {/* Chain 1 — top thin Cuban link */}
+        <ellipse cx="130" cy="148" rx="40" ry="6" fill="none" stroke="url(#goldGrad)" strokeWidth="3"/>
+        {/* fake link segments */}
+        {[-30, -20, -10, 0, 10, 20, 30].map((dx) => (
+          <ellipse key={`l1-${dx}`} cx={130 + dx} cy={148 + Math.abs(dx) * 0.05} rx="3" ry="2.5" fill="#fde047" stroke="#92400e" strokeWidth="0.8"/>
+        ))}
+
+        {/* Chain 2 — rope chain (medium) */}
+        <ellipse cx="130" cy="158" rx="48" ry="8" fill="none" stroke="url(#goldGrad)" strokeWidth="5"/>
+        <ellipse cx="130" cy="158" rx="48" ry="8" fill="none" stroke="#fde047" strokeWidth="1.5" strokeDasharray="4 2"/>
+
+        {/* Chain 3 — chunky Cuban bottom */}
+        <ellipse cx="130" cy="170" rx="55" ry="10" fill="none" stroke="url(#goldGrad)" strokeWidth="6"/>
+        {[-40, -25, -10, 5, 20, 35].map((dx) => (
+          <rect key={`l3-${dx}`} x={127 + dx} y={167 + Math.abs(dx) * 0.07} width="6" height="6" rx="1.5" fill="#fbbf24" stroke="#92400e" strokeWidth="1"/>
+        ))}
+
+        {/* HUGE $ MEDALLION (the bling) */}
+        <circle cx="130" cy="190" r="26" fill="url(#goldGrad)" stroke="#92400e" strokeWidth="3"/>
+        <circle cx="130" cy="190" r="22" fill="none" stroke="#fef3c7" strokeWidth="1.5" opacity="0.6"/>
+        {/* diamond accents on medallion */}
+        <text x="115" y="180" fontSize="10">💎</text>
+        <text x="138" y="180" fontSize="10">💎</text>
+        <text x="115" y="208" fontSize="10">💎</text>
+        <text x="138" y="208" fontSize="10">💎</text>
+        {/* big $ in center */}
+        <text x="130" y="201" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="32" fontWeight="900" fill="#92400e">$</text>
+        {/* shine streak */}
+        <path d="M 116 175 Q 122 178 119 188" stroke="#fef3c7" strokeWidth="2" fill="none" strokeLinecap="round" opacity="0.7"/>
       </g>
 
       {/* HEAD — round, white */}
