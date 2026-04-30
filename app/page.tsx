@@ -117,7 +117,6 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <MoneyRain />
 
       <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col px-4">
         {/* TOP BAR — Roblox style with cash counter */}
@@ -297,36 +296,6 @@ export default function HomePage() {
   );
 }
 
-/* === MONEY RAIN BACKGROUND === */
-function MoneyRain() {
-  const drops = Array.from({ length: 15 }, (_, i) => i);
-  return (
-    <div className="money-rain-bg">
-      {drops.map((i) => {
-        const left = (i * 7) % 100;
-        const delay = (i * 0.6) % 8;
-        const dur = 6 + (i % 4);
-        const emoji = ["🪙", "💰", "💵", "💎", "💸"][i % 5];
-        const cls = ["anim-cloud-1", "anim-cloud-2", "anim-cloud-3"][i % 3];
-        return (
-          <div
-            key={i}
-            className={`raindrop ${cls}`}
-            style={{
-              left: `${left}%`,
-              top: `-50px`,
-              animationDelay: `${delay}s`,
-              animationDuration: `${dur}s`,
-              fontSize: `${1.5 + (i % 3) * 0.5}rem`,
-            }}
-          >
-            {emoji}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
 
 /* === SPEECH BUBBLE — bold, black-stroked === */
 function SpeechBubble({ children }: { children: React.ReactNode }) {
@@ -360,7 +329,6 @@ function ReturningKid({ profile, onPlay, onReset }: { profile: Profile; onPlay: 
   const companion = COMPANIONS.find((c) => c.id === profile.companion);
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <MoneyRain />
       <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col items-center px-4">
         <div className="pt-4 flex items-center justify-between w-full">
           <div className="cash-counter">
