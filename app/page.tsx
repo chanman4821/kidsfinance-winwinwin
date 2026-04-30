@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CoachCoin, KidAvatar, COMPANIONS, MoneyScene, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
+import { CoachCoin, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
 
 const SKINS = [
   { id: "fair", color: "#ffe0bd" },
@@ -36,8 +36,8 @@ const OUTFITS: { id: OutfitStyle; label: string; emoji: string }[] = [
   { id: "suit", label: "Suit", emoji: "🤵" },
   { id: "hoodie", label: "Hoodie", emoji: "🧥" },
   { id: "blazer", label: "Blazer", emoji: "💼" },
-  { id: "vest", label: "Money Vest", emoji: "💰" },
-  { id: "tracksuit", label: "Tracksuit", emoji: "🏃" },
+  { id: "vest", label: "$ Vest", emoji: "💰" },
+  { id: "tracksuit", label: "Tracks", emoji: "🏃" },
 ];
 
 type Profile = {
@@ -48,10 +48,11 @@ type Profile = {
   hairColor: string;
   outfit: OutfitStyle;
   companion: CompanionId;
+  cash: number;
   createdAt: string;
 };
 
-const STORAGE = "winwinwin.profile.v2";
+const STORAGE = "winwinwin.profile.v3";
 
 function speak(text: string) {
   if (typeof window === "undefined") return;
@@ -62,13 +63,13 @@ function speak(text: string) {
     u.volume = 0.7;
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(u);
-  } catch { /* ignore */ }
+  } catch { /* noop */ }
 }
 
 function pickWorld(age: number): { href: string; name: string; emoji: string } {
-  if (age <= 7) return { href: "/play/coinland", name: "Coin Land", emoji: "⭐" };
-  if (age <= 12) return { href: "/play/village", name: "Coin Town", emoji: "🏘️" };
-  return { href: "/play/markets", name: "Money World", emoji: "📈" };
+  if (age <= 7) return { href: "/play/coinland", name: "COIN LAND", emoji: "⭐" };
+  if (age <= 12) return { href: "/play/village", name: "COIN TOWN", emoji: "🏘️" };
+  return { href: "/play/markets", name: "MONEY WORLD", emoji: "📈" };
 }
 
 export default function HomePage() {
@@ -88,23 +89,23 @@ export default function HomePage() {
     try {
       const raw = localStorage.getItem(STORAGE);
       if (raw) setProfile(JSON.parse(raw));
-    } catch { /* ignore */ }
+    } catch { /* noop */ }
   }, []);
 
   useEffect(() => {
-    if (step === "hi") speak("Hi! I'm Coach Coin! Let's play and learn money!");
+    if (step === "hi") speak("Yo! I'm Coach Coin! Let's stack money!");
     if (step === "name") speak("What's your name?");
     if (step === "age") speak("How old are you?");
-    if (step === "skin") speak("Pick your skin color!");
+    if (step === "skin") speak("Pick your skin!");
     if (step === "hair") speak("Pick your hair!");
-    if (step === "outfit") speak("Pick your outfit!");
+    if (step === "outfit") speak("Pick your fit!");
     if (step === "companion") speak("Pick your money buddy!");
-    if (step === "go" && profile) speak(`Awesome ${profile.name}! Let's go to ${pickWorld(profile.age).name}!`);
+    if (step === "go" && profile) speak(`Let's go ${profile.name}!`);
   }, [step, profile]);
 
   function finish() {
     if (!name.trim() || age == null) return;
-    const p: Profile = { name: name.trim(), age, skin, hair, hairColor, outfit, companion, createdAt: new Date().toISOString() };
+    const p: Profile = { name: name.trim(), age, skin, hair, hairColor, outfit, companion, cash: 100, createdAt: new Date().toISOString() };
     localStorage.setItem(STORAGE, JSON.stringify(p));
     setProfile(p);
     setStep("go");
@@ -116,77 +117,77 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <MoneyScene />
+      <MoneyRain />
 
-      <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col items-center px-4">
-        {/* Title */}
-        <div className="pt-6 text-center">
-          <h1 className="display text-6xl font-black drop-shadow-[0_4px_0_rgba(0,0,0,0.3)] tracking-tight">
-            <span className="text-white" style={{ WebkitTextStroke: "4px #1d4ed8" }}>WIN</span>{" "}
-            <span className="text-white" style={{ WebkitTextStroke: "4px #16a34a" }}>WIN</span>{" "}
-            <span className="text-white" style={{ WebkitTextStroke: "4px #ea580c" }}>WIN</span>
-          </h1>
-          <div className="display text-base text-white font-bold mt-1 tracking-wider drop-shadow-[0_2px_0_rgba(0,0,0,0.4)]">
-            MONEY GAMES FOR KIDS
+      <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col px-4">
+        {/* TOP BAR — Roblox style with cash counter */}
+        <div className="pt-4 flex items-center justify-between">
+          <div className="cash-counter">
+            <span className="text-2xl">💰</span>
+            <span>$0</span>
+          </div>
+          <Link href="/parent" className="cash-counter !bg-gradient-to-b !from-[#a855f7] !to-[#6b21a8] !text-white">
+            <span>👨‍👩‍👧</span>
+          </Link>
+        </div>
+
+        {/* TITLE */}
+        <div className="text-center mt-2">
+          <h1 className="bungee text-6xl text-yellow-300 stroked-text">WIN WIN WIN</h1>
+          <div className="bungee text-sm text-white stroked-text-sm mt-1">MONEY GAMES</div>
+        </div>
+
+        {/* CHARACTER */}
+        <div className="mt-3 flex justify-center">
+          <div className="avatar-frame w-56 h-56 p-3 anim-float">
+            {step === "hi" || step === "name" || step === "age" ? (
+              <CoachCoin className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
+            ) : (
+              <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
+            )}
           </div>
         </div>
 
-        {/* Mascot or Avatar Preview */}
-        <div className="my-3 w-52 h-56 anim-float mascot-shadow">
-          {step === "hi" || step === "name" || step === "age" ? (
-            <CoachCoin className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
-          ) : (
-            <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
-          )}
-        </div>
-
-        <div className="w-full">
-          {/* STEP HI */}
+        {/* STEP CONTENT */}
+        <div className="mt-4 flex-1">
           {step === "hi" && (
             <div className="text-center anim-bounce-in">
-              <div className="relative bg-white border-4 border-[#0f172a] rounded-3xl px-5 py-4 shadow-[0_6px_0_0_#0f172a] mb-5">
-                <div className="absolute -left-[14px] top-7 w-0 h-0 border-y-[12px] border-y-transparent border-r-[14px] border-r-white" />
-                <div className="absolute -left-[20px] top-[22px] w-0 h-0 border-y-[16px] border-y-transparent border-r-[18px] border-r-[#0f172a]" />
-                <div className="display text-2xl font-bold leading-tight">
-                  Hi! I&apos;m <span className="text-[#ca8a04]">Coach Coin</span>! 💰
-                </div>
-                <div className="text-base font-bold text-[#1f2937]/80 mt-1">Let&apos;s learn about money!</div>
-              </div>
-              <BigButton onClick={() => setStep("name")} color="yellow">Let&apos;s Go! 🚀</BigButton>
+              <SpeechBubble>YO! I&apos;M <span className="text-yellow-400">COACH COIN!</span> 💰<br/>LET&apos;S STACK MONEY!</SpeechBubble>
+              <RobloxButton onClick={() => setStep("name")} color="green" pulse>PLAY ▶</RobloxButton>
             </div>
           )}
 
-          {/* STEP NAME */}
           {step === "name" && (
             <div className="anim-bounce-in">
-              <Speech>What&apos;s your name?</Speech>
+              <SpeechBubble>WHAT&apos;S YOUR NAME?</SpeechBubble>
               <input
                 value={name}
-                onChange={(e) => setName(e.target.value.slice(0, 20))}
-                placeholder="Your name"
-                className="w-full px-6 py-5 rounded-3xl border-4 border-white text-2xl display font-bold text-center focus:outline-none focus:border-yellow-300 bg-white shadow-lg"
+                onChange={(e) => setName(e.target.value.slice(0, 16))}
+                placeholder="TYPE NAME"
+                className="w-full px-6 py-5 rounded-3xl border-[5px] border-black bungee text-3xl text-center bg-white text-black focus:outline-none focus:border-yellow-300 shadow-[0_8px_0_0_black]"
                 autoFocus
+                style={{ letterSpacing: "0.05em" }}
               />
-              <div className="mt-4">
-                <BigButton onClick={() => name.trim() && setStep("age")} color="green" disabled={!name.trim()}>Next ▶</BigButton>
+              <div className="mt-5">
+                <RobloxButton onClick={() => name.trim() && setStep("age")} color="green" disabled={!name.trim()}>NEXT ▶</RobloxButton>
               </div>
             </div>
           )}
 
-          {/* STEP AGE */}
           {step === "age" && (
             <div className="anim-bounce-in">
-              <Speech>How old are you, {name}?</Speech>
+              <SpeechBubble>HOW OLD ARE YOU, {name.toUpperCase()}?</SpeechBubble>
               <div className="grid grid-cols-3 gap-3">
                 {Array.from({ length: 15 }, (_, i) => i + 4).map((a) => (
                   <button
                     key={a}
-                    onClick={() => { setAge(a); setTimeout(() => setStep("skin"), 250); }}
-                    className={`display font-black text-3xl py-6 rounded-2xl border-4 border-white transition-all ${
+                    onClick={() => { setAge(a); setTimeout(() => setStep("skin"), 200); }}
+                    className={`bungee text-3xl py-5 rounded-3xl border-[5px] border-black transition-all ${
                       age === a
-                        ? "bg-gradient-to-b from-[#facc15] to-[#ca8a04] text-[#0f172a] shadow-[0_6px_0_0_#78350f] scale-110"
-                        : "bg-gradient-to-b from-[#0ea5e9] to-[#0284c7] text-white shadow-[0_6px_0_0_#075985] active:translate-y-1"
+                        ? "bg-gradient-to-b from-yellow-400 to-yellow-600 text-black shadow-[0_4px_0_0_black] scale-110"
+                        : "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0_8px_0_0_black] active:translate-y-2 active:shadow-[0_2px_0_0_black]"
                     }`}
+                    style={{ textShadow: age === a ? "1px 1px 0 rgba(255,255,255,0.4)" : "2px 2px 0 black" }}
                   >
                     {a}
                   </button>
@@ -195,39 +196,35 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* STEP SKIN */}
           {step === "skin" && (
             <div className="anim-bounce-in">
-              <Speech>Pick your skin color!</Speech>
+              <SpeechBubble>PICK YOUR SKIN!</SpeechBubble>
               <div className="grid grid-cols-5 gap-3 mb-5">
                 {SKINS.map((s) => (
                   <button
                     key={s.id}
                     onClick={() => setSkin(s.color)}
-                    className={`aspect-square rounded-full border-4 transition-all ${skin === s.color ? "border-yellow-300 scale-110 shadow-2xl" : "border-white/60"}`}
+                    className={`aspect-square rounded-2xl border-[5px] border-black transition-all ${skin === s.color ? "scale-110 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : ""}`}
                     style={{ background: s.color }}
                   />
                 ))}
               </div>
-              <BigButton onClick={() => setStep("hair")} color="green">Next ▶</BigButton>
+              <RobloxButton onClick={() => setStep("hair")} color="green">NEXT ▶</RobloxButton>
             </div>
           )}
 
-          {/* STEP HAIR */}
           {step === "hair" && (
             <div className="anim-bounce-in">
-              <Speech>Pick your hair style!</Speech>
+              <SpeechBubble>PICK YOUR HAIR!</SpeechBubble>
               <div className="grid grid-cols-3 gap-2 mb-3">
                 {HAIRS.map((h) => (
                   <button
                     key={h.id}
                     onClick={() => setHair(h.id)}
-                    className={`p-2 rounded-2xl border-4 bg-white transition-all flex flex-col items-center ${hair === h.id ? "border-yellow-400 scale-105 shadow-2xl" : "border-white/60"}`}
+                    className={`p-2 rounded-2xl border-[5px] border-black bg-white transition-all flex flex-col items-center ${hair === h.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
                   >
-                    <div className="w-16 h-20">
-                      <KidAvatar className="w-full h-full" skin={skin} hair={h.id} hairColor={hairColor} outfit="tee" />
-                    </div>
-                    <div className="display text-xs font-bold mt-1">{h.label}</div>
+                    <div className="w-16 h-20"><KidAvatar className="w-full h-full" skin={skin} hair={h.id} hairColor={hairColor} outfit="tee" /></div>
+                    <div className="bungee text-xs">{h.label}</div>
                   </button>
                 ))}
               </div>
@@ -236,144 +233,158 @@ export default function HomePage() {
                   <button
                     key={c.id}
                     onClick={() => setHairColor(c.color)}
-                    className={`w-9 h-9 rounded-full border-3 transition-all ${hairColor === c.color ? "border-yellow-300 scale-125 shadow-xl" : "border-white/60"}`}
-                    style={{ background: c.color, borderWidth: 3 }}
+                    className={`w-10 h-10 rounded-full border-[3px] border-black transition-all ${hairColor === c.color ? "scale-125 shadow-[0_0_15px_4px_rgba(250,204,21,0.8)]" : ""}`}
+                    style={{ background: c.color }}
                   />
                 ))}
               </div>
-              <BigButton onClick={() => setStep("outfit")} color="green">Next ▶</BigButton>
+              <RobloxButton onClick={() => setStep("outfit")} color="green">NEXT ▶</RobloxButton>
             </div>
           )}
 
-          {/* STEP OUTFIT */}
           {step === "outfit" && (
             <div className="anim-bounce-in">
-              <Speech>Pick your outfit!</Speech>
+              <SpeechBubble>PICK YOUR FIT!</SpeechBubble>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {OUTFITS.map((o) => (
                   <button
                     key={o.id}
                     onClick={() => setOutfit(o.id)}
-                    className={`p-2 rounded-2xl border-4 bg-white transition-all flex flex-col items-center ${outfit === o.id ? "border-yellow-400 scale-105 shadow-2xl" : "border-white/60"}`}
+                    className={`p-3 rounded-2xl border-[5px] border-black bg-white transition-all flex flex-col items-center ${outfit === o.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
                   >
                     <div className="text-3xl">{o.emoji}</div>
-                    <div className="display text-xs font-bold mt-1">{o.label}</div>
+                    <div className="bungee text-xs mt-1">{o.label}</div>
                   </button>
                 ))}
               </div>
-              <BigButton onClick={() => setStep("companion")} color="green">Next ▶</BigButton>
+              <RobloxButton onClick={() => setStep("companion")} color="green">NEXT ▶</RobloxButton>
             </div>
           )}
 
-          {/* STEP COMPANION */}
           {step === "companion" && (
             <div className="anim-bounce-in">
-              <Speech>Pick your money buddy!</Speech>
+              <SpeechBubble>PICK YOUR MONEY BUDDY!</SpeechBubble>
               <div className="grid grid-cols-3 gap-2 mb-4">
                 {COMPANIONS.map((c) => (
                   <button
                     key={c.id}
                     onClick={() => setCompanion(c.id)}
-                    className={`p-3 rounded-2xl border-4 bg-white transition-all ${companion === c.id ? "border-yellow-400 scale-105 shadow-2xl" : "border-white/60"}`}
+                    className={`p-3 rounded-2xl border-[5px] border-black bg-white transition-all ${companion === c.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
                   >
                     <div className="text-4xl">{c.emoji}</div>
-                    <div className="display text-xs font-bold mt-1">{c.name}</div>
-                    <div className="text-[10px] text-[#1f2937]/60 leading-tight">{c.tagline}</div>
+                    <div className="bungee text-[10px] mt-1">{c.name}</div>
                   </button>
                 ))}
               </div>
-              <BigButton onClick={finish} color="yellow" glow>Done! 🎉</BigButton>
+              <RobloxButton onClick={finish} color="gold" pulse>DONE! 🎉</RobloxButton>
             </div>
           )}
 
-          {/* STEP GO */}
           {step === "go" && profile && (
             <div className="anim-bounce-in text-center">
-              <div className="relative bg-white border-4 border-[#0f172a] rounded-3xl px-5 py-4 shadow-[0_6px_0_0_#0f172a] mb-5">
-                <div className="display text-xl font-bold leading-snug">
-                  AWESOME, <span className="text-[#ca8a04]">{profile.name.toUpperCase()}</span>! 🌟<br />
-                  Let&apos;s go to <span className="text-[#16a34a]">{pickWorld(profile.age).name}</span>!
-                </div>
-              </div>
-              <Link
-                href={pickWorld(profile.age).href}
-                className="block w-full bg-gradient-to-b from-[#22c55e] to-[#15803d] text-white display font-black text-2xl px-8 py-6 rounded-full border-4 border-white shadow-[0_8px_0_0_#14532d,0_12px_24px_rgba(34,197,94,0.5)] active:translate-y-2 active:shadow-[0_2px_0_0_#14532d] transition-all anim-pulse-glow"
-                style={{ textShadow: "0 2px 0 rgba(0,0,0,0.2)" }}
-              >
-                Start Adventure {pickWorld(profile.age).emoji}
+              <SpeechBubble>
+                LET&apos;S GO <span className="text-yellow-400">{profile.name.toUpperCase()}</span>!<br/>
+                ENTER <span className="text-green-400">{pickWorld(profile.age).name}</span>!
+              </SpeechBubble>
+              <Link href={pickWorld(profile.age).href}>
+                <RobloxButton color="green" pulse>START {pickWorld(profile.age).emoji}</RobloxButton>
               </Link>
             </div>
           )}
-        </div>
-
-        <div className="flex-1" />
-        <div className="pb-4 mt-4">
-          <Link href="/parent" className="text-xs text-white/90 underline display font-bold drop-shadow">
-            👨‍👩‍👧 Grown-ups
-          </Link>
         </div>
       </div>
     </div>
   );
 }
 
-function Speech({ children }: { children: React.ReactNode }) {
+/* === MONEY RAIN BACKGROUND === */
+function MoneyRain() {
+  const drops = Array.from({ length: 15 }, (_, i) => i);
   return (
-    <div className="relative bg-white border-4 border-[#0f172a] rounded-3xl px-5 py-4 shadow-[0_6px_0_0_#0f172a] mb-4">
-      <div className="absolute -left-[14px] top-6 w-0 h-0 border-y-[12px] border-y-transparent border-r-[14px] border-r-white" />
-      <div className="absolute -left-[20px] top-[20px] w-0 h-0 border-y-[16px] border-y-transparent border-r-[18px] border-r-[#0f172a]" />
-      <div className="display text-xl font-bold text-center">{children}</div>
+    <div className="money-rain-bg">
+      {drops.map((i) => {
+        const left = (i * 7) % 100;
+        const delay = (i * 0.6) % 8;
+        const dur = 6 + (i % 4);
+        const emoji = ["🪙", "💰", "💵", "💎", "💸"][i % 5];
+        const cls = ["anim-cloud-1", "anim-cloud-2", "anim-cloud-3"][i % 3];
+        return (
+          <div
+            key={i}
+            className={`raindrop ${cls}`}
+            style={{
+              left: `${left}%`,
+              top: `-50px`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${dur}s`,
+              fontSize: `${1.5 + (i % 3) * 0.5}rem`,
+            }}
+          >
+            {emoji}
+          </div>
+        );
+      })}
     </div>
   );
 }
 
-function BigButton({ children, onClick, color, disabled, glow }: { children: React.ReactNode; onClick?: () => void; color: "green" | "yellow" | "blue"; disabled?: boolean; glow?: boolean }) {
-  const styles: Record<string, string> = {
-    green: "bg-gradient-to-b from-[#22c55e] to-[#15803d] text-white shadow-[0_8px_0_0_#14532d,0_12px_24px_rgba(34,197,94,0.5)] active:shadow-[0_2px_0_0_#14532d]",
-    yellow: "bg-gradient-to-b from-[#facc15] to-[#ca8a04] text-[#0f172a] shadow-[0_8px_0_0_#78350f,0_12px_24px_rgba(250,204,21,0.5)] active:shadow-[0_2px_0_0_#78350f]",
-    blue: "bg-gradient-to-b from-[#0ea5e9] to-[#0284c7] text-white shadow-[0_8px_0_0_#075985,0_12px_24px_rgba(14,165,233,0.5)] active:shadow-[0_2px_0_0_#075985]",
-  };
+/* === SPEECH BUBBLE — bold, black-stroked === */
+function SpeechBubble({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative bg-white border-[5px] border-black rounded-3xl px-5 py-4 shadow-[0_8px_0_0_black] mb-5">
+      <div className="absolute -left-[16px] top-7 w-0 h-0 border-y-[14px] border-y-transparent border-r-[16px] border-r-white" />
+      <div className="absolute -left-[24px] top-[22px] w-0 h-0 border-y-[18px] border-y-transparent border-r-[20px] border-r-black" />
+      <div className="bungee text-2xl text-center text-black leading-tight" style={{ letterSpacing: "0.02em" }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* === ROBLOX BUTTON === */
+function RobloxButton({ children, onClick, color, disabled, pulse }: { children: React.ReactNode; onClick?: () => void; color: "green" | "blue" | "red" | "yellow" | "gold" | "purple" | "orange"; disabled?: boolean; pulse?: boolean }) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`w-full ${styles[color]} display font-black text-2xl px-8 py-6 rounded-full border-4 border-white active:translate-y-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed ${glow ? "anim-pulse-glow" : ""}`}
-      style={{ textShadow: color === "yellow" ? "0 2px 0 rgba(255,255,255,0.4)" : "0 2px 0 rgba(0,0,0,0.2)" }}
+      className={`rbx-btn ${color} w-full ${pulse ? "anim-neon-pulse" : ""}`}
     >
       {children}
     </button>
   );
 }
 
+/* === RETURNING KID === */
 function ReturningKid({ profile, onPlay, onReset }: { profile: Profile; onPlay: () => void; onReset: () => void }) {
   const world = pickWorld(profile.age);
   const companion = COMPANIONS.find((c) => c.id === profile.companion);
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <MoneyScene />
-      <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col items-center px-4 pt-12">
-        <h1 className="display text-5xl font-black drop-shadow-[0_4px_0_rgba(0,0,0,0.3)] mb-3 text-center">
-          <span className="text-white" style={{ WebkitTextStroke: "4px #1d4ed8" }}>WIN</span>{" "}
-          <span className="text-white" style={{ WebkitTextStroke: "4px #16a34a" }}>WIN</span>{" "}
-          <span className="text-white" style={{ WebkitTextStroke: "4px #ea580c" }}>WIN</span>
-        </h1>
-        <div className="bg-white border-4 border-white rounded-3xl p-6 text-center w-full shadow-2xl">
-          <div className="w-40 h-44 mx-auto">
+      <MoneyRain />
+      <div className="relative z-10 max-w-md mx-auto min-h-screen flex flex-col items-center px-4">
+        <div className="pt-4 flex items-center justify-between w-full">
+          <div className="cash-counter">
+            <span className="text-2xl">💰</span>
+            <span>${profile.cash}</span>
+          </div>
+          <Link href="/parent" className="cash-counter !bg-gradient-to-b !from-[#a855f7] !to-[#6b21a8] !text-white">
+            <span>👨‍👩‍👧</span>
+          </Link>
+        </div>
+
+        <h1 className="bungee text-6xl text-yellow-300 stroked-text mt-4 text-center">WIN WIN WIN</h1>
+
+        <div className="rbx-card mt-6 p-5 w-full text-center">
+          <div className="avatar-frame w-44 h-44 p-2 mx-auto mb-3">
             <KidAvatar skin={profile.skin} hair={profile.hair} hairColor={profile.hairColor} outfit={profile.outfit} className="w-full h-full" />
           </div>
-          <div className="display text-3xl font-black mt-2">WELCOME BACK, {profile.name.toUpperCase()}!</div>
-          <div className="text-base font-bold text-[#1f2937]/70 mt-1">
-            {companion?.emoji} {companion?.name} is ready! Let&apos;s go to <span className="text-[#ea580c]">{world.name}</span>!
-          </div>
-          <button onClick={onPlay} className="w-full mt-5 bg-gradient-to-b from-[#22c55e] to-[#15803d] text-white display font-black text-2xl px-8 py-6 rounded-full border-4 border-white shadow-[0_8px_0_0_#14532d,0_12px_24px_rgba(34,197,94,0.5)] active:translate-y-2 active:shadow-[0_2px_0_0_#14532d] transition-all anim-pulse-glow"
-            style={{ textShadow: "0 2px 0 rgba(0,0,0,0.2)" }}
-          >
-            Play! {world.emoji}
-          </button>
+          <div className="bungee text-3xl text-black">WELCOME BACK</div>
+          <div className="bungee text-4xl text-blue-700 stroked-text-sm">{profile.name.toUpperCase()}!</div>
+          <div className="text-sm font-bold mt-2">{companion?.emoji} {companion?.name} is ready!</div>
+          <button onClick={onPlay} className="rbx-btn green w-full mt-4 anim-neon-pulse">PLAY {world.emoji}</button>
         </div>
-        <button onClick={onReset} className="text-xs text-white/80 underline display font-bold mt-6">Start over</button>
-        <div className="flex-1" />
-        <Link href="/parent" className="text-xs text-white/90 underline display font-bold pb-4">👨‍👩‍👧 Grown-ups</Link>
+
+        <button onClick={onReset} className="bungee text-xs text-white/80 underline mt-6">START OVER</button>
       </div>
     </div>
   );
