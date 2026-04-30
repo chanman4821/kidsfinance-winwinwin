@@ -163,7 +163,7 @@ export default function VillagePage() {
       {/* Header */}
       <div className="max-w-md mx-auto px-3 pt-3 relative z-10">
         <div className="flex items-center gap-2 mb-3">
-          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold display">
+          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold bungee">
             ← back
           </Link>
           <div className="display text-xl font-bold flex-1 text-center">🏘️ Coinwood Village</div>
@@ -177,7 +177,7 @@ export default function VillagePage() {
           <div className="w-20 h-24 anim-float">
             <Mochi className="w-full h-full" mood="happy" />
           </div>
-          <div className="bg-white rounded-2xl px-3 py-2 self-center mt-1 shadow-[0_3px_0_0_#2b2640] border-[3px] border-[#2b2640] flex-1 relative">
+          <div className="bg-white rounded-2xl px-3 py-2 self-center mt-1 shadow-[0_4px_0_0_black] border-[4px] border-black flex-1 relative">
             <div className="absolute -left-3 top-3 w-0 h-0 border-y-[8px] border-y-transparent border-r-[10px] border-r-white" />
             <div className="absolute -left-[14px] top-[10px] w-0 h-0 border-y-[10px] border-y-transparent border-r-[12px] border-r-[#2b2640]" />
             <div className="text-[10px] text-[#2b2640]/60 font-bold uppercase">Mayor Mochi</div>
@@ -275,20 +275,20 @@ function Onboarding({ onStart }: { onStart: (s: VillageState) => void }) {
             You&apos;re a new resident. Let&apos;s set up your home and meet the townsfolk.
           </p>
         </div>
-        <div className="bg-white rounded-3xl p-5 border-[4px] border-white shadow-2xl space-y-4">
+        <div className="bg-white rounded-3xl p-5 border-[5px] border-black shadow-2xl space-y-4">
           <label className="block">
             <div className="display text-xs uppercase tracking-wider mb-1 font-bold">Your name</div>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Type your name"
-              className="w-full px-4 py-3 rounded-2xl border-[3px] border-[#2b2640]/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
+              className="w-full px-4 py-3 rounded-2xl border-[4px] border-black/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
             />
           </label>
           <button
             disabled={!name.trim()}
             onClick={() => onStart(newVillageState(name.trim()))}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#5aa9e6] border-[4px] border-white shadow-[0_6px_0_0_#3b80b0] active:translate-y-1 active:shadow-[0_2px_0_0_#3b80b0] disabled:opacity-50 display"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#5aa9e6] border-[5px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] disabled:opacity-50 bungee"
           >
             Move to Coinwood 🏠
           </button>
@@ -313,7 +313,7 @@ function HomeTab({
   const undone = CHORES.filter((c) => !doneChores.has(c.id));
   return (
     <div className="space-y-3">
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg">
         <div className="display text-base mb-2 flex items-center gap-2">
           <span className="text-2xl">✅</span> Today&apos;s chores
         </div>
@@ -327,14 +327,14 @@ function HomeTab({
               <button
                 key={c.id}
                 onClick={() => onChore(c)}
-                className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border-2 border-[#2b2640]/10 active:scale-95 hover:border-[#5aa9e6] transition-all text-left"
+                className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border-[3px] border-black/30 active:scale-95 hover:border-blue-600 transition-all text-left"
               >
                 <div className="text-3xl">{c.emoji}</div>
                 <div className="flex-1">
                   <div className="font-bold text-sm">{c.title}</div>
                   <div className="text-[10px] text-[#2b2640]/60 font-bold">🪙 +{c.coins}</div>
                 </div>
-                <div className="bg-[#6ad48b] text-white px-3 py-1.5 rounded-full display text-xs font-bold">Done!</div>
+                <div className="bg-[#6ad48b] text-white px-3 py-1.5 rounded-full bungee text-xs font-bold">Done!</div>
               </button>
             ))}
           </div>
@@ -342,7 +342,7 @@ function HomeTab({
       </div>
 
       {state.coins > 0 && (
-        <div className="bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg">
+        <div className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg">
           <div className="display text-base mb-1 flex items-center gap-2">
             <span className="text-2xl">🫙</span> Move coins to jars
           </div>
@@ -353,21 +353,21 @@ function HomeTab({
             <button
               onClick={() => onMove("save", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#6ad48b] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#6ad48b] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               🐷 +5 Save
             </button>
             <button
               onClick={() => onMove("spend", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#fb923c] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#fb923c] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               🍭 +5 Spend
             </button>
             <button
               onClick={() => onMove("give", Math.min(5, state.coins))}
               disabled={state.coins < 1}
-              className="bg-[#ffd84d] text-[#2b2640] py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+              className="bg-[#ffd84d] text-[#2b2640] py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
             >
               ❤️ +5 Give
             </button>
@@ -383,7 +383,7 @@ function HomeTab({
               setTimeout(() => onMove("spend", sp), 100);
             }}
             disabled={state.coins < 5}
-            className="mt-2 w-full bg-[#5aa9e6] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+            className="mt-2 w-full bg-[#5aa9e6] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
           >
             ✨ Smart split: 50% Save · 30% Spend · 20% Give
           </button>
@@ -414,7 +414,7 @@ function StandTab({
   const upgradeCost = state.stand.level * 80;
   return (
     <div className="space-y-3">
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-4 border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-4 border-[4px] border-black shadow-lg">
         <div className="flex items-center gap-2 mb-2">
           <div className="text-3xl">{product.emoji}</div>
           <div className="flex-1">
@@ -426,7 +426,7 @@ function StandTab({
         </div>
 
         {/* Pricing */}
-        <div className="bg-[#fff3b0]/60 rounded-xl p-3 mb-3">
+        <div className="bg-yellow-100 rounded-xl p-3 mb-3">
           <div className="flex justify-between items-center mb-2">
             <div className="text-xs font-bold text-[#2b2640]/70">Set price (per cup)</div>
             <div className="display text-2xl font-bold">🪙 {state.stand.price}</div>
@@ -456,7 +456,7 @@ function StandTab({
                 key={n}
                 onClick={() => onBuyInventory(n)}
                 disabled={state.coins < n * product.unitCost}
-                className="bg-[#6ad48b] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+                className="bg-[#6ad48b] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
               >
                 Make {n}
                 <div className="text-[9px] opacity-80">🪙 {n * product.unitCost}</div>
@@ -468,7 +468,7 @@ function StandTab({
         <button
           onClick={onOpen}
           disabled={state.stand.inventoryUnits === 0}
-          className="w-full py-4 rounded-full display font-bold text-white text-lg bg-[#fb923c] border-[3px] border-white shadow-[0_5px_0_0_#9a3412] active:translate-y-1 active:shadow-[0_1px_0_0_#9a3412] disabled:opacity-40 disabled:cursor-not-allowed"
+          className="w-full py-4 rounded-full bungee font-bold text-white text-lg bg-[#fb923c] border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] disabled:opacity-40 disabled:cursor-not-allowed"
         >
           🚀 Open the stand!
         </button>
@@ -476,7 +476,7 @@ function StandTab({
 
       {/* Last day report */}
       {lastDay && (
-        <div className="bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg">
+        <div className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg">
           <div className="display text-sm font-bold mb-2 flex items-center gap-2">
             <span className="text-xl">📊</span> Day {lastDay.day} report
           </div>
@@ -501,7 +501,7 @@ function StandTab({
       )}
 
       {/* Products + upgrade */}
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg">
         <div className="display text-sm font-bold mb-2">🛒 Products & upgrades</div>
         <div className="grid grid-cols-2 gap-2 mb-2">
           {(Object.keys(PRODUCTS) as (keyof typeof PRODUCTS)[]).map((p) => {
@@ -518,7 +518,7 @@ function StandTab({
                     ? "bg-[#fff3b0] border-[#ccaa3d]"
                     : locked
                     ? "bg-[#2b2640]/5 border-[#2b2640]/10 opacity-50"
-                    : "bg-white border-[#2b2640]/10 hover:border-[#5aa9e6]"
+                    : "bg-white border-[#2b2640]/10 hover:border-blue-600"
                 } text-left transition-all`}
               >
                 <div className="text-2xl">{meta.emoji}</div>
@@ -533,7 +533,7 @@ function StandTab({
         <button
           onClick={onUpgrade}
           disabled={state.coins < upgradeCost || state.stand.level >= 4}
-          className="w-full bg-[#5aa9e6] text-white py-2 rounded-xl display font-bold text-xs disabled:opacity-40 active:scale-95"
+          className="w-full bg-[#5aa9e6] text-white py-2 rounded-xl bungee font-bold text-xs disabled:opacity-40 active:scale-95"
         >
           ⬆️ Upgrade stand to lvl {state.stand.level + 1} · 🪙 {upgradeCost}
         </button>
@@ -556,17 +556,17 @@ function ShopsTab({
   const dailyTotal = dailyShopIncome(state);
   return (
     <div className="space-y-3">
-      <div className="bg-[#fff3b0]/80 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-[4px] border-black shadow text-xs text-[#2b2640]/80">
         💡 <strong>Buy a shop = passive income.</strong> Each shop pays you coins every day, even when you&apos;re not playing. Take more lessons → shops pay even more!
       </div>
 
       {owned.length > 0 && (
-        <div className="bg-[#d4f4dd] rounded-2xl p-3 border-[3px] border-white shadow-lg">
+        <div className="bg-[#d4f4dd] rounded-2xl p-3 border-[4px] border-black shadow-lg">
           <div className="display text-sm font-bold mb-1">Your shops earn</div>
           <div className="display text-3xl font-bold">🪙 {dailyTotal}/day</div>
           <button
             onClick={onCollect}
-            className="mt-2 w-full bg-[#4fa86c] text-white py-3 rounded-full display font-bold text-base active:scale-95 shadow-[0_4px_0_0_#3a7e51]"
+            className="mt-2 w-full bg-[#4fa86c] text-white py-3 rounded-full bungee font-bold text-base active:scale-95 shadow-[0_8px_0_0_black]"
           >
             💰 Collect today&apos;s coins
           </button>
@@ -579,7 +579,7 @@ function ShopsTab({
           return (
             <div
               key={s.id}
-              className={`bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg flex items-center gap-3 ${
+              className={`bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg flex items-center gap-3 ${
                 isOwned ? "ring-2 ring-[#6ad48b]" : ""
               }`}
             >
@@ -597,7 +597,7 @@ function ShopsTab({
                 <button
                   onClick={() => onBuy(s.id)}
                   disabled={state.coins < s.cost}
-                  className="bg-[#5aa9e6] text-white px-3 py-2 rounded-full display font-bold text-xs disabled:opacity-40 shrink-0"
+                  className="bg-[#5aa9e6] text-white px-3 py-2 rounded-full bungee font-bold text-xs disabled:opacity-40 shrink-0"
                 >
                   🪙 {s.cost}
                 </button>
@@ -623,12 +623,12 @@ const GOAL_PRESETS = [
 function GoalsTab({ state, setState }: { state: VillageState; setState: (s: VillageState) => void }) {
   return (
     <div className="space-y-3">
-      <div className="bg-[#fff3b0]/80 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow text-xs">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-[4px] border-black shadow text-xs">
         💡 <strong>Set a goal you&apos;re saving for.</strong> Every coin in your Save jar gets you closer!
       </div>
 
       {state.goal && (
-        <div className="bg-[#d4f4dd] rounded-2xl p-4 border-[3px] border-white shadow-lg">
+        <div className="bg-[#d4f4dd] rounded-2xl p-4 border-[4px] border-black shadow-lg">
           <div className="display text-xs uppercase tracking-wider font-bold text-[#2b2640]/70">CURRENT GOAL</div>
           <div className="flex items-center gap-3 mt-1">
             <div className="text-5xl">{state.goal.emoji}</div>
@@ -637,7 +637,7 @@ function GoalsTab({ state, setState }: { state: VillageState; setState: (s: Vill
               <div className="text-sm font-bold mt-1">
                 🪙 {state.jars.save} / {state.goal.target}
               </div>
-              <div className="mt-2 h-3 bg-white/60 rounded-full overflow-hidden border-2 border-white">
+              <div className="mt-2 h-3 bg-white/60 rounded-full overflow-hidden border-[3px] border-black">
                 <div
                   className="h-full bg-[#4fa86c] transition-all duration-500"
                   style={{ width: `${Math.min(100, (state.jars.save / state.goal.target) * 100)}%` }}
@@ -653,7 +653,7 @@ function GoalsTab({ state, setState }: { state: VillageState; setState: (s: Vill
           <button
             key={g.name}
             onClick={() => setState({ ...state, goal: { name: g.name, emoji: g.emoji, target: g.target } })}
-            className="bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow active:scale-95 transition-transform text-left"
+            className="bg-white rounded-2xl p-3 border-[4px] border-black shadow active:scale-95 transition-transform text-left"
           >
             <div className="text-4xl mb-1">{g.emoji}</div>
             <div className="display font-bold text-sm">{g.name}</div>
@@ -674,7 +674,7 @@ function PetTab({ state }: { state: VillageState }) {
   const pct = (state.xp % 100);
   return (
     <div className="space-y-3">
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-6 border-[3px] border-white shadow-lg text-center">
+      <div className="bg-white rounded-2xl p-6 border-[4px] border-black shadow-lg text-center">
         <div className="text-8xl my-4 anim-float">{stageEmoji}</div>
         <div className="display text-2xl font-bold">{state.petName}</div>
         <div className="text-xs text-[#2b2640]/60 font-bold uppercase tracking-wider">{stageName} stage</div>
@@ -693,7 +693,7 @@ function PetTab({ state }: { state: VillageState }) {
         )}
       </div>
 
-      <div className="bg-[#fff3b0]/60 rounded-2xl p-3 border-2 border-white text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-[3px] border-black text-xs text-[#2b2640]/80">
         💡 Your pet evolves as you earn XP. Do chores, sell lemonade, take lessons — every action helps {state.petName} grow.
       </div>
     </div>
@@ -703,7 +703,7 @@ function PetTab({ state }: { state: VillageState }) {
 /* ===== HUD bits ===== */
 function Stat({ icon, label, value, bg }: { icon: string; label: string; value: number; bg: string }) {
   return (
-    <div className={`${bg} rounded-xl p-2 text-center border-2 border-white`}>
+    <div className={`${bg} rounded-xl p-2 text-center border-[3px] border-black`}>
       <div className="text-lg leading-none">{icon}</div>
       <div className="display text-base font-bold leading-none mt-0.5">{value}</div>
       <div className="text-[8px] uppercase tracking-wider font-bold text-[#2b2640]/60">{label}</div>
@@ -713,7 +713,7 @@ function Stat({ icon, label, value, bg }: { icon: string; label: string; value: 
 
 function Toast({ msg }: { msg: string }) {
   return (
-    <div className="fixed top-16 left-1/2 -translate-x-1/2 bg-[#2b2640] text-white px-4 py-2 rounded-full display font-bold text-sm shadow-lg z-50 anim-bounce-in">
+    <div className="fixed top-16 left-1/2 -translate-x-1/2 bg-[#2b2640] text-white px-4 py-2 rounded-full bungee font-bold text-sm shadow-lg z-50 anim-bounce-in">
       {msg}
     </div>
   );

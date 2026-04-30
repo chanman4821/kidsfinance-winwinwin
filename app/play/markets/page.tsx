@@ -67,13 +67,13 @@ export default function MarketsPage() {
 
       <div className="max-w-md mx-auto px-3 pt-3 relative z-10">
         <div className="flex items-center gap-2 mb-3">
-          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold display">← back</Link>
+          <Link href="/" className="text-xs underline text-[#2b2640]/60 font-bold bungee">← back</Link>
           <div className="display text-xl font-bold flex-1 text-center">📈 Coinwood Markets</div>
           <div className="w-16" />
         </div>
 
-        <div className="bg-white/90 backdrop-blur rounded-2xl p-4 border-[3px] border-white shadow-lg mb-3">
-          <div className="text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold display">Total Portfolio</div>
+        <div className="bg-white rounded-2xl p-4 border-[4px] border-black shadow-lg mb-3">
+          <div className="text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold bungee">Total Portfolio</div>
           <div className="display text-3xl font-bold leading-none mt-1">
             ${total.toLocaleString(undefined, { maximumFractionDigits: 2 })}
           </div>
@@ -97,10 +97,10 @@ export default function MarketsPage() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`flex-1 py-2 rounded-xl display font-bold text-xs uppercase tracking-wider ${
+              className={`flex-1 py-2 rounded-xl bungee font-bold text-xs uppercase tracking-wider ${
                 tab === t
                   ? "bg-[#5aa9e6] text-white shadow-[0_3px_0_0_#3b80b0]"
-                  : "bg-white/70 text-[#2b2640]/60 border-2 border-white"
+                  : "bg-white/70 text-[#2b2640]/60 border-[3px] border-black"
               }`}
             >
               {t === "portfolio" ? "📊 Holdings" : t === "discover" ? "🔍 Discover" : t === "labs" ? "🧪 Labs" : "👥 Crew"}
@@ -142,7 +142,7 @@ export default function MarketsPage() {
 function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: string) => void }) {
   if (state.portfolio.positions.length === 0) {
     return (
-      <div className="bg-white/85 backdrop-blur rounded-2xl p-6 text-center border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-6 text-center border-[4px] border-black shadow-lg">
         <div className="w-32 h-36 mx-auto">
           <Mochi className="w-full h-full" mood="happy" />
         </div>
@@ -168,7 +168,7 @@ function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
           <button
             key={p.ticker}
             onClick={() => onTrade(p.ticker)}
-            className="w-full bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow-lg flex items-center gap-3 active:scale-95 transition-transform text-left"
+            className="w-full bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg flex items-center gap-3 active:scale-95 transition-transform text-left"
           >
             <div className="text-4xl shrink-0">{stock.emoji}</div>
             <div className="flex-1 min-w-0">
@@ -192,7 +192,7 @@ function Holdings({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
 function Discover({ state, onTrade }: { state: MarketsState; onTrade: (ticker: string) => void }) {
   return (
     <div className="space-y-2">
-      <div className="bg-[#fff3b0]/80 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow text-xs text-[#2b2640]/80">
+      <div className="bg-yellow-100 rounded-2xl p-3 border-[4px] border-black shadow text-xs text-[#2b2640]/80">
         💡 <strong>Tip:</strong> Invest in companies you know and use. Coca-Cola, Disney, Apple, Roblox — these are real companies you interact with every day.
       </div>
       {STOCKS.map((s) => {
@@ -204,7 +204,7 @@ function Discover({ state, onTrade }: { state: MarketsState; onTrade: (ticker: s
           <button
             key={s.ticker}
             onClick={() => onTrade(s.ticker)}
-            className="w-full bg-white/90 backdrop-blur rounded-2xl p-3 border-[3px] border-white shadow flex items-center gap-3 active:scale-95 transition-transform text-left"
+            className="w-full bg-white rounded-2xl p-3 border-[4px] border-black shadow flex items-center gap-3 active:scale-95 transition-transform text-left"
           >
             <div className="text-4xl shrink-0">{s.emoji}</div>
             <div className="flex-1 min-w-0">
@@ -253,7 +253,7 @@ function Labs() {
 
   return (
     <div className="space-y-3">
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-4 border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-4 border-[4px] border-black shadow-lg">
         <div className="display text-lg mb-1 flex items-center gap-2">🧪 Compound Interest Lab</div>
         <div className="text-xs text-[#2b2640]/70 mb-3">See how saving a little every month grows over time.</div>
 
@@ -278,12 +278,12 @@ function Labs() {
           </div>
         </div>
 
-        <div className="mt-3 p-3 bg-[#fff3b0]/60 rounded-xl text-xs text-[#2b2640]/80 italic">
+        <div className="mt-3 p-3 bg-yellow-100 rounded-xl text-xs text-[#2b2640]/80 italic">
           💡 If you start <strong>10 years earlier</strong>, you&apos;d have ${(compoundFutureValue(contrib, years + 10, rate, 0) - fv).toLocaleString(undefined, { maximumFractionDigits: 0 })} MORE money. <strong>Time</strong> is the magic.
         </div>
       </div>
 
-      <div className="bg-white/90 backdrop-blur rounded-2xl p-4 border-[3px] border-white shadow-lg">
+      <div className="bg-white rounded-2xl p-4 border-[4px] border-black shadow-lg">
         <div className="display text-lg mb-1 flex items-center gap-2">💳 Credit Card Trap</div>
         <div className="text-xs text-[#2b2640]/70 mb-3">What happens if you spend $500 on a credit card and only pay the minimum each month?</div>
 
@@ -352,13 +352,13 @@ function SliderRow({
 
 function CrewPlaceholder() {
   return (
-    <div className="bg-white/90 backdrop-blur rounded-2xl p-6 text-center border-[3px] border-white shadow-lg">
+    <div className="bg-white rounded-2xl p-6 text-center border-[4px] border-black shadow-lg">
       <div className="text-6xl mb-3">👥</div>
       <div className="display text-xl">Investment Crews — Coming Soon</div>
       <div className="text-sm text-[#2b2640]/70 mt-2">
         Start a Crew with 2-8 friends. Share your portfolio, see what they&apos;re buying, and discuss strategies. Parent-approved on both sides — totally safe.
       </div>
-      <div className="mt-4 p-3 bg-[#fff3b0]/60 rounded-xl text-xs text-left">
+      <div className="mt-4 p-3 bg-yellow-100 rounded-xl text-xs text-left">
         <strong>What you&apos;ll be able to do:</strong>
         <ul className="list-disc pl-5 mt-1 space-y-1">
           <li>Share &quot;why I bought&quot; notes (predefined safe phrases only)</li>
@@ -398,7 +398,7 @@ function TradeModal({
   return (
     <div className="fixed inset-0 bg-[#2b2640]/50 flex items-end sm:items-center justify-center z-50 p-4" onClick={onClose}>
       <div
-        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[4px] border-white shadow-2xl"
+        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[5px] border-black shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 mb-3">
@@ -410,7 +410,7 @@ function TradeModal({
           <button onClick={onClose} className="text-[#2b2640]/40 text-3xl w-10 h-10">×</button>
         </div>
 
-        <div className="bg-white rounded-2xl p-3 mb-3 border-2 border-[#2b2640]/10">
+        <div className="bg-white rounded-2xl p-3 mb-3 border-[3px] border-black/30">
           <div className="flex items-baseline gap-2">
             <div className="display text-3xl font-bold">${price.toFixed(2)}</div>
             <div className={`text-sm font-bold ${change30 >= 0 ? "text-[#4fa86c]" : "text-[#cc4f6e]"}`}>
@@ -422,7 +422,7 @@ function TradeModal({
         </div>
 
         {position && (
-          <div className="bg-[#d4f4dd] rounded-2xl p-3 mb-3 border-2 border-white text-xs">
+          <div className="bg-[#d4f4dd] rounded-2xl p-3 mb-3 border-[3px] border-black text-xs">
             <strong>You own {position.shares.toFixed(2)} shares</strong> · avg cost ${position.avgCost.toFixed(2)} · worth ${(position.shares * price).toFixed(2)}
           </div>
         )}
@@ -430,15 +430,15 @@ function TradeModal({
         <div className="flex gap-2 mb-3">
           <button
             onClick={() => setSide("buy")}
-            className={`flex-1 py-3 rounded-xl display font-bold ${side === "buy" ? "bg-[#6ad48b] text-white shadow-[0_3px_0_0_#4fa86c]" : "bg-white border-2 border-[#2b2640]/10"}`}
+            className={`flex-1 py-3 rounded-xl bungee font-bold ${side === "buy" ? "bg-[#6ad48b] text-white shadow-[0_4px_0_0_black]" : "bg-white border-[3px] border-black/30"}`}
           >
             Buy
           </button>
           <button
             disabled={!position}
             onClick={() => setSide("sell")}
-            className={`flex-1 py-3 rounded-xl display font-bold ${
-              side === "sell" ? "bg-[#fb923c] text-white shadow-[0_3px_0_0_#9a3412]" : "bg-white border-2 border-[#2b2640]/10 disabled:opacity-40"
+            className={`flex-1 py-3 rounded-xl bungee font-bold ${
+              side === "sell" ? "bg-[#fb923c] text-white shadow-[0_3px_0_0_#9a3412]" : "bg-white border-[3px] border-black/30 disabled:opacity-40"
             }`}
           >
             Sell
@@ -456,8 +456,8 @@ function TradeModal({
                 key={n}
                 onClick={() => setAmount(n)}
                 disabled={side === "buy" ? n > state.portfolio.cash : n > (position ? position.shares * price : 0)}
-                className={`py-2 rounded-xl display font-bold text-sm ${
-                  amount === n ? "bg-[#5aa9e6] text-white" : "bg-white border-2 border-[#2b2640]/10"
+                className={`py-2 rounded-xl bungee font-bold text-sm ${
+                  amount === n ? "bg-[#5aa9e6] text-white" : "bg-white border-[3px] border-black/30"
                 } disabled:opacity-30`}
               >
                 ${n}
@@ -473,7 +473,7 @@ function TradeModal({
 
         <button
           onClick={() => (side === "buy" ? onBuy(ticker, amount) : onSell(ticker, sellShares))}
-          className={`w-full py-3 rounded-full display font-bold text-white text-lg border-[3px] border-white shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)] ${
+          className={`w-full py-3 rounded-full bungee font-bold text-white text-lg border-[4px] border-black shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)] ${
             side === "buy" ? "bg-[#6ad48b]" : "bg-[#fb923c]"
           }`}
         >
