@@ -19,13 +19,13 @@ type Mode = {
 const MODES: Mode[] = [
   {
     href: "/play/coinland",
-    emoji: "🌟",
+    emoji: "⚡",
     title: "Coinland",
     age: "Ages 4–7",
     blurb: "Tap, count, and play. Meet Mochi the dog and learn what coins are.",
     perks: ["Coin Catch mini-game", "Story Time with Mochi", "Save / Spend / Give jars", "Pet egg → bunny"],
-    bg: "bg-[#fff3b0]",
-    ring: "ring-[#ccaa3d]",
+    bg: "bg-[#fde68a]",
+    ring: "ring-[#d97706]",
     status: "ready",
   },
   {
@@ -35,8 +35,8 @@ const MODES: Mode[] = [
     age: "Ages 8–12",
     blurb: "Move into the town. Run a lemonade stand, buy shops, save toward goals, beat the Bank Robber.",
     perks: ["Lemonade Stand business sim", "Shop ownership (passive income)", "Savings goals", "Family League · 15 lessons"],
-    bg: "bg-[#d4f4dd]",
-    ring: "ring-[#4fa86c]",
+    bg: "bg-[#bbf7d0]",
+    ring: "ring-[#16a34a]",
     status: "beta",
   },
   {
@@ -46,8 +46,8 @@ const MODES: Mode[] = [
     age: "Ages 13–18",
     blurb: "Real-stock portfolio with $10K play money. Compound interest lab, credit card trap, business builder.",
     perks: ["12 real companies (Apple, Disney, Roblox…)", "Compound Interest Lab", "Credit Card Trap simulator", "Investment Crews (peer learning)"],
-    bg: "bg-[#cfe7ff]",
-    ring: "ring-[#3b80b0]",
+    bg: "bg-[#bfdbfe]",
+    ring: "ring-[#1d4ed8]",
     status: "ready",
   },
 ];
@@ -75,9 +75,9 @@ export default function HomePage() {
             <Mochi className="w-full h-full" mood="wave" />
           </div>
           <h1 className="display text-4xl font-bold mt-2 leading-tight">
-            <span className="text-[#5aa9e6]">Win</span>{" "}
-            <span className="text-[#ff7eb5]">Win</span>{" "}
-            <span className="text-[#ccaa3d]">Win</span>
+            <span className="text-[#1d4ed8]">Win</span>{" "}
+            <span className="text-[#16a34a]">Win</span>{" "}
+            <span className="text-[#ea580c]">Win</span>
           </h1>
           <p className="text-sm text-[#2b2640]/70 mt-2 px-4 leading-snug">
             A fun way for kids to learn money, saving, and investing — with Mochi and friends.
