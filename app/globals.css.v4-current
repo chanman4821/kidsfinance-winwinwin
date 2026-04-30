@@ -1,0 +1,276 @@
+@import "tailwindcss";
+
+@theme {
+  /* GAME PALETTE — Pokémon/Prodigy/Minecraft inspired (gender-neutral, bold) */
+  --color-sky-soft: #bfdbfe;
+  --color-sky-vivid: #2563eb;
+  --color-sky-deep: #1d4ed8;
+  --color-teal-soft: #99f6e4;
+  --color-teal-vivid: #14b8a6;
+  --color-teal-deep: #0d9488;
+  --color-orange-soft: #fed7aa;
+  --color-orange-vivid: #f97316;
+  --color-orange-deep: #ea580c;
+  --color-yellow-soft: #fde68a;
+  --color-yellow-vivid: #f59e0b;
+  --color-yellow-deep: #d97706;
+  --color-mint-soft: #bbf7d0;
+  --color-mint-vivid: #22c55e;
+  --color-mint-deep: #16a34a;
+  --color-lime-soft: #d9f99d;
+  --color-lime-vivid: #84cc16;
+  --color-red-soft: #fecaca;
+  --color-red-vivid: #ef4444;
+  --color-purple-soft: #c4b5fd;
+  --color-purple-vivid: #7c3aed;
+  --color-pink-soft: #fbcfe8;
+  --color-pink-vivid: #ec4899;
+  --color-pink-deep: #db2777;
+  --color-cream: #fffbeb;
+  --color-coal: #1f2937;
+  --font-display: "Fredoka", "ui-sans-serif", "system-ui", sans-serif;
+  --font-body: "Nunito", "ui-sans-serif", "system-ui", sans-serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { font-family: var(--font-body); color: var(--color-coal); min-height: 100vh; overscroll-behavior: none; margin: 0; padding: 0; }
+
+/* ===== ANIMATED GRADIENT MESH BACKGROUND — game palette (no pink dominance) ===== */
+body {
+  background: #e6f7ff;
+  background-image:
+    radial-gradient(at 20% 10%, hsla(217, 91%, 70%, 0.55) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(174, 72%, 56%, 0.50) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(45, 100%, 70%, 0.55) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, hsla(150, 70%, 65%, 0.50) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(28, 100%, 65%, 0.50) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(82, 80%, 65%, 0.50) 0px, transparent 50%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  animation: mesh-shift 30s ease-in-out infinite;
+}
+
+@keyframes mesh-shift {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+
+.display { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.05; }
+
+/* ===== KEYFRAMES ===== */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-10deg); } 75% { transform: rotate(10deg); } }
+@keyframes pop-in { 0% { transform: scale(0) rotate(-60deg); opacity: 0; } 60% { transform: scale(1.2) rotate(10deg); opacity: 1; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+@keyframes bounce-in { 0% { transform: scale(0.3); opacity: 0; } 60% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes drift-1 { 0% { transform: translateX(-100px); } 100% { transform: translateX(100vw); } }
+@keyframes drift-2 { 0% { transform: translateX(-200px); } 100% { transform: translateX(100vw); } }
+@keyframes drift-3 { 0% { transform: translateX(-50px); } 100% { transform: translateX(100vw); } }
+@keyframes confetti-burst { 0% { transform: translate(0,0) scale(0); opacity: 1; } 100% { transform: translate(var(--dx,60px),var(--dy,-120px)) scale(1.2); opacity: 0; } }
+@keyframes coin-fly { 0% { transform: translate(0,0) scale(1); opacity: 1; } 100% { transform: translate(var(--dx,0px),var(--dy,200px)) scale(0.4); opacity: 0; } }
+@keyframes pulse-glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,193,7,0.7), 0 8px 0 0 #cc9000, 0 12px 24px rgba(255,193,7,0.4); }
+  50% { box-shadow: 0 0 0 16px rgba(255,193,7,0), 0 8px 0 0 #cc9000, 0 12px 32px rgba(255,193,7,0.6); }
+}
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+@keyframes wag-tail { 0%,100% { transform: rotate(0); } 50% { transform: rotate(20deg); } }
+@keyframes wave-paw { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-30deg); } 75% { transform: rotate(-30deg); } }
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px currentColor); }
+  50% { filter: drop-shadow(0 0 24px currentColor); }
+}
+@keyframes star-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.anim-float { animation: float 3.5s ease-in-out infinite; }
+.anim-wiggle { animation: wiggle 0.6s ease-in-out 2; }
+.anim-pop-in { animation: pop-in 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.anim-bounce-in { animation: bounce-in 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.anim-pulse-glow { animation: pulse-glow 1.6s ease-in-out infinite; }
+.anim-cloud-1 { animation: drift-1 60s linear infinite; }
+.anim-cloud-2 { animation: drift-2 90s linear infinite; }
+.anim-cloud-3 { animation: drift-3 120s linear infinite; }
+.anim-coin-fly { animation: coin-fly 0.8s cubic-bezier(0.45,0,0.55,1) forwards; }
+.anim-glow { animation: glow-pulse 2s ease-in-out infinite; }
+.anim-star-spin { animation: star-spin 3s ease-in-out infinite; }
+.anim-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  background-size: 200px 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+.tail-wag { transform-origin: 150px 145px; animation: wag-tail 1.2s ease-in-out infinite; }
+.paw-wave { transform-origin: 40px 155px; animation: wave-paw 1.5s ease-in-out infinite; }
+
+.confetti { position: absolute; pointer-events: none; animation: confetti-burst 1.2s ease-out forwards; font-size: 1.5rem; }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ===== CLAYMORPHISM CARDS — real 3D feel with inner highlight + shadow ===== */
+.clay {
+  background: white;
+  border-radius: 28px;
+  box-shadow:
+    inset 0 4px 8px rgba(255,255,255,0.8),
+    inset 0 -6px 12px rgba(0,0,0,0.06),
+    0 8px 24px rgba(0,0,0,0.08),
+    0 16px 32px rgba(0,0,0,0.06);
+  border: 3px solid white;
+  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s;
+}
+.clay:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    inset 0 4px 8px rgba(255,255,255,0.8),
+    inset 0 -6px 12px rgba(0,0,0,0.06),
+    0 16px 36px rgba(0,0,0,0.12),
+    0 24px 48px rgba(0,0,0,0.08);
+}
+
+.clay-pink { background: linear-gradient(145deg, var(--color-pink-soft) 0%, var(--color-pink-vivid) 100%); }
+.clay-blue { background: linear-gradient(145deg, var(--color-sky-soft) 0%, var(--color-sky-vivid) 100%); }
+.clay-yellow { background: linear-gradient(145deg, var(--color-yellow-soft) 0%, var(--color-yellow-vivid) 100%); }
+.clay-mint { background: linear-gradient(145deg, var(--color-mint-soft) 0%, var(--color-mint-vivid) 100%); }
+.clay-teal { background: linear-gradient(145deg, var(--color-teal-soft) 0%, var(--color-teal-vivid) 100%); }
+.clay-orange { background: linear-gradient(145deg, var(--color-orange-soft) 0%, var(--color-orange-vivid) 100%); }
+.clay-lime { background: linear-gradient(145deg, var(--color-lime-soft) 0%, var(--color-lime-vivid) 100%); }
+.clay-purple { background: linear-gradient(145deg, var(--color-purple-soft) 0%, var(--color-purple-vivid) 100%); }
+.clay-red { background: linear-gradient(145deg, var(--color-red-soft) 0%, var(--color-red-vivid) 100%); }
+
+/* ===== CLAY BUTTONS — 3D with inner highlight + outer drop shadow ===== */
+.clay-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  color: white;
+  background: linear-gradient(180deg, var(--color-sky-vivid) 0%, var(--color-sky-deep) 100%);
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,0.5),
+    inset 0 -3px 6px rgba(0,0,0,0.2),
+    0 6px 0 0 #1565c0,
+    0 12px 24px rgba(33,150,243,0.4);
+  transition: transform 0.1s cubic-bezier(0.4,2,0.6,1), box-shadow 0.1s;
+}
+.clay-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,0.5),
+    inset 0 -3px 6px rgba(0,0,0,0.2),
+    0 8px 0 0 #1565c0,
+    0 16px 32px rgba(33,150,243,0.5);
+}
+.clay-btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 0 3px 6px rgba(255,255,255,0.5),
+    inset 0 -3px 6px rgba(0,0,0,0.2),
+    0 2px 0 0 #1565c0,
+    0 4px 12px rgba(33,150,243,0.3);
+}
+.clay-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.clay-btn.pink {
+  background: linear-gradient(180deg, var(--color-pink-vivid) 0%, var(--color-pink-deep) 100%);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 6px 0 0 #ad1457, 0 12px 24px rgba(255,64,129,0.4);
+}
+.clay-btn.pink:active { box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 2px 0 0 #ad1457, 0 4px 12px rgba(255,64,129,0.3); }
+.clay-btn.yellow {
+  background: linear-gradient(180deg, var(--color-yellow-vivid) 0%, var(--color-yellow-deep) 100%);
+  color: var(--color-coal);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 6px 0 0 #c66900, 0 12px 24px rgba(255,193,7,0.4);
+}
+.clay-btn.yellow:active { box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 2px 0 0 #c66900, 0 4px 12px rgba(255,193,7,0.3); }
+.clay-btn.mint {
+  background: linear-gradient(180deg, var(--color-mint-vivid) 0%, var(--color-mint-deep) 100%);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 6px 0 0 #006619, 0 12px 24px rgba(0,200,83,0.4);
+}
+.clay-btn.mint:active { box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 2px 0 0 #006619, 0 4px 12px rgba(0,200,83,0.3); }
+.clay-btn.purple {
+  background: linear-gradient(180deg, var(--color-purple-vivid) 0%, #6a1b9a 100%);
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 6px 0 0 #4a148c, 0 12px 24px rgba(156,39,176,0.4);
+}
+.clay-btn.purple:active { box-shadow: inset 0 3px 6px rgba(255,255,255,0.5), inset 0 -3px 6px rgba(0,0,0,0.2), 0 2px 0 0 #4a148c, 0 4px 12px rgba(156,39,176,0.3); }
+
+/* ===== 3D EMOJI WRAPPER (Microsoft Fluent Emoji 3D via CDN) =====
+ * Free, Apache 2.0 license, used by Teams + Office.
+ * Source: https://github.com/microsoft/fluentui-emoji
+ * CDN: https://emojicdn.elk.sh/<emoji>?style=microsoft
+ */
+.emoji-3d {
+  display: inline-block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)) drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+  transition: transform 0.3s ease;
+}
+.emoji-3d:hover { transform: scale(1.1) rotate(-5deg); }
+
+/* ===== GLASS MORPHISM CARD ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-radius: 28px;
+  border: 1.5px solid rgba(255,255,255,0.8);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 2px 4px rgba(255,255,255,0.5);
+}
+
+/* ===== CARD WITH 3D PERSPECTIVE TILT ===== */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+.tilt-3d:hover {
+  transform: perspective(1000px) rotateX(-4deg) rotateY(4deg) translateY(-4px);
+}
+
+/* ===== GLOWING TEXT ===== */
+.text-glow {
+  text-shadow:
+    0 0 10px currentColor,
+    0 0 20px currentColor,
+    0 2px 0 rgba(0,0,0,0.1);
+}
+
+/* ===== RAINBOW ANIMATED TEXT ===== */
+.text-rainbow {
+  background: linear-gradient(90deg, #ff4081, #ffc107, #00c853, #2196f3, #9c27b0, #ff4081);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* ===== BIG GAME-STYLE NUMBER ===== */
+.game-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-shadow: 0 4px 0 rgba(0,0,0,0.15), 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* ===== FOR SVG MASCOTS — add depth ===== */
+.mascot-shadow { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.18)) drop-shadow(0 16px 24px rgba(0,0,0,0.1)); }
