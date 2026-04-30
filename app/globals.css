@@ -35,15 +35,15 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { font-family: var(--font-body); color: #0f172a; min-height: 100vh; overscroll-behavior: none; margin: 0; padding: 0; }
 
-/* WHIMSICAL MAGIC-MONEY SCENE — pastel rainbow sky for cool kids vibes */
+/* KUNG FU PANDA SCENE — pastel sky + cherry blossom + lantern glow */
 body {
-  background: #c4b5fd;
+  background: #fce7f3;
   background-image:
-    radial-gradient(circle at 15% 20%, rgba(167,243,208,0.7) 0%, transparent 45%),
-    radial-gradient(circle at 85% 15%, rgba(253,224,71,0.6) 0%, transparent 45%),
-    radial-gradient(circle at 80% 85%, rgba(103,232,249,0.6) 0%, transparent 50%),
-    radial-gradient(circle at 20% 90%, rgba(251,207,232,0.7) 0%, transparent 50%),
-    linear-gradient(180deg, #fce7f3 0%, #ddd6fe 50%, #c7d2fe 100%);
+    radial-gradient(circle at 12% 18%, rgba(254,240,138,0.7) 0%, transparent 40%),
+    radial-gradient(circle at 88% 22%, rgba(252,165,165,0.55) 0%, transparent 40%),
+    radial-gradient(circle at 80% 88%, rgba(167,243,208,0.55) 0%, transparent 50%),
+    radial-gradient(circle at 18% 92%, rgba(196,181,253,0.6) 0%, transparent 50%),
+    linear-gradient(180deg, #ffe4e6 0%, #fbcfe8 35%, #ddd6fe 70%, #c7d2fe 100%);
   background-attachment: fixed;
 }
 

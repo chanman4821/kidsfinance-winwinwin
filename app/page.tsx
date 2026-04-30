@@ -32,12 +32,12 @@ const HAIRS: { id: HairStyle; label: string }[] = [
 ];
 
 const OUTFITS: { id: OutfitStyle; label: string; emoji: string }[] = [
-  { id: "tee", label: "Tee", emoji: "👕" },
-  { id: "suit", label: "Suit", emoji: "🤵" },
-  { id: "hoodie", label: "Hoodie", emoji: "🧥" },
-  { id: "blazer", label: "Blazer", emoji: "💼" },
-  { id: "vest", label: "$ Vest", emoji: "💰" },
-  { id: "tracksuit", label: "Tracks", emoji: "🏃" },
+  { id: "tee", label: "Gi", emoji: "🥋" },
+  { id: "suit", label: "Robe", emoji: "🧧" },
+  { id: "hoodie", label: "Dragon", emoji: "🐉" },
+  { id: "blazer", label: "Kimono", emoji: "👘" },
+  { id: "vest", label: "Master", emoji: "💪" },
+  { id: "tracksuit", label: "Ninja", emoji: "🥷" },
 ];
 
 type Profile = {
@@ -67,9 +67,9 @@ function speak(text: string) {
 }
 
 function pickWorld(age: number): { href: string; name: string; emoji: string } {
-  if (age <= 7) return { href: "/play/coinland", name: "COIN LAND", emoji: "⭐" };
-  if (age <= 12) return { href: "/play/village", name: "COIN TOWN", emoji: "🏘️" };
-  return { href: "/play/markets", name: "MONEY WORLD", emoji: "📈" };
+  if (age <= 7) return { href: "/play/coinland", name: "DUMPLING VILLAGE", emoji: "🥟" };
+  if (age <= 12) return { href: "/play/village", name: "BAMBOO MARKET", emoji: "🏯" };
+  return { href: "/play/markets", name: "DRAGON EXCHANGE", emoji: "🐲" };
 }
 
 export default function HomePage() {
@@ -93,13 +93,13 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (step === "hi") speak("Hey friend! I'm Sparkle the Money Panda! Let's make magic money!");
-    if (step === "name") speak("What's your name?");
-    if (step === "age") speak("How old are you?");
+    if (step === "hi") speak("Welcome young warrior! I'm Sparkle the Panda. Let's build a dumpling empire!");
+    if (step === "name") speak("What's your warrior name?");
+    if (step === "age") speak("How old are you, warrior?");
     if (step === "skin") speak("Pick your skin!");
     if (step === "hair") speak("Pick your hair!");
-    if (step === "outfit") speak("Pick your fit!");
-    if (step === "companion") speak("Pick your money buddy!");
+    if (step === "outfit") speak("Pick your kung fu fit!");
+    if (step === "companion") speak("Pick your spirit buddy!");
     if (step === "go" && profile) speak(`Let's go ${profile.name}!`);
   }, [step, profile]);
 
@@ -117,16 +117,18 @@ export default function HomePage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* BACKGROUND SPARKLE LAYER — twinkling stars + drifting money */}
+      {/* BACKGROUND — cherry blossoms + lanterns + dumplings (Kung Fu Panda vibes) */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
         {[
-          { e: "✨", t: 8, l: 12, d: 0, s: 2 },
-          { e: "⭐", t: 22, l: 88, d: 0.8, s: 1.4 },
-          { e: "💫", t: 38, l: 6, d: 1.6, s: 1.6 },
-          { e: "✨", t: 55, l: 92, d: 0.4, s: 1.2 },
-          { e: "⭐", t: 70, l: 18, d: 1.2, s: 1.8 },
-          { e: "💫", t: 80, l: 80, d: 0, s: 1.4 },
-          { e: "✨", t: 90, l: 50, d: 2, s: 2.2 },
+          { e: "🌸", t: 8, l: 12, d: 0, s: 2 },
+          { e: "🏮", t: 22, l: 88, d: 0.8, s: 2.4 },
+          { e: "🌸", t: 38, l: 6, d: 1.6, s: 1.6 },
+          { e: "🥟", t: 55, l: 92, d: 0.4, s: 1.8 },
+          { e: "🌸", t: 70, l: 18, d: 1.2, s: 1.4 },
+          { e: "🐲", t: 80, l: 80, d: 0, s: 2.2 },
+          { e: "🌸", t: 90, l: 50, d: 2, s: 1.6 },
+          { e: "🥠", t: 12, l: 60, d: 1.4, s: 1.4 },
+          { e: "🐱", t: 50, l: 8, d: 0.6, s: 1.6 },
         ].map((s, i) => (
           <div
             key={i}
@@ -141,11 +143,12 @@ export default function HomePage() {
             {s.e}
           </div>
         ))}
-        {/* drifting money emoji background */}
+        {/* drifting cherry blossom petals + dumplings in background */}
         {[
-          { e: "💵", t: 15, l: 70, d: 0, dur: 18 },
-          { e: "💰", t: 60, l: 30, d: 4, dur: 22 },
-          { e: "💸", t: 35, l: 85, d: 8, dur: 20 },
+          { e: "🌸", t: 15, l: 70, d: 0, dur: 18 },
+          { e: "🥟", t: 60, l: 30, d: 4, dur: 22 },
+          { e: "🏮", t: 35, l: 85, d: 8, dur: 20 },
+          { e: "🌸", t: 78, l: 55, d: 2, dur: 24 },
         ].map((m, i) => (
           <div
             key={`m-${i}`}
@@ -198,7 +201,7 @@ export default function HomePage() {
         <div className="mt-4 flex-1">
           {step === "hi" && (
             <div className="text-center anim-bounce-in">
-              <SpeechBubble>HEY! I&apos;M <span className="text-fuchsia-500">SPARKLE</span>! ✨<br/>LET&apos;S MAKE <span className="text-amber-500">MAGIC MONEY!</span> 💸</SpeechBubble>
+              <SpeechBubble>WELCOME, YOUNG <span className="text-rose-500">WARRIOR!</span> 🥋<br/>I&apos;M <span className="text-fuchsia-500">SPARKLE</span> 🐼<br/>LET&apos;S BUILD A <span className="text-amber-500">DUMPLING EMPIRE!</span> 🥟</SpeechBubble>
               <RobloxButton onClick={() => setStep("name")} color="green" pulse>PLAY ▶</RobloxButton>
             </div>
           )}

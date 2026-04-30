@@ -632,17 +632,18 @@ function Hair({ hair, hairColor }: { hair: HairStyle; hairColor: string }) {
 }
 
 /* ============================================================
- * FINANCE COMPANIONS — replace pet animals
+ * KUNG FU PANDA-THEMED COMPANIONS
+ * Asian-cute critters that follow the kid around
  * ============================================================ */
-export type CompanionId = "piggy" | "vault" | "treasure" | "moneytree" | "bag" | "atm";
+export type CompanionId = "dumpling" | "dragon" | "luckycat" | "koi" | "lantern" | "fortunecookie";
 
 export const COMPANIONS: { id: CompanionId; emoji: string; name: string; tagline: string }[] = [
-  { id: "piggy", emoji: "🐷", name: "Piggy Bank", tagline: "Saves coins" },
-  { id: "vault", emoji: "🔐", name: "Vault", tagline: "Locks money" },
-  { id: "treasure", emoji: "💎", name: "Treasure", tagline: "Gems & jewels" },
-  { id: "moneytree", emoji: "🌳", name: "Money Tree", tagline: "Grows wealth" },
-  { id: "bag", emoji: "💰", name: "Money Bag", tagline: "Big sack of coins" },
-  { id: "atm", emoji: "🏧", name: "ATM Buddy", tagline: "Always loaded" },
+  { id: "dumpling",      emoji: "🥟", name: "Bao",      tagline: "Cute & profitable" },
+  { id: "dragon",        emoji: "🐲", name: "Drako",    tagline: "Breathes gold" },
+  { id: "luckycat",      emoji: "🐱", name: "Lucky",    tagline: "Brings fortune" },
+  { id: "koi",           emoji: "🐠", name: "Koi",      tagline: "Swims to riches" },
+  { id: "lantern",       emoji: "🏮", name: "Lumi",     tagline: "Lights the way" },
+  { id: "fortunecookie", emoji: "🥠", name: "Fortune",  tagline: "Knows secrets" },
 ];
 
 /* ============================================================
