@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CoachCoin, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
+import { CoachCoin, MoneyUnicorn, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
 
 const SKINS = [
   { id: "fair", color: "#ffe0bd" },
@@ -93,7 +93,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (step === "hi") speak("Yo! I'm Coach Coin! Let's stack money!");
+    if (step === "hi") speak("Hey friend! I'm Sparkle the Money Unicorn! Let's make magic money!");
     if (step === "name") speak("What's your name?");
     if (step === "age") speak("How old are you?");
     if (step === "skin") speak("Pick your skin!");
@@ -132,15 +132,15 @@ export default function HomePage() {
 
         {/* TITLE */}
         <div className="text-center mt-2">
-          <h1 className="bungee text-6xl text-yellow-300 stroked-text">WIN WIN WIN</h1>
-          <div className="bungee text-sm text-white stroked-text-sm mt-1">MONEY GAMES</div>
+          <h1 className="bungee text-6xl text-yellow-300 ">WIN WIN WIN</h1>
+          <div className="bungee text-sm text-white -sm mt-1">MONEY GAMES</div>
         </div>
 
         {/* CHARACTER */}
         <div className="mt-3 flex justify-center">
           <div className="avatar-frame w-56 h-56 p-3 anim-float">
             {step === "hi" || step === "name" || step === "age" ? (
-              <CoachCoin className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
+              <MoneyUnicorn className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
             ) : (
               <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
             )}
@@ -151,7 +151,7 @@ export default function HomePage() {
         <div className="mt-4 flex-1">
           {step === "hi" && (
             <div className="text-center anim-bounce-in">
-              <SpeechBubble>YO! I&apos;M <span className="text-yellow-400">COACH COIN!</span> 💰<br/>LET&apos;S STACK MONEY!</SpeechBubble>
+              <SpeechBubble>HEY! I&apos;M <span className="text-fuchsia-500">SPARKLE</span>! ✨<br/>LET&apos;S MAKE <span className="text-amber-500">MAGIC MONEY!</span> 💸</SpeechBubble>
               <RobloxButton onClick={() => setStep("name")} color="green" pulse>PLAY ▶</RobloxButton>
             </div>
           )}
@@ -163,7 +163,7 @@ export default function HomePage() {
                 value={name}
                 onChange={(e) => setName(e.target.value.slice(0, 16))}
                 placeholder="TYPE NAME"
-                className="w-full px-6 py-5 rounded-3xl border-[5px] border-black bungee text-3xl text-center bg-white text-black focus:outline-none focus:border-yellow-300 shadow-[0_8px_0_0_black]"
+                className="w-full px-6 py-5 rounded-3xl border-2 border-slate-900/15 bungee text-3xl text-center bg-white text-black focus:outline-none focus:border-yellow-300 shadow-lg shadow-blue-900/15"
                 autoFocus
                 style={{ letterSpacing: "0.05em" }}
               />
@@ -181,10 +181,10 @@ export default function HomePage() {
                   <button
                     key={a}
                     onClick={() => { setAge(a); setTimeout(() => setStep("skin"), 200); }}
-                    className={`bungee text-3xl py-5 rounded-3xl border-[5px] border-black transition-all ${
+                    className={`bungee text-3xl py-5 rounded-3xl border-2 border-slate-900/15 transition-all ${
                       age === a
-                        ? "bg-gradient-to-b from-yellow-400 to-yellow-600 text-black shadow-[0_4px_0_0_black] scale-110"
-                        : "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0_8px_0_0_black] active:translate-y-2 active:shadow-[0_2px_0_0_black]"
+                        ? "bg-gradient-to-b from-yellow-400 to-yellow-600 text-black shadow shadow-blue-900/10 scale-110"
+                        : "bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-lg shadow-blue-900/15 active:translate-y-2 active:shadow-sm"
                     }`}
                     style={{ textShadow: age === a ? "1px 1px 0 rgba(255,255,255,0.4)" : "2px 2px 0 black" }}
                   >
@@ -203,7 +203,7 @@ export default function HomePage() {
                   <button
                     key={s.id}
                     onClick={() => setSkin(s.color)}
-                    className={`aspect-square rounded-2xl border-[5px] border-black transition-all ${skin === s.color ? "scale-110 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : ""}`}
+                    className={`aspect-square rounded-2xl border-2 border-slate-900/15 transition-all ${skin === s.color ? "scale-110 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : ""}`}
                     style={{ background: s.color }}
                   />
                 ))}
@@ -220,7 +220,7 @@ export default function HomePage() {
                   <button
                     key={h.id}
                     onClick={() => setHair(h.id)}
-                    className={`p-2 rounded-2xl border-[5px] border-black bg-white transition-all flex flex-col items-center ${hair === h.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
+                    className={`p-2 rounded-2xl border-2 border-slate-900/15 bg-white transition-all flex flex-col items-center ${hair === h.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow shadow-blue-900/10"}`}
                   >
                     <div className="w-16 h-20"><KidAvatar className="w-full h-full" skin={skin} hair={h.id} hairColor={hairColor} outfit="tee" /></div>
                     <div className="bungee text-xs">{h.label}</div>
@@ -232,7 +232,7 @@ export default function HomePage() {
                   <button
                     key={c.id}
                     onClick={() => setHairColor(c.color)}
-                    className={`w-10 h-10 rounded-full border-[3px] border-black transition-all ${hairColor === c.color ? "scale-125 shadow-[0_0_15px_4px_rgba(250,204,21,0.8)]" : ""}`}
+                    className={`w-10 h-10 rounded-full border border-slate-900/15 transition-all ${hairColor === c.color ? "scale-125 shadow-[0_0_15px_4px_rgba(250,204,21,0.8)]" : ""}`}
                     style={{ background: c.color }}
                   />
                 ))}
@@ -249,7 +249,7 @@ export default function HomePage() {
                   <button
                     key={o.id}
                     onClick={() => setOutfit(o.id)}
-                    className={`p-3 rounded-2xl border-[5px] border-black bg-white transition-all flex flex-col items-center ${outfit === o.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
+                    className={`p-3 rounded-2xl border-2 border-slate-900/15 bg-white transition-all flex flex-col items-center ${outfit === o.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow shadow-blue-900/10"}`}
                   >
                     <div className="text-3xl">{o.emoji}</div>
                     <div className="bungee text-xs mt-1">{o.label}</div>
@@ -268,7 +268,7 @@ export default function HomePage() {
                   <button
                     key={c.id}
                     onClick={() => setCompanion(c.id)}
-                    className={`p-3 rounded-2xl border-[5px] border-black bg-white transition-all ${companion === c.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow-[0_4px_0_0_black]"}`}
+                    className={`p-3 rounded-2xl border-2 border-slate-900/15 bg-white transition-all ${companion === c.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow shadow-blue-900/10"}`}
                   >
                     <div className="text-4xl">{c.emoji}</div>
                     <div className="bungee text-[10px] mt-1">{c.name}</div>
@@ -300,7 +300,7 @@ export default function HomePage() {
 /* === SPEECH BUBBLE — bold, black-stroked === */
 function SpeechBubble({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative bg-white border-[5px] border-black rounded-3xl px-5 py-4 shadow-[0_8px_0_0_black] mb-5">
+    <div className="relative bg-white border-2 border-slate-900/15 rounded-3xl px-5 py-4 shadow-lg shadow-blue-900/15 mb-5">
       <div className="absolute -left-[16px] top-7 w-0 h-0 border-y-[14px] border-y-transparent border-r-[16px] border-r-white" />
       <div className="absolute -left-[24px] top-[22px] w-0 h-0 border-y-[18px] border-y-transparent border-r-[20px] border-r-black" />
       <div className="bungee text-2xl text-center text-black leading-tight" style={{ letterSpacing: "0.02em" }}>
@@ -340,14 +340,14 @@ function ReturningKid({ profile, onPlay, onReset }: { profile: Profile; onPlay: 
           </Link>
         </div>
 
-        <h1 className="bungee text-6xl text-yellow-300 stroked-text mt-4 text-center">WIN WIN WIN</h1>
+        <h1 className="bungee text-6xl text-yellow-300  mt-4 text-center">WIN WIN WIN</h1>
 
         <div className="rbx-card mt-6 p-5 w-full text-center">
           <div className="avatar-frame w-44 h-44 p-2 mx-auto mb-3">
             <KidAvatar skin={profile.skin} hair={profile.hair} hairColor={profile.hairColor} outfit={profile.outfit} className="w-full h-full" />
           </div>
           <div className="bungee text-3xl text-black">WELCOME BACK</div>
-          <div className="bungee text-4xl text-blue-700 stroked-text-sm">{profile.name.toUpperCase()}!</div>
+          <div className="bungee text-4xl text-blue-700 -sm">{profile.name.toUpperCase()}!</div>
           <div className="text-sm font-bold mt-2">{companion?.emoji} {companion?.name} is ready!</div>
           <button onClick={onPlay} className="rbx-btn green w-full mt-4 anim-neon-pulse">PLAY {world.emoji}</button>
         </div>

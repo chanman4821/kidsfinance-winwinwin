@@ -7,6 +7,159 @@ import React from "react";
  */
 
 /* ============================================================
+ * MONEY UNICORN — primary mascot (REPLACES Coach Coin)
+ * Whimsical pastel-rainbow unicorn with dollar-sign horn,
+ * gold-coin necklace, big sparkly eyes, money sparkles around
+ * Aesthetic: Adopt-Me / Royale-High / cool kids game vibe
+ * ============================================================ */
+export function MoneyUnicorn({ className = "", mood = "happy" }: { className?: string; mood?: "happy" | "wave" | "celebrate" | "sleep" }) {
+  return (
+    <svg viewBox="0 0 260 280" className={className} aria-label="Money Unicorn">
+      <defs>
+        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fef3f8" />
+          <stop offset="50%" stopColor="#fce7f3" />
+          <stop offset="100%" stopColor="#e9d5ff" />
+        </linearGradient>
+        <linearGradient id="maneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#a7f3d0" />
+          <stop offset="33%" stopColor="#67e8f9" />
+          <stop offset="66%" stopColor="#c4b5fd" />
+          <stop offset="100%" stopColor="#fbcfe8" />
+        </linearGradient>
+        <linearGradient id="hornGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#fde047" />
+          <stop offset="60%" stopColor="#fbbf24" />
+          <stop offset="100%" stopColor="#d97706" />
+        </linearGradient>
+        <radialGradient id="cheekGrad" cx="50%" cy="50%">
+          <stop offset="0%" stopColor="#fb7185" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* soft shadow */}
+      <ellipse cx="130" cy="265" rx="80" ry="6" fill="rgba(120,90,180,0.18)" />
+
+      {/* MANE BACK (rainbow streamers behind head) */}
+      <g>
+        <path d="M 70 80 Q 30 90 35 140 Q 40 175 70 165 Z" fill="url(#maneGrad)" opacity="0.85"/>
+        <path d="M 60 100 Q 20 130 30 170 Q 50 195 75 175 Z" fill="url(#maneGrad)" opacity="0.7"/>
+      </g>
+
+      {/* BODY (round chibi pony body) */}
+      <ellipse cx="130" cy="180" rx="70" ry="55" fill="url(#bodyGrad)" />
+      {/* belly highlight */}
+      <ellipse cx="130" cy="195" rx="48" ry="32" fill="white" opacity="0.55"/>
+
+      {/* legs (4 stubby) */}
+      <rect x="80" y="220" width="22" height="38" rx="11" fill="#f5d0fe"/>
+      <rect x="108" y="225" width="22" height="35" rx="11" fill="#f5d0fe"/>
+      <rect x="135" y="225" width="22" height="35" rx="11" fill="#f5d0fe"/>
+      <rect x="163" y="220" width="22" height="38" rx="11" fill="#f5d0fe"/>
+      {/* hoof tips (gold) */}
+      <ellipse cx="91" cy="258" rx="13" ry="5" fill="#fbbf24"/>
+      <ellipse cx="119" cy="260" rx="13" ry="5" fill="#fbbf24"/>
+      <ellipse cx="146" cy="260" rx="13" ry="5" fill="#fbbf24"/>
+      <ellipse cx="174" cy="258" rx="13" ry="5" fill="#fbbf24"/>
+
+      {/* GOLD COIN NECKLACE (chunky) */}
+      <g>
+        <ellipse cx="130" cy="148" rx="42" ry="8" fill="none" stroke="#fbbf24" strokeWidth="3"/>
+        {/* Big $ medallion */}
+        <circle cx="130" cy="156" r="16" fill="url(#hornGrad)" stroke="#92400e" strokeWidth="2"/>
+        <text x="130" y="163" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="22" fontWeight="900" fill="#92400e">$</text>
+      </g>
+
+      {/* HEAD — round cute */}
+      <ellipse cx="130" cy="115" rx="62" ry="55" fill="url(#bodyGrad)" />
+      {/* head highlight */}
+      <ellipse cx="113" cy="100" rx="22" ry="14" fill="white" opacity="0.5"/>
+
+      {/* EARS */}
+      <path d="M 78 85 Q 75 60 95 70 Q 95 88 80 92 Z" fill="#f5d0fe"/>
+      <path d="M 182 85 Q 185 60 165 70 Q 165 88 180 92 Z" fill="#f5d0fe"/>
+      <path d="M 84 80 Q 84 70 92 75" fill="none" stroke="#fb7185" strokeWidth="2" opacity="0.6"/>
+      <path d="M 176 80 Q 176 70 168 75" fill="none" stroke="#fb7185" strokeWidth="2" opacity="0.6"/>
+
+      {/* MANE (top — rainbow tuft falling forward) */}
+      <g>
+        <path d="M 100 70 Q 95 50 115 55 Q 120 75 105 75 Z" fill="url(#maneGrad)"/>
+        <path d="M 130 60 Q 125 35 145 45 Q 150 70 132 70 Z" fill="url(#maneGrad)"/>
+        <path d="M 155 65 Q 155 45 175 55 Q 175 75 158 72 Z" fill="url(#maneGrad)"/>
+      </g>
+
+      {/* HORN — golden spiral with $ */}
+      <g>
+        <path d="M 130 12 L 142 65 L 118 65 Z" fill="url(#hornGrad)" stroke="#92400e" strokeWidth="1.5" strokeLinejoin="round"/>
+        {/* spiral lines */}
+        <path d="M 122 30 Q 130 28 138 30" stroke="#92400e" strokeWidth="1.5" fill="none"/>
+        <path d="M 121 42 Q 130 40 139 42" stroke="#92400e" strokeWidth="1.5" fill="none"/>
+        <path d="M 120 54 Q 130 52 140 54" stroke="#92400e" strokeWidth="1.5" fill="none"/>
+        {/* $ on horn */}
+        <text x="130" y="50" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="14" fontWeight="900" fill="#fef3c7">$</text>
+        {/* horn glow tip */}
+        <circle cx="130" cy="14" r="4" fill="#fef3c7" opacity="0.9"/>
+      </g>
+
+      {/* EYES — big sparkly */}
+      {mood === "sleep" ? (
+        <g>
+          <path d="M 100 115 Q 110 125 120 115" stroke="#1f2937" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+          <path d="M 140 115 Q 150 125 160 115" stroke="#1f2937" strokeWidth="3.5" fill="none" strokeLinecap="round"/>
+        </g>
+      ) : (
+        <g>
+          {/* eye whites */}
+          <ellipse cx="110" cy="115" rx="13" ry="16" fill="white" stroke="#1f2937" strokeWidth="2"/>
+          <ellipse cx="150" cy="115" rx="13" ry="16" fill="white" stroke="#1f2937" strokeWidth="2"/>
+          {/* iris (lavender to teal gradient) */}
+          <ellipse cx="110" cy="118" rx="9" ry="11" fill="#8b5cf6"/>
+          <ellipse cx="150" cy="118" rx="9" ry="11" fill="#8b5cf6"/>
+          {/* dollar-sign pupils!  */}
+          <text x="110" y="124" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="15" fontWeight="900" fill="#fde047">$</text>
+          <text x="150" y="124" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="15" fontWeight="900" fill="#fde047">$</text>
+          {/* sparkle */}
+          <circle cx="106" cy="111" r="2.5" fill="white"/>
+          <circle cx="146" cy="111" r="2.5" fill="white"/>
+        </g>
+      )}
+
+      {/* CHEEK BLUSH */}
+      <ellipse cx="92" cy="135" rx="11" ry="7" fill="url(#cheekGrad)"/>
+      <ellipse cx="168" cy="135" rx="11" ry="7" fill="url(#cheekGrad)"/>
+
+      {/* SMILE */}
+      <path d="M 117 148 Q 130 162 143 148" stroke="#1f2937" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+
+      {/* FLOATING MONEY SPARKLES around (always visible) */}
+      <g className="anim-float">
+        <text x="20" y="40" fontSize="20" opacity="0.9">✨</text>
+        <text x="220" y="55" fontSize="22" opacity="0.9">💸</text>
+        <text x="225" y="200" fontSize="18" opacity="0.85">⭐</text>
+        <text x="14" y="180" fontSize="16" opacity="0.85">💰</text>
+      </g>
+
+      {/* CELEBRATE EXTRAS */}
+      {mood === "celebrate" && (
+        <g>
+          <text x="50" y="20" fontSize="24">🎉</text>
+          <text x="200" y="20" fontSize="24">🎉</text>
+          <text x="120" y="8" fontSize="18">✨</text>
+        </g>
+      )}
+
+      {/* WAVE — front hoof up with money fan */}
+      {mood === "wave" && (
+        <g>
+          <text x="195" y="160" fontSize="32" transform="rotate(-15, 200, 150)">💵</text>
+        </g>
+      )}
+    </svg>
+  );
+}
+
+/* ============================================================
  * COACH COIN — primary mascot (replaces Mochi the dog)
  * Friendly anthropomorphic gold coin with face + arms
  * ============================================================ */

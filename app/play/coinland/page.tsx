@@ -168,7 +168,7 @@ export default function Page() {
           <div className="w-28 h-32 relative anim-float shrink-0">
             <Mochi className="w-full h-full" mood={pendingCoins > 0 ? "celebrate" : "wave"} />
           </div>
-          <div className="relative bg-white rounded-2xl px-3 py-2 self-center mt-2 shadow-[0_5px_0_0_black] border-[4px] border-black flex-1">
+          <div className="relative bg-white rounded-2xl px-3 py-2 self-center mt-2 shadow-md shadow-blue-900/10 border-2 border-slate-900/15 flex-1">
             <div className="absolute -left-3 top-4 w-0 h-0 border-y-[10px] border-y-transparent border-r-[12px] border-r-white" />
             <div className="absolute -left-[16px] top-[13px] w-0 h-0 border-y-[12px] border-y-transparent border-r-[14px] border-r-[#2b2640]" />
             <div className="display text-[10px] uppercase tracking-wider text-[#2b2640]/60 font-bold">Mayor Mochi</div>
@@ -177,7 +177,7 @@ export default function Page() {
         </header>
 
         {/* HUD */}
-        <div className="bg-white rounded-2xl p-3 mb-3 flex items-center gap-3 border-[4px] border-black shadow-lg">
+        <div className="bg-white rounded-2xl p-3 mb-3 flex items-center gap-3 border-2 border-slate-900/15 shadow-lg">
           <div className="w-12 h-14 shrink-0">
             {stage === 0 ? <Egg className="w-full h-full" /> : <Bunny className="w-full h-full" />}
           </div>
@@ -194,7 +194,7 @@ export default function Page() {
             <div className="text-2xl anim-wiggle">🔥</div>
             <div className="display text-xs font-bold">{state.streakDays}d</div>
           </div>
-          <div className="text-center shrink-0 px-2 py-1 bg-[#fff3b0] rounded-xl border-[3px] border-black">
+          <div className="text-center shrink-0 px-2 py-1 bg-[#fff3b0] rounded-xl border border-slate-900/15">
             <div className="text-xs">🪙</div>
             <div className="display text-base font-bold leading-none">{total}</div>
           </div>
@@ -216,13 +216,13 @@ export default function Page() {
 
         {pendingCoins === 0 && undoneChores.length === 0 && (
           <section className="mb-3">
-            <div className="bg-white rounded-2xl p-4 text-center border-[4px] border-black shadow-lg">
+            <div className="bg-white rounded-2xl p-4 text-center border-2 border-slate-900/15 shadow-lg">
               <div className="text-5xl mb-2">🎊</div>
               <div className="display text-lg">All chores done today!</div>
               <div className="text-xs text-[#2b2640]/60 mt-1 mb-3">Try a lesson, set a goal, or reset for tomorrow.</div>
               <button
                 onClick={resetDay}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full font-bold text-white bg-[#5aa9e6] border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] text-sm bungee"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-full font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm text-sm bungee"
               >
                 Reset for tomorrow ↻
               </button>
@@ -247,7 +247,7 @@ export default function Page() {
           {state.goal ? (
             <button
               onClick={() => setModal("goal")}
-              className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg text-left active:scale-95 transition-transform"
+              className="bg-white rounded-2xl p-3 border-2 border-slate-900/15 shadow-lg text-left active:scale-95 transition-transform"
             >
               <div className="display text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold mb-0.5">🎯 Goal</div>
               <div className="text-3xl mb-1">{state.goal.emoji}</div>
@@ -262,7 +262,7 @@ export default function Page() {
           ) : (
             <button
               onClick={() => setModal("goal")}
-              className="bg-yellow-100 rounded-2xl p-3 border-[4px] border-black shadow-lg text-left active:scale-95 transition-transform"
+              className="bg-yellow-100 rounded-2xl p-3 border-2 border-slate-900/15 shadow-lg text-left active:scale-95 transition-transform"
             >
               <div className="display text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold mb-0.5">🎯 Goal</div>
               <div className="text-3xl mb-1">✨</div>
@@ -272,7 +272,7 @@ export default function Page() {
 
           <button
             onClick={() => setModal("lessons")}
-            className="bg-white rounded-2xl p-3 border-[4px] border-black shadow-lg text-left active:scale-95 transition-transform"
+            className="bg-white rounded-2xl p-3 border-2 border-slate-900/15 shadow-lg text-left active:scale-95 transition-transform"
           >
             <div className="display text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold mb-0.5">📘 Lessons</div>
             <div className="text-3xl mb-1">{lessons[state.lessonsCompleted.length]?.emoji ?? "🏆"}</div>
@@ -291,7 +291,7 @@ export default function Page() {
             <div className="display text-xs uppercase tracking-wider text-[#2b2640]/60 font-bold mb-1 px-1">🏅 Your badges</div>
             <div className="flex gap-2 flex-wrap">
               {state.badges.map((b, i) => (
-                <div key={i} className="bg-white px-2 py-1 rounded-full text-xs font-bold border-[3px] border-black shadow">
+                <div key={i} className="bg-white px-2 py-1 rounded-full text-xs font-bold border border-slate-900/15 shadow">
                   {b}
                 </div>
               ))}
@@ -321,7 +321,7 @@ export default function Page() {
               <button
                 key={j}
                 onClick={() => depositToJar(j)}
-                className={`w-full flex items-center gap-3 p-3 rounded-2xl ${JAR[j].bg} ${JAR[j].text} border-[4px] border-black shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-0.5 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)]`}
+                className={`w-full flex items-center gap-3 p-3 rounded-2xl ${JAR[j].bg} ${JAR[j].text} border-2 border-slate-900/15 shadow-[0_4px_0_0_rgba(0,0,0,0.2)] active:translate-y-0.5 active:shadow-[0_1px_0_0_rgba(0,0,0,0.2)]`}
               >
                 <div className="text-3xl">{JAR[j].emoji}</div>
                 <div className="text-left">
@@ -339,7 +339,7 @@ export default function Page() {
               const sp = pendingCoins - s - g;
               depositSplit(s, sp, g);
             }}
-            className="w-full bg-[#5aa9e6] text-white px-4 py-2 rounded-full font-bold border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-0.5 active:shadow-[0_2px_0_0_black] bungee"
+            className="w-full bg-[#5aa9e6] text-white px-4 py-2 rounded-full font-bold border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-0.5 active:shadow-sm bungee"
           >
             Smart split: 50% Save · 30% Spend · 20% Give ✨
           </button>
@@ -360,7 +360,7 @@ export default function Page() {
                     setModal(null);
                     setActiveLesson(l);
                   }}
-                  className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border-[3px] border-black/30 active:scale-98 text-left hover:border-blue-600 transition-all"
+                  className="w-full flex items-center gap-3 p-3 bg-white rounded-2xl border border-slate-900/15/30 active:scale-98 text-left hover:border-blue-600 transition-all"
                 >
                   <div className="text-3xl">{l.emoji}</div>
                   <div className="flex-1">
@@ -438,14 +438,14 @@ function Onboarding({ onStart }: { onStart: (s: GameState) => void }) {
             I&apos;m Mayor Mochi 🐶 — let&apos;s build your first coins!
           </p>
         </div>
-        <div className="bg-white rounded-3xl p-5 border-[5px] border-black shadow-2xl space-y-4">
+        <div className="bg-white rounded-3xl p-5 border-2 border-slate-900/15 shadow-2xl space-y-4">
           <label className="block">
             <div className="display text-xs uppercase tracking-wider mb-1 font-bold">Your name</div>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Type your name"
-              className="w-full px-4 py-3 rounded-2xl border-[4px] border-black/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
+              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-900/15/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
             />
           </label>
           <label className="block">
@@ -457,8 +457,8 @@ function Onboarding({ onStart }: { onStart: (s: GameState) => void }) {
                   onClick={() => setAge(a)}
                   className={`py-3 rounded-2xl bungee font-bold text-base transition-all ${
                     age === a
-                      ? "bg-[#5aa9e6] text-white border-[4px] border-black shadow-lg scale-105"
-                      : "bg-white border-[4px] border-black/10 text-[#2b2640]/70"
+                      ? "bg-[#5aa9e6] text-white border-2 border-slate-900/15 shadow-lg scale-105"
+                      : "bg-white border-2 border-slate-900/15/10 text-[#2b2640]/70"
                   }`}
                 >
                   {a}
@@ -471,13 +471,13 @@ function Onboarding({ onStart }: { onStart: (s: GameState) => void }) {
             <input
               value={pet}
               onChange={(e) => setPet(e.target.value)}
-              className="w-full px-4 py-3 rounded-2xl border-[4px] border-black/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
+              className="w-full px-4 py-3 rounded-2xl border-2 border-slate-900/15/20 bg-white focus:outline-none focus:border-[#5aa9e6] text-lg"
             />
           </label>
           <button
             disabled={!name.trim()}
             onClick={() => onStart(newGame(name.trim(), age, pet.trim() || "Bo"))}
-            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#5aa9e6] border-[5px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] disabled:opacity-50 disabled:cursor-not-allowed bungee"
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full text-lg font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed bungee"
           >
             Start adventure 🚀
           </button>
@@ -492,7 +492,7 @@ function ChoreButton({ chore, onTap, highlight }: { chore: Chore; onTap: (c: Cho
   return (
     <button
       onClick={() => onTap(chore)}
-      className={`w-full flex items-center gap-3 p-3 bg-white rounded-2xl border-[4px] border-black shadow-[0_6px_0_0_black] active:translate-y-1 active:shadow-[0_1px_0_0_black] text-left ${
+      className={`w-full flex items-center gap-3 p-3 bg-white rounded-2xl border-2 border-slate-900/15 shadow-md shadow-blue-900/15 active:translate-y-1 active:shadow-none text-left ${
         highlight ? "anim-pulse-glow" : ""
       }`}
     >
@@ -501,7 +501,7 @@ function ChoreButton({ chore, onTap, highlight }: { chore: Chore; onTap: (c: Cho
         <div className="display font-bold text-base leading-tight">{chore.title}</div>
         <div className="text-xs text-[#2b2640]/60 font-bold">🪙 +{chore.coins}</div>
       </div>
-      <div className="bg-[#6ad48b] text-white px-4 py-2 rounded-full bungee font-bold text-sm shrink-0 border-[4px] border-black shadow">
+      <div className="bg-[#6ad48b] text-white px-4 py-2 rounded-full bungee font-bold text-sm shrink-0 border-2 border-slate-900/15 shadow">
         Done!
       </div>
     </button>
@@ -512,7 +512,7 @@ function ChoreButton({ chore, onTap, highlight }: { chore: Chore; onTap: (c: Cho
 function JarTile({ jar, amount }: { jar: JarKey; amount: number }) {
   const j = JAR[jar];
   return (
-    <div className={`relative ${j.bgSoft} rounded-2xl p-3 border-[4px] border-black shadow-lg overflow-hidden`}>
+    <div className={`relative ${j.bgSoft} rounded-2xl p-3 border-2 border-slate-900/15 shadow-lg overflow-hidden`}>
       <div className="text-center">
         <div className="text-4xl anim-float">{j.emoji}</div>
         <div className="display text-[10px] uppercase tracking-wider font-bold text-[#2b2640]/70 mt-1">
@@ -536,7 +536,7 @@ function ModalShell({ children, onClose }: { children: React.ReactNode; onClose:
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-[5px] border-black shadow-2xl relative"
+        className="bg-white rounded-3xl p-5 max-w-md w-full max-h-[85vh] overflow-y-auto border-2 border-slate-900/15 shadow-2xl relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -593,7 +593,7 @@ function GoalModal({
           <button
             key={g.name}
             onClick={() => onSet(g.name, g.emoji, g.target)}
-            className="bg-white rounded-2xl p-3 border-[4px] border-black/10 hover:border-blue-600 active:scale-95 transition-all text-left"
+            className="bg-white rounded-2xl p-3 border-2 border-slate-900/15/10 hover:border-blue-600 active:scale-95 transition-all text-left"
           >
             <div className="text-4xl mb-1">{g.emoji}</div>
             <div className="display font-bold text-sm">{g.name}</div>
@@ -635,7 +635,7 @@ function LessonModal({
 
       {step === "intro" && (
         <>
-          <div className="bg-white p-3 rounded-2xl mb-4 text-sm leading-relaxed border-[3px] border-black/30">
+          <div className="bg-white p-3 rounded-2xl mb-4 text-sm leading-relaxed border border-slate-900/15/30">
             {lesson.blurb}
           </div>
           {done ? (
@@ -643,7 +643,7 @@ function LessonModal({
           ) : (
             <button
               onClick={() => setStep("quiz")}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] bungee"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm bungee"
             >
               Take the quiz →
             </button>
@@ -654,7 +654,7 @@ function LessonModal({
       {step === "quiz" && (
         <>
           {lesson.quiz.map((q, i) => (
-            <div key={i} className="bg-white p-3 rounded-2xl mb-3 border-[3px] border-black/30">
+            <div key={i} className="bg-white p-3 rounded-2xl mb-3 border border-slate-900/15/30">
               <div className="font-bold text-sm mb-2">
                 {i + 1}. {q.q}
               </div>
@@ -699,7 +699,7 @@ function LessonModal({
                 setStep("result");
                 if (!done) onComplete(allCorrect);
               }}
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] bungee"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm bungee"
             >
               Finish lesson →
             </button>
@@ -720,7 +720,7 @@ function LessonModal({
           )}
           <button
             onClick={onClose}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-[4px] border-black shadow-[0_8px_0_0_black] active:translate-y-1 active:shadow-[0_2px_0_0_black] bungee"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white bg-[#5aa9e6] border-2 border-slate-900/15 shadow-lg shadow-blue-900/15 active:translate-y-1 active:shadow-sm bungee"
           >
             Back to Coinwood
           </button>

@@ -35,13 +35,15 @@
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { font-family: var(--font-body); color: #0f172a; min-height: 100vh; overscroll-behavior: none; margin: 0; padding: 0; }
 
-/* ROBLOX-MONEY SCENE — bold sky + ground gradient (NO falling emojis) */
+/* WHIMSICAL MAGIC-MONEY SCENE — pastel rainbow sky for cool kids vibes */
 body {
-  background: #2563eb;
+  background: #c4b5fd;
   background-image:
-    radial-gradient(circle at 20% 80%, rgba(34,197,94,0.45) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(250,204,21,0.35) 0%, transparent 50%),
-    linear-gradient(180deg, #38bdf8 0%, #2563eb 55%, #16a34a 100%);
+    radial-gradient(circle at 15% 20%, rgba(167,243,208,0.7) 0%, transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(253,224,71,0.6) 0%, transparent 45%),
+    radial-gradient(circle at 80% 85%, rgba(103,232,249,0.6) 0%, transparent 50%),
+    radial-gradient(circle at 20% 90%, rgba(251,207,232,0.7) 0%, transparent 50%),
+    linear-gradient(180deg, #fce7f3 0%, #ddd6fe 50%, #c7d2fe 100%);
   background-attachment: fixed;
 }
 
@@ -96,12 +98,12 @@ body {
 .mascot-shadow { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35)) drop-shadow(0 16px 24px rgba(0,0,0,0.2)); }
 
 /* ROBLOX-STYLE HEAVY BLACK STROKE TEXT */
-.stroked-text {
+. {
   -webkit-text-stroke: 5px black;
   paint-order: stroke fill;
   text-shadow: 0 5px 0 rgba(0,0,0,0.4);
 }
-.stroked-text-sm {
+.-sm {
   -webkit-text-stroke: 3px black;
   paint-order: stroke fill;
   text-shadow: 0 3px 0 rgba(0,0,0,0.4);
