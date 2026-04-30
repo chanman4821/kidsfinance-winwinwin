@@ -82,7 +82,7 @@ export default function HomePage() {
   const [hair, setHair] = useState<HairStyle>("short");
   const [hairColor, setHairColor] = useState(HAIR_COLORS[0].color);
   const [outfit, setOutfit] = useState<OutfitStyle>("vest");
-  const [companion, setCompanion] = useState<CompanionId>("piggy");
+  const [companion, setCompanion] = useState<CompanionId>("dumpling");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
