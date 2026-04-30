@@ -3,32 +3,32 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { CoachCoin, MoneyPanda, KidAvatar, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
+import { CoachCoin, MoneyPanda, PandaWarrior, COMPANIONS, type CompanionId, type HairStyle, type OutfitStyle } from "@/components/money-characters";
 
 const SKINS = [
-  { id: "fair", color: "#ffe0bd" },
-  { id: "light", color: "#fcd9a8" },
-  { id: "tan", color: "#e8b388" },
-  { id: "brown", color: "#a06a3f" },
-  { id: "deep", color: "#5a3318" },
+  { id: "snow",     color: "#ffffff" },
+  { id: "classic",  color: "#f8fafc" },
+  { id: "cream",    color: "#fef3c7" },
+  { id: "honey",    color: "#fde047" },
+  { id: "cocoa",    color: "#a16207" },
 ];
 
 const HAIR_COLORS = [
-  { id: "black", color: "#1f2937" },
-  { id: "brown", color: "#5b3015" },
-  { id: "blonde", color: "#fbbf24" },
-  { id: "red", color: "#dc2626" },
-  { id: "purple", color: "#a855f7" },
-  { id: "blue", color: "#3b82f6" },
+  { id: "red",     color: "#dc2626" },
+  { id: "gold",    color: "#fbbf24" },
+  { id: "black",   color: "#0f172a" },
+  { id: "jade",    color: "#10b981" },
+  { id: "purple",  color: "#a855f7" },
+  { id: "pink",    color: "#ec4899" },
 ];
 
-const HAIRS: { id: HairStyle; label: string }[] = [
-  { id: "short", label: "Short" },
-  { id: "long", label: "Long" },
-  { id: "curly", label: "Curly" },
-  { id: "buzz", label: "Buzz" },
-  { id: "bun", label: "Bun" },
-  { id: "afro", label: "Afro" },
+const HAIRS: { id: HairStyle; label: string; emoji: string }[] = [
+  { id: "short", label: "None",     emoji: "🐼" },
+  { id: "long",  label: "Bandana",  emoji: "🎀" },
+  { id: "curly", label: "Topknot",  emoji: "🎎" },
+  { id: "buzz",  label: "Monk Dot", emoji: "🟠" },
+  { id: "bun",   label: "Blossom",  emoji: "🌸" },
+  { id: "afro",  label: "Rice Hat", emoji: "👒" },
 ];
 
 const OUTFITS: { id: OutfitStyle; label: string; emoji: string }[] = [
@@ -191,7 +191,7 @@ export default function HomePage() {
               {step === "hi" || step === "name" || step === "age" ? (
                 <MoneyPanda className="w-full h-full" mood={step === "hi" ? "wave" : "happy"} />
               ) : (
-                <KidAvatar className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
+                <PandaWarrior className="w-full h-full" skin={skin} hair={hair} hairColor={hairColor} outfit={outfit} />
               )}
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function HomePage() {
                     onClick={() => setHair(h.id)}
                     className={`p-2 rounded-2xl border-2 border-slate-900/15 bg-white transition-all flex flex-col items-center ${hair === h.id ? "scale-105 shadow-[0_0_20px_5px_rgba(250,204,21,0.8)]" : "shadow shadow-blue-900/10"}`}
                   >
-                    <div className="w-16 h-20"><KidAvatar className="w-full h-full" skin={skin} hair={h.id} hairColor={hairColor} outfit="tee" /></div>
+                    <div className="w-16 h-20"><PandaWarrior className="w-full h-full" skin={skin} hair={h.id} hairColor={hairColor} outfit="tee" /></div>
                     <div className="bungee text-xs">{h.label}</div>
                   </button>
                 ))}
@@ -394,7 +394,7 @@ function ReturningKid({ profile, onPlay, onReset }: { profile: Profile; onPlay: 
 
         <div className="rbx-card mt-6 p-5 w-full text-center">
           <div className="avatar-frame w-44 h-44 p-2 mx-auto mb-3">
-            <KidAvatar skin={profile.skin} hair={profile.hair} hairColor={profile.hairColor} outfit={profile.outfit} className="w-full h-full" />
+            <PandaWarrior skin={profile.skin} hair={profile.hair} hairColor={profile.hairColor} outfit={profile.outfit} className="w-full h-full" />
           </div>
           <div className="bungee text-3xl text-black">WELCOME BACK</div>
           <div className="bungee text-4xl text-blue-700 -sm">{profile.name.toUpperCase()}!</div>

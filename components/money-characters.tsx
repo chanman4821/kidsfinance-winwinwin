@@ -337,6 +337,169 @@ function _LegacyMoneyUnicorn({ className = "", mood = "happy" }: { className?: s
 }
 
 /* ============================================================
+ * PANDA WARRIOR — customizable kid-panda for skin/hair/outfit picker
+ * skin = fur color · hair = headwear · hairColor = headwear color · outfit = kung-fu robe
+ * ============================================================ */
+type PandaWarriorProps = {
+  className?: string;
+  skin?: string;       // fur color (white, cream, gold, brown, charcoal)
+  hair?: HairStyle;    // headwear style (short=none, long=bandana, curly=topknot, buzz=bald, bun=flower, afro=bigtuft)
+  hairColor?: string;  // headwear/accent color
+  outfit?: OutfitStyle; // kung-fu robe (gi/robe/dragon/kimono/vest/ninja)
+};
+
+const FUR_DEFAULT = "#f8fafc";
+const HEADWEAR_DEFAULT = "#dc2626";
+
+const OUTFIT_COLORS: Record<OutfitStyle, { primary: string; trim: string; emoji: string }> = {
+  tee:       { primary: "#f8fafc", trim: "#1f2937", emoji: "🥋" },  // white Gi
+  suit:      { primary: "#dc2626", trim: "#fbbf24", emoji: "🧧" },  // red robe
+  hoodie:    { primary: "#16a34a", trim: "#fde047", emoji: "🐉" },  // green dragon hoodie
+  blazer:    { primary: "#ec4899", trim: "#86efac", emoji: "👘" },  // pink kimono w/ green trim
+  vest:      { primary: "#fbbf24", trim: "#92400e", emoji: "💪" },  // gold master vest
+  tracksuit: { primary: "#0f172a", trim: "#dc2626", emoji: "🥷" },  // black ninja w/ red sash
+};
+
+export function PandaWarrior({ className = "", skin = FUR_DEFAULT, hair = "short", hairColor = HEADWEAR_DEFAULT, outfit = "tee" }: PandaWarriorProps) {
+  const fit = OUTFIT_COLORS[outfit];
+
+  return (
+    <svg viewBox="0 0 260 280" className={className} aria-label="Panda Warrior">
+      <defs>
+        <radialGradient id="furGrad" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor={skin} />
+        </radialGradient>
+        <radialGradient id="furBlack" cx="40%" cy="35%">
+          <stop offset="0%" stopColor="#334155" />
+          <stop offset="100%" stopColor="#0f172a" />
+        </radialGradient>
+        <linearGradient id="outfitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor={fit.primary} />
+          <stop offset="100%" stopColor={fit.trim} />
+        </linearGradient>
+      </defs>
+
+      {/* shadow */}
+      <ellipse cx="130" cy="265" rx="78" ry="6" fill="rgba(15,23,42,0.18)" />
+
+      {/* === BODY (in robe) === */}
+      <ellipse cx="130" cy="190" rx="68" ry="58" fill="url(#furGrad)" stroke="#e2e8f0" strokeWidth="1.5" />
+      {/* OUTFIT — robe wraps the body */}
+      <path d="M 70 175 Q 70 235 100 248 L 160 248 Q 190 235 190 175 Q 175 165 130 165 Q 85 165 70 175 Z" fill="url(#outfitGrad)" stroke={fit.trim} strokeWidth="2.5"/>
+      {/* sash belt */}
+      <rect x="78" y="208" width="104" height="14" fill={fit.trim} opacity="0.95"/>
+      <circle cx="130" cy="215" r="7" fill={fit.primary} stroke={fit.trim} strokeWidth="1.5"/>
+      <text x="130" y="220" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="12" fontWeight="900" fill={fit.trim}>$</text>
+      {/* outfit collar V */}
+      <path d="M 110 165 L 130 195 L 150 165 Z" fill="white" stroke={fit.trim} strokeWidth="1.5"/>
+
+      {/* === BLACK ARMS holding pose === */}
+      <ellipse cx="72" cy="200" rx="20" ry="28" fill="url(#furBlack)" />
+      <ellipse cx="188" cy="200" rx="20" ry="28" fill="url(#furBlack)" />
+      {/* arm sleeves matching outfit */}
+      <ellipse cx="72" cy="180" rx="22" ry="14" fill={fit.primary} stroke={fit.trim} strokeWidth="2"/>
+      <ellipse cx="188" cy="180" rx="22" ry="14" fill={fit.primary} stroke={fit.trim} strokeWidth="2"/>
+
+      {/* === BLACK LEGS === */}
+      <ellipse cx="100" cy="252" rx="20" ry="13" fill="url(#furBlack)" />
+      <ellipse cx="160" cy="252" rx="20" ry="13" fill="url(#furBlack)" />
+
+      {/* === HEAD (round, fur-colored) === */}
+      <ellipse cx="130" cy="115" rx="60" ry="54" fill="url(#furGrad)" stroke="#e2e8f0" strokeWidth="1.5" />
+
+      {/* head highlight */}
+      <ellipse cx="113" cy="100" rx="22" ry="14" fill="white" opacity="0.6"/>
+
+      {/* === BLACK EARS === */}
+      <ellipse cx="84" cy="74" rx="15" ry="17" fill="url(#furBlack)" />
+      <ellipse cx="176" cy="74" rx="15" ry="17" fill="url(#furBlack)" />
+      <ellipse cx="84" cy="78" rx="6" ry="8" fill="#fb7185" opacity="0.7"/>
+      <ellipse cx="176" cy="78" rx="6" ry="8" fill="#fb7185" opacity="0.7"/>
+
+      {/* === BLACK EYE PATCHES (smaller, kid proportions) === */}
+      <ellipse cx="107" cy="115" rx="14" ry="17" fill="url(#furBlack)" transform="rotate(-12, 107, 115)"/>
+      <ellipse cx="153" cy="115" rx="14" ry="17" fill="url(#furBlack)" transform="rotate(12, 153, 115)"/>
+
+      {/* === EYES (cute kid eyes inside patches) === */}
+      <circle cx="107" cy="118" r="6" fill="white"/>
+      <circle cx="153" cy="118" r="6" fill="white"/>
+      <circle cx="108" cy="120" r="3.5" fill="#0f172a"/>
+      <circle cx="154" cy="120" r="3.5" fill="#0f172a"/>
+      <circle cx="109" cy="118" r="1.5" fill="white"/>
+      <circle cx="155" cy="118" r="1.5" fill="white"/>
+
+      {/* === CHEEK BLUSH === */}
+      <ellipse cx="88" cy="140" rx="10" ry="6" fill="#fb7185" opacity="0.55"/>
+      <ellipse cx="172" cy="140" rx="10" ry="6" fill="#fb7185" opacity="0.55"/>
+
+      {/* === NOSE === */}
+      <ellipse cx="130" cy="138" rx="6" ry="5" fill="#0f172a"/>
+      <ellipse cx="128" cy="136" rx="2" ry="1.5" fill="white" opacity="0.6"/>
+
+      {/* === SMILE === */}
+      <path d="M 130 144 L 130 150" stroke="#0f172a" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M 117 152 Q 130 162 143 152" stroke="#0f172a" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+
+      {/* === HEADWEAR (varies by hair style) === */}
+      {hair === "short" && null /* no headwear */}
+      {hair === "long" && (
+        /* BANDANA — wraps forehead */
+        <g>
+          <path d="M 78 70 Q 130 50 182 70 Q 184 80 175 88 L 85 88 Q 76 80 78 70 Z" fill={hairColor} stroke="#0f172a" strokeWidth="2"/>
+          {/* tied ends flowing right */}
+          <path d="M 175 78 Q 200 70 215 85 L 200 88 Z" fill={hairColor} stroke="#0f172a" strokeWidth="1.5"/>
+          {/* dot detail */}
+          <circle cx="115" cy="76" r="2.5" fill="white" opacity="0.9"/>
+          <circle cx="145" cy="76" r="2.5" fill="white" opacity="0.9"/>
+        </g>
+      )}
+      {hair === "curly" && (
+        /* TOPKNOT bun on top */
+        <g>
+          <circle cx="130" cy="48" r="14" fill={hairColor} stroke="#0f172a" strokeWidth="2"/>
+          <rect x="125" y="56" width="10" height="10" rx="2" fill={hairColor} stroke="#0f172a" strokeWidth="1.5"/>
+          {/* chopsticks */}
+          <line x1="118" y1="45" x2="142" y2="51" stroke="#92400e" strokeWidth="2"/>
+          <line x1="142" y1="45" x2="118" y2="51" stroke="#92400e" strokeWidth="2"/>
+        </g>
+      )}
+      {hair === "buzz" && (
+        /* MONK DOT on forehead (small enlightenment dot) */
+        <circle cx="130" cy="78" r="4" fill={hairColor} stroke="#0f172a" strokeWidth="1.5"/>
+      )}
+      {hair === "bun" && (
+        /* FLOWER on side of head (cherry blossom) */
+        <g>
+          <circle cx="170" cy="68" r="9" fill="#fda4af"/>
+          <circle cx="160" cy="62" r="6" fill="#fbcfe8"/>
+          <circle cx="180" cy="62" r="6" fill="#fbcfe8"/>
+          <circle cx="160" cy="74" r="6" fill="#fbcfe8"/>
+          <circle cx="180" cy="74" r="6" fill="#fbcfe8"/>
+          <circle cx="170" cy="68" r="3" fill="#fde047"/>
+        </g>
+      )}
+      {hair === "afro" && (
+        /* CONICAL HAT (rice paddy hat) */
+        <g>
+          <path d="M 60 78 L 130 30 L 200 78 Z" fill={hairColor} stroke="#0f172a" strokeWidth="2"/>
+          <ellipse cx="130" cy="78" rx="72" ry="6" fill={hairColor} stroke="#0f172a" strokeWidth="1.5"/>
+          {/* strap */}
+          <path d="M 110 90 Q 130 105 150 90" stroke="#92400e" strokeWidth="2" fill="none"/>
+        </g>
+      )}
+
+      {/* === DOLLAR-SIGN HEADBAND $ on forehead (always visible) === */}
+      <text x="130" y="100" textAnchor="middle" fontFamily="Lilita One, sans-serif" fontSize="10" fontWeight="900" fill="#dc2626" opacity="0.4">$</text>
+
+      {/* === SPARKLES === */}
+      <text x="20" y="40" fontSize="18" opacity="0.85">✨</text>
+      <text x="220" y="55" fontSize="18" opacity="0.85">🌸</text>
+    </svg>
+  );
+}
+
+/* ============================================================
  * COACH COIN — primary mascot (replaces Mochi the dog)
  * Friendly anthropomorphic gold coin with face + arms
  * ============================================================ */
